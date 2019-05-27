@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<title>TEst~!</title>
+<body th:replace="/framework/main">
+<div th:fragment="nav-wrapper">
+    <ul th:replace="/priv/Staff/Navbar::sidebar"></ul>
+</div>
+<div th:fragment="mainContent">
+    <div class="row">
+        <h2>CUSTOMER!!!</h2>
+    </div>
+</div>
+</body>
+</html>

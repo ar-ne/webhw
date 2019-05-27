@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+}
+
+apply plugin: 'java'
+
+group 'nchu.162012322'
+version '0.0.1-SNAPSHOT'
+
+task cleanPack(type: Delete) {
+    delete "$rootProject.projectDir/src/main/resources/static/webpack"
+    delete "$rootProject.projectDir/src/main/resources/static/fonts"
+}
+
+task buildPack(type: Exec) {
+    inputs.file("package-lock.json").withPathSensitivity(PathSensitivity.RELATIVE)
+    inputs.file("package.json").withPathSensitivity(PathSensitivity.RELATIVE)
+    inputs.file("webpack.config.js").withPathSensitivity(PathSensitivity.RELATIVE)
+    inputs.dir("app").withPathSensitivity(PathSensitivity.RELATIVE)
+    outputs.dir("$rootProject.projectDir/src/main/resources/static/webpack")
+    outputs.dir("$rootProject.projectDir/src/main/resources/static/fonts")
+    outputs.cacheIf { true }
+
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "$projectDir/node_modules/.bin/webpack.cmd"
+    } else {
+        commandLine "$projectDir/node_modules/.bin/webpack"
+    }
+}
+
+task cnpmClean(type: Delete) {
+    delete "node_modules"
+}
+
+task cnpmInstall(type: Exec){
+    dependsOn cnpmClean
+    inputs.file("package-lock.json").withPathSensitivity(PathSensitivity.RELATIVE)
+    inputs.file("package.json").withPathSensitivity(PathSensitivity.RELATIVE)
+    outputs.dir("node_modules")
+    outputs.cacheIf { true }
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "${System.properties['user.home']}/AppData/Roaming/npm/cnpm.cmd","install"
+    }
+}
+
+rootProject.tasks.getByName('build').dependsOn buildPack
+rootProject.tasks.getByName('clean').dependsOn cleanPack

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="welcomeMsg (name)">
+    <header class="card-header">欢迎使用学生选课系统<!--/*@thymesVar id="name" type="java.lang.String"*/-->
+        <span th:text="${name}"></span></header>
+</div>
+
+<div th:fragment="table(jsonURL)">
+    <table id="table"></table>
+    <script th:inline="javascript">
+        $.get([[${jsonURL}]], function (data, status) {
+            generateTables(data, 'table');
+        });
+    </script>
+</div>
+</html>

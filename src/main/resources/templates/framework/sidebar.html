@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<ul >
+    <li class="nav-item" th:fragment="nav-item(icon,text,tref,active)" >
+        <a class="spf-link nav-link " th:classappend="${active?'active':''}" href="#" th:href="${tref}">
+            <i class="material-icons" th:text="${icon}">icon</i>
+            <span th:text="${text}">Text</span>
+        </a>
+    </li>
+</ul>
+</html>
