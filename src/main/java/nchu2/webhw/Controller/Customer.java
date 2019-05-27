@@ -13,4 +13,9 @@ public class Customer {
     public String index() {
         return "priv/Customer/index";
     }
+
+    @GetMapping("/2")
+    public String index2() {
+        return "priv/Customer/index2";
+    }
 }

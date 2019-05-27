@@ -1,8 +1,13 @@
 package nchu2.webhw.API;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -12,24 +17,32 @@ import javax.ws.rs.core.MediaType;
 import java.util.Locale;
 
 @Path("i18n")
-public class I18n extends APIBase {
+@RestController
+public class I18n {
     private final MessageSource messageSource;
 
+    @Autowired
     public I18n(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
 
     @POST
-    public I18nProp[] translate(I18nProp[] props) {
-        for (I18nProp prop : props) {
-            prop.setTrans(messageSource.getMessage(prop.key, null, Locale.getDefault()));
+    @Path("tableCol")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public BootstrapTableCol[] translate(BootstrapTableCol[] cols) {
+        for (BootstrapTableCol col : cols) {
+            col.setTitle(messageSource.getMessage(col.field, null, Locale.getDefault()));
         }
-        return props;
+        return cols;
     }
 
     @Data
-    static class I18nProp {
-        String key;
-        String trans;
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class BootstrapTableCol {
+        String field;
+        String title;
+        boolean sortable;
     }
 }
