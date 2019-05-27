@@ -1,4 +1,4 @@
-package nchu2.webhw;
+package nchu2.webhw.Utils;
 
 public class Properites {
     public static class Tamplet {
