@@ -3,7 +3,7 @@
 <title>TEst~!</title>
 <body>
 <ul class="nav flex-column" th:fragment="sidebar">
-    <li th:replace="/framework/sidebar::nav-item('create_new_folder',#{msg.staff.sidebar.advice},@{/index},true)"></li>
+    <li th:replace="/framework/sidebar::nav-item('create_new_folder',#{msg.staff.sidebar.advice},@{/index},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('assignment_late',#{msg.staff.sidebar.ticket},@{/test},false)"></li>
 </ul>
 </body>

@@ -3,7 +3,6 @@ package nchu2.webhw.Utils;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -11,7 +10,7 @@ import java.util.Map;
 
 @Component
 @ConfigurationProperties("field.flag")
-@PropertySource("classpath:/fieldFlags.properties")
+@PropertySource("classpath:/flags.properties")
 public class FieldFlag {
     private final Map<Integer, Integer> priorityMap = new HashMap<>();
 
