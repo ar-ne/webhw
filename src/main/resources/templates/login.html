@@ -29,35 +29,43 @@
                                                     class="material-icons">person</i>
                                             </span>
                                         </span>
-                                        <input type="text" class="form-control" id="username" placeholder="Username">
+                                        <input type="text" class="form-control" id="username" placeholder="Username" th:placeholder="#{msg.login.uid}">
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group input-group-seamless">
                                         <span class="input-group-prepend">
-                                            <span class="input-group-text">                                                <i
-                                                    class="material-icons">lock</i>
+                                            <span class="input-group-text">
+                                                <i class="material-icons">lock</i>
                                             </span>
                                         </span>
-                                        <input type="password" class="form-control" id="password" placeholder="Username">
+                                        <input type="password" class="form-control" id="password" placeholder="Username"
+                                               th:placeholder="#{msg.login.pwd}">
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
                                         <label class="btn btn-white active">
-                                            <input type="radio" name="type" id="option1" autocomplete="off" checked th:text="#{msg.login.type.customer}"></label>
+                                            <input type="radio" name="type" id="option1" autocomplete="off" checked
+                                                   th:text="#{msg.login.type.customer}"></label>
                                         <label class="btn btn-white">
-                                            <input type="radio" name="type" id="option2" autocomplete="off" th:text="#{msg.login.type.manager}"></label>
+                                            <input type="radio" name="type" id="option2" autocomplete="off"
+                                                   th:text="#{msg.login.type.manager}"></label>
                                         <label class="btn btn-white">
-                                            <input type="radio" name="type" id="option3" autocomplete="off" th:text="#{msg.login.type.staff}"></label>
+                                            <input type="radio" name="type" id="option3" autocomplete="off"
+                                                   th:text="#{msg.login.type.staff}"></label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="">
-                                        <button type="button" class="mb-2 btn btn-outline-primary mr-2" th:text="#{msg.login.btn.login}">Primary</button>
+                                        <button type="button" class="mb-2 btn btn-outline-primary mr-2"
+                                                th:text="#{msg.login.btn.login}">Primary
+                                        </button>
                                     </div>
                                     <div class="pl-1">
-                                        <button type="button" class="mb-2 btn btn-outline-warning mr-2" th:text="#{msg.login.btn.register}">Warning</button>
+                                        <button type="button" class="mb-2 btn btn-outline-warning mr-2"
+                                                th:text="#{msg.login.btn.register}">Warning
+                                        </button>
                                     </div>
                                 </div>
                             </li>
