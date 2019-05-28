@@ -3,9 +3,14 @@
 <title>TEst~!</title>
 <body>
 <ul class="nav flex-column" th:fragment="sidebar">
-    <li th:replace="/framework/sidebar::nav-item('edit','Blog Dashboard',@{/index},true)"></li>
-    <li th:replace="/framework/sidebar::nav-item('border_all','Test Page',@{/test},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('border_all','Error Page',@{/error},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('add_circle_outline',#{msg.manager.sidebar.add.production},@{/index},true)"></li>
+    <li th:replace="/framework/sidebar::nav-item('select_all',#{msg.manager.sidebar.select.production},@{/test},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('saved_search',#{msg.manager.sidebar.select.order},@{/error},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('search',#{msg.manager.sidebar.select.loan},@{/error},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('add_comment',#{msg.manager.sidebar.add.Introduction},@{/error},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('insert_chart_outlined',#{msg.manager.sidebar.chart.order},@{/error},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('pie_chart_outlined',#{msg.manager.sidebar.chart.loan},@{/error},false)"></li>
+
 </ul>
 </body>
 </html>
