@@ -3,7 +3,7 @@
 <title>TEst~!</title>
 <body>
 <ul class="nav flex-column" th:fragment="sidebar">
-    <li th:replace="/framework/sidebar::nav-item('add_circle_outline',#{msg.manager.sidebar.add.production},@{/index},true)"></li>
+    <li th:replace="/framework/sidebar::nav-item('add_circle_outline',#{msg.manager.sidebar.add.production},@{/index},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('select_all',#{msg.manager.sidebar.select.production},@{/test},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('saved_search',#{msg.manager.sidebar.select.order},@{/error},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('search',#{msg.manager.sidebar.select.loan},@{/error},false)"></li>

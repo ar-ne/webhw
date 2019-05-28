@@ -4,7 +4,6 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.Consumes;
@@ -18,7 +17,7 @@ import java.util.Locale;
 
 @Path("i18n")
 @RestController
-@PropertySource("classpath:fieldFlags.properties")
+@PropertySource("classpath:flags.properties")
 public class I18n {
     private final MessageSource messageSource;
 

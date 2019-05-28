@@ -3,7 +3,7 @@
 <title>TEst~!</title>
 <body>
 <ul class="nav flex-column" th:fragment="sidebar">
-    <li th:replace="/framework/sidebar::nav-item('shield',#{msg.customer.sidebar.buy},@{/index},true)"></li>
+    <li th:replace="/framework/sidebar::nav-item('shield',#{msg.customer.sidebar.buy},@{buy},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('shopping_cart',#{msg.customer.sidebar.bought},@{/test},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('credit_card',#{msg.customer.sidebar.loan},@{/error},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('mark_as_unread',#{msg.customer.sidebar.advice},@{/error},false)"></li>
