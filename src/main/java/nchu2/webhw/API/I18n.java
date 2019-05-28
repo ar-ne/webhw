@@ -1,12 +1,10 @@
 package nchu2.webhw.API;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.Consumes;
@@ -14,10 +12,13 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
 @Path("i18n")
 @RestController
+@PropertySource("classpath:fieldFlags.properties")
 public class I18n {
     private final MessageSource messageSource;
 
@@ -30,7 +31,8 @@ public class I18n {
     @Path("tableCol")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public BootstrapTableCol[] translate(BootstrapTableCol[] cols) {
+    public BootstrapTableCol[] bootstrapTableCol(BootstrapTableCol[] cols) {
+        List list = new LinkedList();
         for (BootstrapTableCol col : cols) {
             col.setTitle(messageSource.getMessage(col.field, null, Locale.getDefault()));
         }
@@ -38,8 +40,6 @@ public class I18n {
     }
 
     @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
     static class BootstrapTableCol {
         String field;
         String title;
