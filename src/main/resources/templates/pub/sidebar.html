@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
-<title>TEst~!</title>
 <body>
-<ul class="nav flex-column" th:fragment="sidebar">
+<ul class="nav flex-column" th:fragment="manager">
     <li th:replace="/framework/sidebar::nav-item('add_circle_outline',#{msg.manager.sidebar.add.production},@{/index},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('select_all',#{msg.manager.sidebar.select.production},@{/test},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('saved_search',#{msg.manager.sidebar.select.order},@{/error},false)"></li>
@@ -12,7 +11,7 @@
     <li th:replace="/framework/sidebar::nav-item('pie_chart_outlined',#{msg.manager.sidebar.chart.loan},@{/error},false)"></li>
 
 </ul>
-<ul class="nav flex-column" th:fragment="sidebar">
+<ul class="nav flex-column" th:fragment="customer">
     <li th:replace="/framework/sidebar::nav-item('shield',#{msg.customer.sidebar.buy},@{buy},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('shopping_cart',#{msg.customer.sidebar.bought},@{bought},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('credit_card',#{msg.customer.sidebar.loan},@{loan},false)"></li>
@@ -21,7 +20,7 @@
     <li th:replace="/framework/sidebar::nav-item('assignment_turned_in',#{msg.customer.sidebar.result},@{result},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('map',#{msg.customer.sidebar.map},@{map},false)"></li>
 </ul>
-<ul class="nav flex-column" th:fragment="sidebar">
+<ul class="nav flex-column" th:fragment="staff">
     <li th:replace="/framework/sidebar::nav-item('create_new_folder',#{msg.staff.sidebar.advice},@{/index},false)"></li>
     <li th:replace="/framework/sidebar::nav-item('assignment_late',#{msg.staff.sidebar.ticket},@{/test},false)"></li>
 </ul>
