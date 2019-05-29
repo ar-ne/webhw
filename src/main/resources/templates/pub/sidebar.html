@@ -2,13 +2,13 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <body>
 <ul class="nav flex-column" th:fragment="manager">
-    <li th:replace="/framework/sidebar::nav-item('add_circle_outline',#{msg.manager.sidebar.add.production},@{/index},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('select_all',#{msg.manager.sidebar.select.production},@{/test},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('saved_search',#{msg.manager.sidebar.select.order},@{/error},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('search',#{msg.manager.sidebar.select.loan},@{/error},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('add_comment',#{msg.manager.sidebar.add.Introduction},@{/error},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('insert_chart_outlined',#{msg.manager.sidebar.chart.order},@{/error},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('pie_chart_outlined',#{msg.manager.sidebar.chart.loan},@{/error},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('add_circle_outline',#{msg.manager.sidebar.add.production},@{addProduction},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('select_all',#{msg.manager.sidebar.select.production},@{selectProduction},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('saved_search',#{msg.manager.sidebar.select.order},@{selectOrder},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('search',#{msg.manager.sidebar.select.loan},@{selectLoan},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('add_comment',#{msg.manager.sidebar.add.Introduction},@{addIntroduction},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('insert_chart_outlined',#{msg.manager.sidebar.chart.order},@{chartOrder},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('pie_chart_outlined',#{msg.manager.sidebar.chart.loan},@{chartLoan},false)"></li>
 
 </ul>
 <ul class="nav flex-column" th:fragment="customer">
@@ -21,8 +21,8 @@
     <li th:replace="/framework/sidebar::nav-item('map',#{msg.customer.sidebar.map},@{map},false)"></li>
 </ul>
 <ul class="nav flex-column" th:fragment="staff">
-    <li th:replace="/framework/sidebar::nav-item('create_new_folder',#{msg.staff.sidebar.advice},@{/index},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('assignment_late',#{msg.staff.sidebar.ticket},@{/test},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('create_new_folder',#{msg.staff.sidebar.advice},@{advice},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('assignment_late',#{msg.staff.sidebar.ticket},@{ticket},false)"></li>
 </ul>
 </body>
 </html>

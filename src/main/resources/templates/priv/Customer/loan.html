@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<title th:text="#{msg.customer.sidebar.loan.title}">申请贷款</title>
+<body th:replace="/framework/main">
+<div th:fragment="mainContent">
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+
+        </div>
+    </div>
+    <div class="row ">
+        <div class="mb-3 col-12 ">
+            <div class="card card-small ">
+                <div class="card-header "><h3 th:text="#{msg.customer.loan.header.title}" class="page-title">申请表</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group col-md-7">
+                        <strong class="text-muted d-block mb-2" th:text="#{msg.customer.sidebar.loan.rmb}">贷款金额</strong>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">￥</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+                                   value="1000">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-md-12">
+                        <strong class="text-muted d-block mb-2"
+                                th:text="#{msg.customer.sidebar.loan.reason}">贷款理由</strong>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button type="button" class="mb-2 btn btn-outline-danger mr-2"
+                                th:text="#{msg.customer.sidebar.loan.button}">提交申请
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

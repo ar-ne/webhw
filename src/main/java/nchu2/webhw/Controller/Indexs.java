@@ -31,6 +31,7 @@ public class Indexs extends ComponentBase {
     @GetMapping("priv/{userType}/{page}")
     public String router(@PathVariable("userType") String userType, @PathVariable("page") String page, Model model) {
         model.addAttribute("userType", userType);
+        model.addAttribute("page", page);
         return String.format("priv/%s/%s", userType, page);
     }
 
