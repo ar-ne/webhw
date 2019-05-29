@@ -5,12 +5,10 @@
         <span th:text="${name}"></span></header>
 </div>
 
-<div th:fragment="table(jsonURL)">
+<div th:fragment="table(jURL,table)">
     <table id="table"></table>
     <script th:inline="javascript">
-        $.get([[${jsonURL}]], function (data, status) {
-            generateTables(data, 'table');
-        });
+        generateTables([[${jURL}]],[[${table}]]);
     </script>
 </div>
 </html>

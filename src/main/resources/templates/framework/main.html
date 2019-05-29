@@ -37,8 +37,8 @@
                     <input class="navbar-search form-control" type="text" placeholder="Search for something..."
                            th:placeholder="#{msg.main.search.placeholder}" aria-label="Search"></div>
             </form>
-            <div class="nav-wrapper" th:include="::nav-wrapper">
-                <ul class="nav flex-column">
+            <div class="nav-wrapper">
+                <ul class="nav flex-column" th:include="/pub/sidebar::${userType}">
                     <li th:replace="/framework/sidebar::nav-item('edit','Blog Dashboard',@{/index},true)"></li>
                     <li th:replace="/framework/sidebar::nav-item('border_all','Test Page',@{/test},false)"></li>
                     <li th:replace="/framework/sidebar::nav-item('border_all','Error Page',@{/error},false)"></li>

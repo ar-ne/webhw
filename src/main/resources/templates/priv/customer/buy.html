@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<title th:text="#{msg.customer.buy.title}">购买理财产品</title>
+<body th:replace="/framework/main">
+<div th:fragment="mainContent">
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <h3 th:text="#{msg.customer.buy.header.title}" class="page-title">清单</h3>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="mb-3 col-12 ">
+            <div class="card card-small ">
+                <div class="card-header "></div>
+                <div class="card-body">
+                    <table class="table mb-0">
+                        <thead class="bg-light">
+                        <tr>
+                            <th scope="col" class="border-1">选择</th>
+                            <th scope="col" class="border-1">产品编号</th>
+                            <th scope="col" class="border-1">风险等级</th>
+                            <th scope="col" class="border-1">年化收益率</th>
+                            <th scope="col" class="border-1">最低投入</th>
+                            <th scope="col" class="border-1">产品介绍</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="bs-checkbox"><label><input type="checkbox"
+                                                                  class="custom-control-input"><span></span></label>
+                            </td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>3%</td>
+                            <td>10000</td>
+                            <td>一定赚钱</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" class="mb-2 btn btn-outline-primary mr-2"
+                            th:text="#{msg.customer.buy.button}">Primary
+                    </button>
+                    <div th:replace="/framework/fragments::table(@{/api/lizt/production},${'Production'})"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

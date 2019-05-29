@@ -1,34 +1,37 @@
-function generateTables(jsonTable, container) {
-    var col = [];
-    // col.push({checkbox: true});
-    for (var key in jsonTable[0]) {
-        if (col.indexOf(key) === -1) {
-            col.push({
-                field: key.toString(),
-                title: null,
-                sortable: true
-            });
+function generateTables(jURL,table, container='table') {
+    $.get(jURL, function (data, status) {
+        if (status !== "success") return;
+        jsonTable = data;
+        var col = [];
+        for (var key in jsonTable[0]) {
+            if (col.indexOf(key) === -1) {
+                col.push({
+                    field: key.toString(),
+                    title: null,
+                    sortable: true
+                });
+            }
         }
-    }
-    $.ajax({
-        type: "POST",
-        url: "/api/i18n/tableCol",
-        dataType: 'json',
-        contentType: "application/json",
-        data: JSON.stringify(col),
-        success: function (data) {
-            data.splice(0,0,{checkbox: true});
-            $(container).bootstrapTable({
-                locale: 'zh-CN',
-                pagination: true,
-                search: true,
-                silentSort: false,
-                maintainSelected: true,
-                clickToSelect: true,
-                columns: data,
-                data: jsonTable
-            })
-        }
+        $.ajax({
+            type: "POST",
+            url: "/api/i18n/tableCol/" + table,
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify(col),
+            success: function (data) {
+                data.splice(0, 0, {checkbox: true});
+                $(container).bootstrapTable({
+                    locale: 'zh-CN',
+                    pagination: true,
+                    search: true,
+                    silentSort: false,
+                    maintainSelected: true,
+                    clickToSelect: true,
+                    columns: data,
+                    data: jsonTable
+                })
+            }
+        });
     });
 }
 

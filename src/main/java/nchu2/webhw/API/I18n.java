@@ -1,15 +1,13 @@
 package nchu2.webhw.API;
 
 import lombok.Data;
+import nchu2.webhw.Utils.Flags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,20 +18,24 @@ import java.util.Locale;
 @PropertySource("classpath:flags.properties")
 public class I18n {
     private final MessageSource messageSource;
+    private final Flags flags;
 
     @Autowired
-    public I18n(MessageSource messageSource) {
+    public I18n(MessageSource messageSource, Flags flags) {
         this.messageSource = messageSource;
+        this.flags = flags;
     }
 
     @POST
-    @Path("tableCol")
+    @Path("tableCol/{tableName}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public BootstrapTableCol[] bootstrapTableCol(BootstrapTableCol[] cols) {
+    public BootstrapTableCol[] bootstrapTableCol(@PathParam("tableName") String tableName, BootstrapTableCol[] cols) {
         List list = new LinkedList();
         for (BootstrapTableCol col : cols) {
             col.setTitle(messageSource.getMessage(col.field, null, Locale.getDefault()));
+            Flags.FieldFlag colFlag = flags.getFielfFlag(tableName, col.field);
+            col.setVisible(colFlag.visibility);
         }
         return cols;
     }
@@ -43,5 +45,6 @@ public class I18n {
         String field;
         String title;
         boolean sortable;
+        boolean visible;
     }
 }

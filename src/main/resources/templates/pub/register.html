@@ -1,0 +1,82 @@
+<!doctype html>
+<html class="no-js h-100" lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script>if (!window.Turbolinks) window.location.replace('/?redirect=' + window.location.pathname);</script>
+    <meta name="turbolinks-cache-control" content="no-preview">
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body class="h-100">
+<div class="container-fluid">
+    <div class="row">
+        <main class="main-content col-lg-10 col-md-10 col-sm-12 offset-lg-2 offset-md-2" style="display: none;">
+            <div class="page-header row no-gutters py-4">
+                <!--                <div class="col-12 col-sm-4 text-center text-sm-left mb-0"></div>-->
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-12 mb-4">
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <h5 class="m-0" th:text="#{msg.login.title}">Login</h5>
+                        </div>
+                        <ul class="card-body list-group list-group-flush">
+                            <li class="list-group-item px-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group input-group-seamless">
+                                        <span class="input-group-prepend">
+                                            <span class="input-group-text">                                                <i
+                                                    class="material-icons">person</i>
+                                            </span>
+                                        </span>
+                                        <input type="text" class="form-control" id="username" placeholder="Username"
+                                               th:placeholder="#{msg.login.uid}">
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group input-group-seamless">
+                                        <span class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">lock</i>
+                                            </span>
+                                        </span>
+                                        <input type="password" class="form-control" id="password" placeholder="Username"
+                                               th:placeholder="#{msg.login.pwd}">
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+                                        <label class="btn btn-white active">
+                                            <input type="radio" name="type" id="option1" autocomplete="off" checked
+                                                   th:text="#{msg.login.type.customer}"></label>
+                                        <label class="btn btn-white">
+                                            <input type="radio" name="type" id="option2" autocomplete="off"
+                                                   th:text="#{msg.login.type.manager}"></label>
+                                        <label class="btn btn-white">
+                                            <input type="radio" name="type" id="option3" autocomplete="off"
+                                                   th:text="#{msg.login.type.staff}"></label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="">
+                                        <button type="button" class="mb-2 btn btn-outline-primary mr-2"
+                                                th:text="#{msg.login.btn.login}">Primary
+                                        </button>
+                                    </div>
+                                    <div class="pl-1">
+                                        <button type="button" class="mb-2 btn btn-outline-warning mr-2"
+                                                th:text="#{msg.login.btn.register}">Warning
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script data-turbolinks-eval=true>initPopper()</script>
+</body>
+</html>
