@@ -4,10 +4,12 @@
 <body>
 <ul class="nav flex-column" th:fragment="sidebar">
     <li th:replace="/framework/sidebar::nav-item('shield',#{msg.customer.sidebar.buy},@{buy},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('shopping_cart',#{msg.customer.sidebar.bought},@{/test},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('credit_card',#{msg.customer.sidebar.loan},@{/error},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('mark_as_unread',#{msg.customer.sidebar.advice},@{/error},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('sms_failed',#{msg.customer.sidebar.ticket},@{/error},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('shopping_cart',#{msg.customer.sidebar.bought},@{bought},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('credit_card',#{msg.customer.sidebar.loan},@{loan},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('mark_as_unread',#{msg.customer.sidebar.advice},@{advice},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('sms_failed',#{msg.customer.sidebar.ticket},@{ticket},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('assignment_turned_in',#{msg.customer.sidebar.result},@{result},false)"></li>
+    <li th:replace="/framework/sidebar::nav-item('map',#{msg.customer.sidebar.map},@{map},false)"></li>
 </ul>
 </body>
 </html>

@@ -2,6 +2,7 @@ package nchu2.webhw.API;
 
 import nchu2.webhw.tables.daos.ProductionDao;
 import nchu2.webhw.tables.pojos.Production;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.GET;
@@ -14,9 +15,10 @@ import java.util.List;
 @Path("lizt")
 public class Lizt extends APIBase {
     @GET
-    @Path("production")
+    @Path("Production")
     @Produces(MediaType.APPLICATION_JSON)
     public List production() {
         return new ProductionDao(dsl.configuration()).findAll();
     }
+
 }

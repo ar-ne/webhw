@@ -12,11 +12,11 @@ public class Indexs extends ComponentBase {
     @GetMapping("/")
     public String splash(Model model, String redirect) {
         model.addAttribute("direction", redirect);
-        return "splash";
+        return "pub/splash";
     }
 
     @GetMapping("login")
     public String index() {
-        return "login";
+        return "pub/login";
     }
 }
