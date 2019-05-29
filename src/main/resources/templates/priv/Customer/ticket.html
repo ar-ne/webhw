@@ -23,7 +23,8 @@
                             <option>功能方面</option>
                         </select>
                     </div>
-                    <div th:replace="/framework/fragments::titledTextarea(#{msg.customer.sidebar.ticket.content},'ta')"></div>
+
+                    <div th:replace="/parts::titledTextarea(#{msg.customer.sidebar.ticket.content},'ticketContent')"></div>
                     <div class="form-group col-md-12">
                         <button type="button" class="mb-2 btn btn-outline-primary mr-2"
                                 th:text="#{msg.customer.sidebar.ticket.button}">提交投诉

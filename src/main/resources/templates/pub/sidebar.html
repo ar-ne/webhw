@@ -2,27 +2,27 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <body>
 <ul class="nav flex-column" th:fragment="manager">
-    <li th:replace="/framework/sidebar::nav-item('add_circle_outline',#{msg.manager.sidebar.add.production},@{addProduction},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('select_all',#{msg.manager.sidebar.select.production},@{selectProduction},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('saved_search',#{msg.manager.sidebar.select.order},@{selectOrder},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('search',#{msg.manager.sidebar.select.loan},@{selectLoan},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('add_comment',#{msg.manager.sidebar.add.Introduction},@{addIntroduction},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('insert_chart_outlined',#{msg.manager.sidebar.chart.order},@{chartOrder},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('pie_chart_outlined',#{msg.manager.sidebar.chart.loan},@{chartLoan},false)"></li>
+    <li th:replace="/parts::nav-item('add_circle_outline',#{msg.manager.sidebar.add.production},@{addProduction},false)"></li>
+    <li th:replace="/parts::nav-item('select_all',#{msg.manager.sidebar.select.production},@{selectProduction},false)"></li>
+    <li th:replace="/parts::nav-item('saved_search',#{msg.manager.sidebar.select.order},@{selectOrder},false)"></li>
+    <li th:replace="/parts::nav-item('search',#{msg.manager.sidebar.select.loan},@{selectLoan},false)"></li>
+    <li th:replace="/parts::nav-item('add_comment',#{msg.manager.sidebar.add.Introduction},@{addIntroduction},false)"></li>
+    <li th:replace="/parts::nav-item('insert_chart_outlined',#{msg.manager.sidebar.chart.order},@{chartOrder},false)"></li>
+    <li th:replace="/parts::nav-item('pie_chart_outlined',#{msg.manager.sidebar.chart.loan},@{chartLoan},false)"></li>
 
 </ul>
 <ul class="nav flex-column" th:fragment="customer">
-    <li th:replace="/framework/sidebar::nav-item('shield',#{msg.customer.sidebar.buy},@{buy},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('shopping_cart',#{msg.customer.sidebar.bought},@{bought},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('credit_card',#{msg.customer.sidebar.loan},@{loan},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('mark_as_unread',#{msg.customer.sidebar.advice},@{advice},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('sms_failed',#{msg.customer.sidebar.ticket},@{ticket},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('assignment_turned_in',#{msg.customer.sidebar.result},@{result},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('map',#{msg.customer.sidebar.map},@{map},false)"></li>
+    <li th:replace="/parts::nav-item('shield',#{msg.customer.sidebar.buy},@{buy},false)"></li>
+    <li th:replace="/parts::nav-item('shopping_cart',#{msg.customer.sidebar.bought},@{bought},false)"></li>
+    <li th:replace="/parts::nav-item('credit_card',#{msg.customer.sidebar.loan},@{loan},false)"></li>
+    <li th:replace="/parts::nav-item('mark_as_unread',#{msg.customer.sidebar.advice},@{advice},false)"></li>
+    <li th:replace="/parts::nav-item('sms_failed',#{msg.customer.sidebar.ticket},@{ticket},false)"></li>
+    <li th:replace="/parts::nav-item('assignment_turned_in',#{msg.customer.sidebar.result},@{result},false)"></li>
+    <li th:replace="/parts::nav-item('map',#{msg.customer.sidebar.map},@{map},false)"></li>
 </ul>
 <ul class="nav flex-column" th:fragment="staff">
-    <li th:replace="/framework/sidebar::nav-item('create_new_folder',#{msg.staff.sidebar.advice},@{advice},false)"></li>
-    <li th:replace="/framework/sidebar::nav-item('assignment_late',#{msg.staff.sidebar.ticket},@{ticket},false)"></li>
+    <li th:replace="/parts::nav-item('create_new_folder',#{msg.staff.sidebar.advice},@{advice},false)"></li>
+    <li th:replace="/parts::nav-item('assignment_late',#{msg.staff.sidebar.ticket},@{ticket},false)"></li>
 </ul>
 </body>
 </html>

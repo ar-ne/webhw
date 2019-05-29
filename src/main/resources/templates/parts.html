@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="welcomeMsg (name)">
+    <header class="card-header">欢迎使用学生选课系统<!--/*@thymesVar id="name" type="java.lang.String"*/-->
+        <span th:text="${name}"></span></header>
+</div>
+<ul>
+    <li class="nav-item" th:fragment="nav-item(icon,text,tref,active)">
+        <a class="spf-link nav-link " th:classappend="${tref==page?'active':''}" href="#" th:href="${tref}">
+            <i class="material-icons" th:text="${icon}">icon</i>
+            <span th:text="${text}">Text</span>
+        </a>
+    </li>
+</ul>
+
+<!--表单-->
+<div th:fragment="table(jURL,table)">
+    <table id="table"></table>
+    <script th:inline="javascript">
+        generateTables([[${jURL}]], [[${table}]]);
+    </script>
+</div>
+
+<!--带标题的输入区域-->
+<div class="form-group col-md-12" th:fragment="titledTextarea(title,name)">
+    <strong class="text-muted d-block mb-2"
+            th:text="${title}"></strong>
+    <textarea class="form-control" th:name="${name}"></textarea>
+</div>
+
+<!--带标题的输入框（文字）-->
+<div class="form-group col-md-7" th:fragment="titledTextInput(title,text,name)">
+    <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" th:text="${text}">￥</span>
+        </div>
+        <input type="text" class="form-control" th:name="${name}">
+    </div>
+</div>
+
+<!--带标题的输入框（图片连接）-->
+<div class="form-group col-md-7" th:fragment="titledIconInput(title,icon,name)">
+    <strong class="text-muted d-block mb-2" th:text="$(title)"></strong>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="material-icons" th:text="${icon}">icon</i>
+            </span>
+        </div>
+        <input type="text" class="form-control" th:name="${name}">
+    </div>
+</div>
+
+</html>
