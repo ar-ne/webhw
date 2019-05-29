@@ -29,7 +29,9 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="bs-checkbox"><label><input type="checkbox" class="custom-control-input"><span></span></label></td>
+                            <td class="bs-checkbox"><label><input type="checkbox"
+                                                                  class="custom-control-input"><span></span></label>
+                            </td>
                             <td>1</td>
                             <td>0</td>
                             <td>3%</td>
@@ -38,7 +40,10 @@
                         </tr>
                         </tbody>
                     </table>
-                    <button type="button" class="mb-2 btn btn-outline-primary mr-2" th:text="#{msg.customer.buy.button}">Primary</button>
+                    <button type="button" class="mb-2 btn btn-outline-primary mr-2"
+                            th:text="#{msg.customer.buy.button}">Primary
+                    </button>
+                    <div th:replace="/framework/fragments::table(@{/api/lizt/production},${'Production'})"></div>
                 </div>
             </div>
         </div>

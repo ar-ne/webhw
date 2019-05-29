@@ -35,22 +35,22 @@ public class Customer {
     }
 
     @GetMapping("advice")
-    public String advice(){
+    public String advice() {
         return "priv/Customer/advice";
     }
 
     @GetMapping("ticket")
-    public String ticket(){
+    public String ticket() {
         return "priv/Customer/ticket";
     }
 
     @GetMapping("result")
-    public String result(){
+    public String result() {
         return "priv/Customer/result";
     }
 
     @GetMapping("map")
-    public String map(){
+    public String map() {
         return "priv/Customer/map";
     }
 }

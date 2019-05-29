@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/5/27 20:34:19                           */
+/* Created on:     2019/5/29 12:14:47                           */
 /*==============================================================*/
 
 
@@ -141,7 +141,7 @@ create table Customer
    phoneNum             varchar(200)  comment 'phoneNum',
    age                  int  comment 'age',
    sex                  int  comment 'sex',
-   pid                  varchar(200)  comment 'pid',
+   personid             varchar(200)  comment 'personid',
    adress               varchar(254)  comment 'adress',
    joinTime             datetime  comment 'joinTime',
    primary key (c_id)
@@ -159,7 +159,7 @@ create index Index_1 on Customer
    phoneNum,
    age,
    sex,
-   pid,
+   personid,
    adress,
    joinTime
 );
@@ -401,7 +401,7 @@ create table Production
    risk                 int  comment 'risk',
    profit               double  comment 'profit',
    pMin                 double  comment 'pMin',
-   content              varchar(2000)  comment 'content',
+   intro                varchar(2000)  comment 'intro',
    primary key (p_id)
 );
 

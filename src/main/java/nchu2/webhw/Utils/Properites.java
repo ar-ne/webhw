@@ -16,21 +16,18 @@ public class Properites {
     //    #show显示 #hide隐藏 #editable可编辑 #uneditable不可编辑 #direct直接显示(SEX=1转为SEX=男) #indirect编码后显示
     public static class FieldFlag {
         public static class Visibility {
-            public static final String SHOW = "S";
-            public static final String HIDE = "H";
-            public static final String[] types = {SHOW, HIDE};
+            public static final boolean SHOW = true;
+            public static final boolean HIDE = false;
         }
 
         public static class Editability {
-            public static final String EDITABLE = "E";
-            public static final String UNEDITABLE = "U";
-            public static final String[] types = {EDITABLE, UNEDITABLE};
+            public static final boolean EDITABLE = true;
+            public static final boolean UNEDITABLE = false;
         }
 
         public static class ShowType {
-            public static final String DIRECT = "D";
-            public static final String INDIRECT = "I";
-            public static final String[] types = {DIRECT, INDIRECT};
+            public static final boolean DIRECT = true;
+            public static final boolean INDIRECT = false;
         }
 
     }
