@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<title th:text="#{msg.customer.bought.title}">购买理财产品</title>
+<body th:replace="/framework/main">
+<div th:fragment="mainContent">
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <h3 th:text="#{msg.customer.bougth.header.title}" class="page-title">清单</h3>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="mb-3 col-12 ">
+            <div class="card card-small ">
+                <div class="card-header "></div>
+                <div class="card-body">
+                    <table class="table mb-0">
+                        <thead class="bg-light">
+                        <tr>
+                            <th scope="col" class="border-1">订单编号</th>
+                            <th scope="col" class="border-1">购买时间</th>
+                            <th scope="col" class="border-1">购买时长(月)</th>
+                            <th scope="col" class="border-1">购买金额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2019-5-4</td>
+                            <td>12</td>
+                            <td>20000</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
