@@ -5,22 +5,22 @@
 <div th:fragment="mainContent">
     <div class="page-header row no-gutters py-4">
         <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-
+            <div class="card-header "><h3 th:text="#{msg.customer.ticket.header.title}" class="page-title">投诉表</h3>
         </div>
     </div>
     <div class="row ">
         <div class="mb-3 col-12 ">
             <div class="card card-small ">
-                <div class="card-header "><h3 th:text="#{msg.customer.ticket.header.title}" class="page-title">投诉表</h3>
+
                 </div>
                 <div class="card-body">
                     <div class="form-group col-md-12">
                         <strong class="text-muted d-block mb-2"
                                 th:text="#{msg.customer.sidebar.ticket.type}">投诉类型</strong>
                         <select id="inputState" class="form-control">
-                            <option selected="">界面方面</option>
-                            <option>服务方面</option>
-                            <option>功能方面</option>
+                            <option selected="" value="界面">界面</option>
+                            <option value="服务">服务</option>
+                            <option value="功能">功能</option>
                         </select>
                     </div>
 

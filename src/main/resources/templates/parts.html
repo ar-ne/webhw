@@ -25,10 +25,10 @@
 <div class="form-group col-md-12" th:fragment="titledTextarea(title,name)">
     <strong class="text-muted d-block mb-2"
             th:text="${title}"></strong>
-    <textarea class="form-control" th:name="${name}"></textarea>
+    <textarea class="form-control" th:name="${name}" style="min-height: 200px"></textarea>
 </div>
 
-<!--带标题的输入框（文字）-->
+<!--带标题的输入框（文字前）-->
 <div class="form-group col-md-7" th:fragment="titledTextInput(title,text,name)">
     <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
     <div class="input-group mb-3">
@@ -39,7 +39,18 @@
     </div>
 </div>
 
-<!--带标题的输入框（图片连接）-->
+<!--带标题的输入框（文字后）-->
+<div class="form-group col-md-7" th:fragment="titledTextInputAf(title,text,name)">
+    <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" th:name="${name}">
+        <div class="input-group-append">
+            <span class="input-group-text" th:text="${text}">￥</span>
+        </div>
+    </div>
+</div>
+
+<!--带标题的输入框（图片链接）-->
 <div class="form-group col-md-7" th:fragment="titledIconInput(title,icon,name)">
     <strong class="text-muted d-block mb-2" th:text="$(title)"></strong>
     <div class="input-group mb-3">
