@@ -34,6 +34,29 @@ function generateTables(jURL,table, container='table') {
         });
     });
 }
+function zzz_test(tablename) {
+    console.log(tablename);
+    $.ajax({
+        type: "post",
+        async: false,
+        url: "/api/sample/" + tablename,
+        dataType: "json",
+
+        success: function (data) {
+            console.log(data);
+
+            for (key in data){
+                console.log(key);
+                if ($("[name='key']").val() != null){
+                    data[key] =  $("[name=key]").val();
+                }
+                console.log(data[key]);
+            }
+            console.log(data);
+
+        }
+    });
+}
 
 function goBack() {
     history.back(-1);

@@ -28,8 +28,15 @@
     <textarea class="form-control" th:name="${name}" style="min-height: 200px"></textarea>
 </div>
 
+<!--带标题的输入区域(带默认内容)-->
+<div class="form-group col-md-10" th:fragment="titledTextareaC(title,name,value)">
+    <strong class="text-muted d-block mb-2"
+            th:text="${title}"></strong>
+    <textarea class="form-control" th:name="${name}"  th:text="${value}" style="min-height: 200px"></textarea>
+</div>
+
 <!--带标题的输入框（文字前）-->
-<div class="form-group col-md-7" th:fragment="titledTextInput(title,text,name)">
+<div class="form-group col-md-5" th:fragment="titledTextInput(title,text,name)">
     <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -40,7 +47,7 @@
 </div>
 
 <!--带标题的输入框（文字后）-->
-<div class="form-group col-md-7" th:fragment="titledTextInputAf(title,text,name)">
+<div class="form-group col-md-5" th:fragment="titledTextInputAf(title,text,name)">
     <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
     <div class="input-group mb-3">
         <input type="text" class="form-control" th:name="${name}">
@@ -50,8 +57,14 @@
     </div>
 </div>
 
+<!--带标题的输入框（无文字）-->
+<div class="form-group col-md-5" th:fragment="TextInput(text,name,value)">
+    <label th:text="${text}" th:for="${text}">First Name</label>
+    <input type="text" class="form-control" th:id="${text}" th:name="${name}" th:value="${value}">
+</div>
+
 <!--带标题的输入框（图片链接）-->
-<div class="form-group col-md-7" th:fragment="titledIconInput(title,icon,name)">
+<div class="form-group col-md-5" th:fragment="titledIconInput(title,icon,name)">
     <strong class="text-muted d-block mb-2" th:text="$(title)"></strong>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -63,4 +76,38 @@
     </div>
 </div>
 
+<!--带标题的输入框（文字前）无法输入-->
+<div class="form-group col-md-5" th:fragment="titledTextInputN(title,text,name,value)">
+    <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" th:text="${text}">￥</span>
+        </div>
+        <input type="text" class="form-control" th:name="${name}" th:value="${value}" disabled="disabled">
+    </div>
+</div>
+
+<!--带标题的输入框（文字后）无法输入-->
+<div class="form-group col-md-5" th:fragment="titledTextInputAfN(title,text,name,value)">
+    <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" th:name="${name}" th:value="${value}" disabled="disabled">
+        <div class="input-group-append">
+            <span class="input-group-text" th:text="${text}">￥</span>
+        </div>
+    </div>
+</div>
+
+<!--带标题的输入框（无文字）无法输入-->
+<div class="form-group col-md-5" th:fragment="TextInputN(text,name,value)">
+    <label th:text="${text}" th:for="${text}">First Name</label>
+    <input type="text" class="form-control" th:id="${text}" th:name="${name}" th:value="${value}" disabled="disabled">
+</div>
+
+<!--带标题的输入区域(带默认内容) 无法输入-->
+<div class="form-group col-md-10" th:fragment="titledTextareaCN(title,name,value)">
+    <strong class="text-muted d-block mb-2"
+            th:text="${title}"></strong>
+    <textarea class="form-control" th:name="${name}"  th:text="${value}" style="min-height: 200px" disabled="disabled"></textarea>
+</div>
 </html>

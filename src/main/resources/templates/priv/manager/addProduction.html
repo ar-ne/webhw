@@ -35,7 +35,7 @@
                             <label class="btn btn-white">
                                 <input type="radio" name="options" id="option2" autocomplete="off" value="1">低风险</label>
                             <label class="btn btn-white">
-                                <input type="radio" name="options" id="option3" autocomplete="off" value="2 ">
+                                <input type="radio" name="options" id="option3" autocomplete="off" value="2">
                                 高风险</label></div>
                     </div>
                     <div th:replace="/parts::titledTextInputAf(#{msg.manager.sidebar.addPro.profit},'%','profit')"></div>
@@ -45,7 +45,8 @@
                     <div th:replace="/parts::titledTextarea(#{msg.manager.sidebar.addPro.content},'productionContent')"></div>
                     <br>
                     <div class="form-group col-md-12">
-                        <button type="button" class="mb-2 btn btn-outline-primary mr-2"
+                        <button id="Production" onclick="zzz_test(this.id)"
+                                type="button" class="mb-2 btn btn-outline-primary mr-2"
                                 th:text="#{msg.manager.sidebar.addPro.button}">发布
                         </button>
                     </div>
