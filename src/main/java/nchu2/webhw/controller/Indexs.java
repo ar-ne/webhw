@@ -1,6 +1,8 @@
-package nchu2.webhw.Controller;
+package nchu2.webhw.controller;
 
 import nchu2.webhw.ComponentBase;
+import nchu2.webhw.utils.Properites;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,27 +23,34 @@ public class Indexs extends ComponentBase {
         return "pub/login";
     }
 
-
-    @GetMapping("priv/{userType}")
-    public String router(@PathVariable("userType") String userType) {
-        return String.format("redirect:/priv/%s/index", userType);
+    @GetMapping("logout")
+    public String logout() {
+        return "pub/logout";
     }
 
 
-    @GetMapping("priv/{userType}/{page}")
-    public String router(@PathVariable("userType") String userType, @PathVariable("page") String page, Model model) {
-        model.addAttribute("userType", userType);
+    @GetMapping("priv")
+    public String router() {
+        return "redirect:/priv/index";
+    }
+
+
+    @GetMapping("priv/{page}")
+    public String router(@PathVariable("page") String page, Model model, Authentication authentication) {
+        Properites.UserType userType = ((Properites.UserType.Authority) authentication.getAuthorities().toArray()[0]).getUserType();
+        model.addAttribute("userType", userType.name());
         model.addAttribute("page", page);
-        return String.format("priv/%s/%s", userType, page);
+        System.out.println(authentication);
+        return String.format("priv/%s/%s", userType.name(), page);
     }
 
     @GetMapping("profile")
-    public String profile(){
+    public String profile() {
         return "pub/profile";
     }
 
     @GetMapping("notification")
-    public String introduction(){
+    public String introduction() {
         return "pub/notification";
     }
 }

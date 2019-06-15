@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<title th:text="#{msg.logout.title}">LOGOOOOUTTTTTTT</title>
+<body th:replace="/framework/brief">
+<div th:fragment="mainContent">
+    <div class="error">
+        <div class="error__content">
+            <h2 th:text="#{msg.logout}">ERROR</h2>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        urlx = [[@{/logout}]]
+        ;
+        $.ajax({
+            type: "POST",
+            url: urlx,
+            data: {[[${_csrf.parameterName}]]: [[${_csrf.token}]]},
+            dataType: "xhr",
+            async: true,
+            cache: false,
+            complete: function (xhr, textStatus) {
+                console.log(xhr.status);
+                Turbolinks.visit("login");
+            }
+        });
+    </script>
+</div>
+</body>
+</html>

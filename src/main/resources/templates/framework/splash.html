@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js h-100" lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta name="turbolinks-cache-control" content="no-preview">
+    <meta name="turbolinks-cache-control" content="no-cache">
     <meta charset="UTF-8">
     <title>Loading~~~~~</title>
     <script>
@@ -27,7 +27,7 @@
             $(document).on('turbolinks:load', function () {
                 $('main').fadeIn('slow');
             });
-            Turbolinks.visit("[[${direction==null?'login':direction}]]", {action: "replace"})
+            Turbolinks.visit("[[${direction==null?'priv/index':direction}]]", {action: "replace"})
         };
     </script>
     <style>

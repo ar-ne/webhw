@@ -1,4 +1,28 @@
-function generateTables(jURL,table, container='table') {
+function formSubmit(form = 'form', callback = null) {
+    form = $('#' + form);
+    $.ajax({
+        type: form.attr("method"),
+        url: form.attr("action"),
+        data: form.serialize(),
+        dataType: "xhr",
+        async: false,
+        cache: false,
+        complete: function (xhr, textStatus) {
+            console.log(xhr);
+            if ((xhr.getResponseHeader('Content-Type') || '').substring(0, 9) === 'text/html') {
+                var referrer = window.location.href;
+                var snapshot = Turbolinks.Snapshot.wrap(xhr.response);
+                Turbolinks.controller.cache.put(referrer, snapshot);
+                Turbolinks.visit(referrer, {action: 'restore'})
+            }
+        }
+    });
+    alert("before return");
+
+    return false;
+}
+
+function generateTables(jURL, table, container = 'table') {
     $.get(jURL, function (data, status) {
         if (status !== "success") return;
         jsonTable = data;
@@ -34,6 +58,7 @@ function generateTables(jURL,table, container='table') {
         });
     });
 }
+
 function zzz_test(tablename) {
     console.log(tablename);
     $.ajax({
@@ -45,10 +70,10 @@ function zzz_test(tablename) {
         success: function (data) {
             console.log(data);
 
-            for (key in data){
+            for (key in data) {
                 console.log(key);
-                if ($("[name='key']").val() != null){
-                    data[key] =  $("[name=key]").val();
+                if ($("[name='key']").val() != null) {
+                    data[key] = $("[name=key]").val();
                 }
                 console.log(data[key]);
             }
@@ -60,6 +85,10 @@ function zzz_test(tablename) {
 
 function goBack() {
     history.back(-1);
+}
+
+function init() {
+    initPopper();
 }
 
 function initPopper() {

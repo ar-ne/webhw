@@ -1,142 +1,15 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/5/29 12:14:47                           */
+/* Created on:     2019/6/15 15:44:48                           */
 /*==============================================================*/
 
-
-alter table Introduction 
-   drop foreign key FK_INTRODUC_REFERENCE_MANAGER;
-
-alter table Loan 
-   drop foreign key FK_LOAN_REFERENCE_CUSTOMER;
-
-alter table Notification 
-   drop foreign key FK_NOTIFICA_REFERENCE_CUSTOMER;
-
-alter table Notification 
-   drop foreign key FK_NOTIFICA_REFERENCE_INTRODUC;
-
-alter table Notification 
-   drop foreign key FK_NOTIFICA_REFERENCE_TICKET;
-
-alter table Notification 
-   drop foreign key FK_NOTIFICA_REFERENCE_LOAN;
-
-alter table Opinion 
-   drop foreign key FK_OPINION_REFERENCE_CUSTOMER;
-
-alter table Orders 
-   drop foreign key FK_ORDERS_REFERENCE_PRODUCTI;
-
-alter table Orders 
-   drop foreign key FK_ORDERS_REFERENCE_CUSTOMER;
-
-alter table Production 
-   drop foreign key FK_PRODUCTI_REFERENCE_MANAGER;
-
-alter table Ticket 
-   drop foreign key FK_TICKET_REFERENCE_CUSTOMER;
-
-alter table Ticket 
-   drop foreign key FK_TICKET_REFERENCE_STUFF;
-
-drop index Index_1 on Customer;
-
-drop table if exists Customer;
-
-drop index Index_1 on Introduction;
-
-
-alter table Introduction 
-   drop foreign key FK_INTRODUC_REFERENCE_MANAGER;
-
-drop table if exists Introduction;
-
-drop index Index_1 on Loan;
-
-
-alter table Loan 
-   drop foreign key FK_LOAN_REFERENCE_CUSTOMER;
-
-drop table if exists Loan;
-
-drop index Index_1 on Log;
-
-drop table if exists Log;
-
-drop index Index_1 on Login;
-
-drop table if exists Login;
-
-drop index Index_1 on Manager;
-
-drop table if exists Manager;
-
-drop index Index_1 on Notification;
-
-
-alter table Notification 
-   drop foreign key FK_NOTIFICA_REFERENCE_CUSTOMER;
-
-alter table Notification 
-   drop foreign key FK_NOTIFICA_REFERENCE_INTRODUC;
-
-alter table Notification 
-   drop foreign key FK_NOTIFICA_REFERENCE_TICKET;
-
-alter table Notification 
-   drop foreign key FK_NOTIFICA_REFERENCE_LOAN;
-
-drop table if exists Notification;
-
-drop index Index_1 on Opinion;
-
-
-alter table Opinion 
-   drop foreign key FK_OPINION_REFERENCE_CUSTOMER;
-
-drop table if exists Opinion;
-
-drop index Index_1 on Orders;
-
-
-alter table Orders 
-   drop foreign key FK_ORDERS_REFERENCE_PRODUCTI;
-
-alter table Orders 
-   drop foreign key FK_ORDERS_REFERENCE_CUSTOMER;
-
-drop table if exists Orders;
-
-drop index Index_1 on Production;
-
-
-alter table Production 
-   drop foreign key FK_PRODUCTI_REFERENCE_MANAGER;
-
-drop table if exists Production;
-
-drop index Index_1 on Stuff;
-
-drop table if exists Stuff;
-
-drop index Index_1 on Ticket;
-
-
-alter table Ticket 
-   drop foreign key FK_TICKET_REFERENCE_CUSTOMER;
-
-alter table Ticket 
-   drop foreign key FK_TICKET_REFERENCE_STUFF;
-
-drop table if exists Ticket;
 
 /*==============================================================*/
 /* Table: Customer                                              */
 /*==============================================================*/
 create table Customer
 (
-   c_id                 bigint not null auto_increment  comment 'c_id',
+   id                   bigint not null  comment 'id',
    name                 varchar(200)  comment 'name',
    phoneNum             varchar(200)  comment 'phoneNum',
    age                  int  comment 'age',
@@ -144,7 +17,7 @@ create table Customer
    personid             varchar(200)  comment 'personid',
    adress               varchar(254)  comment 'adress',
    joinTime             datetime  comment 'joinTime',
-   primary key (c_id)
+   primary key (id)
 );
 
 alter table Customer comment 'Customer';
@@ -154,7 +27,7 @@ alter table Customer comment 'Customer';
 /*==============================================================*/
 create index Index_1 on Customer
 (
-   c_id,
+   id,
    name,
    phoneNum,
    age,
@@ -253,7 +126,9 @@ create table Login
    loginId              bigint not null auto_increment  comment 'loginId',
    type                 int  comment 'type',
    pass                 varchar(200)  comment 'pass',
-   primary key (loginId)
+   loginname            varchar(200) not null  comment 'loginname',
+   primary key (loginname),
+   key AK_Key_2 (loginId)
 );
 
 alter table Login comment 'Login';
@@ -264,7 +139,7 @@ alter table Login comment 'Login';
 create index Index_1 on Login
 (
    loginId,
-   type
+   loginname
 );
 
 /*==============================================================*/
@@ -272,7 +147,7 @@ create index Index_1 on Login
 /*==============================================================*/
 create table Manager
 (
-   m_id                 bigint not null auto_increment  comment 'm_id',
+   id                   bigint not null  comment 'id',
    name                 varchar(200)  comment 'name',
    phoneNum             varchar(200)  comment 'phoneNum',
    age                  int  comment 'age',
@@ -281,7 +156,7 @@ create table Manager
    adress               varchar(254)  comment 'adress',
    workYear             int  comment 'workYear',
    joinTime             datetime  comment 'joinTime',
-   primary key (m_id)
+   primary key (id)
 );
 
 alter table Manager comment 'Manager';
@@ -291,7 +166,7 @@ alter table Manager comment 'Manager';
 /*==============================================================*/
 create index Index_1 on Manager
 (
-   m_id,
+   id,
    name,
    phoneNum,
    age,
@@ -421,11 +296,11 @@ create index Index_1 on Production
 );
 
 /*==============================================================*/
-/* Table: Stuff                                                 */
+/* Table: Staff                                                 */
 /*==============================================================*/
-create table Stuff
+create table Staff
 (
-   s_id                 bigint not null auto_increment  comment 's_id',
+   id                   bigint not null  comment 'id',
    name                 varchar(200)  comment 'name',
    phoneNum             varchar(200)  comment 'phoneNum',
    age                  int  comment 'age',
@@ -434,17 +309,17 @@ create table Stuff
    adress               varchar(254)  comment 'adress',
    workYear             int  comment 'workYear',
    joinTime             datetime  comment 'joinTime',
-   primary key (s_id)
+   primary key (id)
 );
 
-alter table Stuff comment 'Stuff';
+alter table Staff comment 'Staff';
 
 /*==============================================================*/
 /* Index: Index_1                                               */
 /*==============================================================*/
-create index Index_1 on Stuff
+create index Index_1 on Staff
 (
-   s_id,
+   id,
    name,
    phoneNum,
    age,
@@ -487,13 +362,13 @@ create index Index_1 on Ticket
 );
 
 alter table Introduction add constraint FK_INTRODUC_REFERENCE_MANAGER foreign key (m_id)
-      references Manager (m_id) on delete restrict on update restrict;
+      references Manager (id) on delete restrict on update restrict;
 
 alter table Loan add constraint FK_LOAN_REFERENCE_CUSTOMER foreign key (c_id)
-      references Customer (c_id) on delete restrict on update restrict;
+      references Customer (id) on delete restrict on update restrict;
 
 alter table Notification add constraint FK_NOTIFICA_REFERENCE_CUSTOMER foreign key (c_id)
-      references Customer (c_id) on delete restrict on update restrict;
+      references Customer (id) on delete restrict on update restrict;
 
 alter table Notification add constraint FK_NOTIFICA_REFERENCE_INTRODUC foreign key (i_id)
       references Introduction (i_id) on delete restrict on update restrict;
@@ -505,20 +380,20 @@ alter table Notification add constraint FK_NOTIFICA_REFERENCE_LOAN foreign key (
       references Loan (l_id) on delete restrict on update restrict;
 
 alter table Opinion add constraint FK_OPINION_REFERENCE_CUSTOMER foreign key (c_id)
-      references Customer (c_id) on delete restrict on update restrict;
+      references Customer (id) on delete restrict on update restrict;
 
 alter table Orders add constraint FK_ORDERS_REFERENCE_PRODUCTI foreign key (p_id)
       references Production (p_id) on delete restrict on update restrict;
 
 alter table Orders add constraint FK_ORDERS_REFERENCE_CUSTOMER foreign key (c_id)
-      references Customer (c_id) on delete restrict on update restrict;
+      references Customer (id) on delete restrict on update restrict;
 
 alter table Production add constraint FK_PRODUCTI_REFERENCE_MANAGER foreign key (m_id)
-      references Manager (m_id) on delete restrict on update restrict;
+      references Manager (id) on delete restrict on update restrict;
 
 alter table Ticket add constraint FK_TICKET_REFERENCE_CUSTOMER foreign key (c_id)
-      references Customer (c_id) on delete restrict on update restrict;
+      references Customer (id) on delete restrict on update restrict;
 
-alter table Ticket add constraint FK_TICKET_REFERENCE_STUFF foreign key (s_id)
-      references Stuff (s_id) on delete restrict on update restrict;
+alter table Ticket add constraint FK_TICKET_REFERENCE_STAFF foreign key (s_id)
+      references Staff (id) on delete restrict on update restrict;
 

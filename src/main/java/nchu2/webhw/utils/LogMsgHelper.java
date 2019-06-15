@@ -1,0 +1,18 @@
+package nchu2.webhw.utils;
+
+import nchu2.webhw.model.tables.pojos.Log;
+import nchu2.webhw.model.tables.pojos.Login;
+
+import java.sql.Timestamp;
+
+public class LogMsgHelper {
+    public static class Auth {
+        public static Log newLogin(Login login) {
+            Log log = new Log();
+            log.setOperation(String.format("Add new login=>id: %s, passwd: masked, type: %s", login.getLoginid(), login.getType()));
+            log.setResult(String.valueOf(login.getLoginid() == null));
+            log.setTime(new Timestamp(System.currentTimeMillis()));
+            return log;
+        }
+    }
+}

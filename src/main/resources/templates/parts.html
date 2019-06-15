@@ -32,7 +32,7 @@
 <div class="form-group col-md-10" th:fragment="titledTextareaC(title,name,value)">
     <strong class="text-muted d-block mb-2"
             th:text="${title}"></strong>
-    <textarea class="form-control" th:name="${name}"  th:text="${value}" style="min-height: 200px"></textarea>
+    <textarea class="form-control" th:name="${name}" th:text="${value}" style="min-height: 200px"></textarea>
 </div>
 
 <!--带标题的输入框（文字前）-->
@@ -108,6 +108,7 @@
 <div class="form-group col-md-10" th:fragment="titledTextareaCN(title,name,value)">
     <strong class="text-muted d-block mb-2"
             th:text="${title}"></strong>
-    <textarea class="form-control" th:name="${name}"  th:text="${value}" style="min-height: 200px" disabled="disabled"></textarea>
+    <textarea class="form-control" th:name="${name}" th:text="${value}" style="min-height: 200px"
+              disabled="disabled"></textarea>
 </div>
 </html>

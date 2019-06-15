@@ -1,8 +1,6 @@
-package nchu2.webhw.API;
+package nchu2.webhw.api;
 
-import nchu2.webhw.tables.daos.ProductionDao;
-import nchu2.webhw.tables.pojos.Production;
-import org.springframework.core.annotation.Order;
+import nchu2.webhw.model.tables.daos.ProductionDao;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.GET;

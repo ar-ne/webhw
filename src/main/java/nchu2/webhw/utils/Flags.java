@@ -1,4 +1,4 @@
-package nchu2.webhw.Utils;
+package nchu2.webhw.utils;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

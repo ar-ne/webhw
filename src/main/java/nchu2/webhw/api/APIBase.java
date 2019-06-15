@@ -1,4 +1,4 @@
-package nchu2.webhw.API;
+package nchu2.webhw.api;
 
 import nchu2.webhw.ComponentBase;
 import org.jooq.DSLContext;

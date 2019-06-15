@@ -1,14 +1,18 @@
-package nchu2.webhw.API;
+package nchu2.webhw.api;
 
-import nchu2.webhw.Webhw;
-import nchu2.webhw.WebhwApplication;
-import nchu2.webhw.tables.pojos.Customer;
+import nchu2.webhw.model.Webhw;
+import nchu2.webhw.model.tables.pojos.Customer;
+import org.jooq.Configuration;
 import org.jooq.Field;
 import org.jooq.Table;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.jooq.impl.DAOImpl;
 
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("sample")
 public class Sample extends APIBase {
@@ -30,11 +34,10 @@ public class Sample extends APIBase {
         return builder.toString();
     }
 
-    @POST
-    @Path("{classname}")
+    @GET
+    @Path("all/{table}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Object getSample(@PathParam("classname") String classname) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        return Class.forName("nchu2.webhw.tables.pojos." + classname).newInstance();
+    public List all(@PathParam("table") String table) throws Exception {
+        return ((DAOImpl) Class.forName(String.format("nchu2.webhw.tables.daos.%sDao", table)).getConstructor(Configuration.class).newInstance(dsl.configuration())).findAll();
     }
-
 }

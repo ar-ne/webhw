@@ -1,7 +1,7 @@
-package nchu2.webhw.API;
+package nchu2.webhw.api;
 
 import lombok.Data;
-import nchu2.webhw.Utils.Flags;
+import nchu2.webhw.utils.Flags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.PropertySource;

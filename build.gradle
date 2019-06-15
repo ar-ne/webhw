@@ -20,6 +20,7 @@ configurations {
 repositories {
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    maven { url 'https://maven.aliyun.com/repository/spring/' }
 }
 
 ext {
@@ -40,6 +41,7 @@ dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1'
     implementation 'org.springframework.session:spring-session-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    compile "org.springframework.boot:spring-boot-starter-security"
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -62,18 +64,16 @@ allprojects {
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/spring/' }
     }
 }
 
 def application = new Properties()
 file("src/main/resources/application.properties").withInputStream { application.load(it) }
-ext['jooq.version'] = '3.11.10'
 jooq {
-    version = '3.11.10'
-    edition = 'OSS'
     webhw(sourceSets.main) {
         jdbc {
-            driver = 'com.mysql.jdbc.Driver'
+            driver = 'com.mysql.cj.jdbc.Driver'
             url = application.getProperty("spring.datasource.url")
             user = application.getProperty("spring.datasource.username")
             password = application.getProperty("spring.datasource.password")
@@ -81,11 +81,27 @@ jooq {
         generator {
             name = 'org.jooq.codegen.DefaultGenerator'
             strategy {
-                name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+                name = null
+                matchers {
+                    tables {
+                        table {
+                            expression = 'Customer|Manager|Staff'
+                            pojoExtends = 'nchu2.webhw.model.User'
+                        }
+                    }
+                }
             }
             database {
                 name = 'org.jooq.meta.mysql.MySQLDatabase'
                 inputSchema = 'webhw'
+                forcedTypes {
+                    forcedType {
+                        userType = 'nchu2.webhw.utils.Properites.UserType'
+                        converter = 'nchu2.webhw.utils.Properites.UserType.Converter'
+                        expression = 'webhw.Login.type'
+                        types = '.*'
+                    }
+                }
             }
             generate {
                 daos = true
@@ -97,13 +113,13 @@ jooq {
                 fluentSetters = true
             }
             target {
-                packageName = 'nchu2.webhw'
+                packageName = 'nchu2.webhw.model'
             }
         }
     }
 }
 
-task cleanOut(type: Delete){
+task cleanOut(type: Delete) {
     delete("out")
 }
 rootProject.tasks.getByName('clean').dependsOn cleanOut
