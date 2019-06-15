@@ -35,4 +35,13 @@ public class Indexs extends ComponentBase {
         return String.format("priv/%s/%s", userType, page);
     }
 
+    @GetMapping("profile")
+    public String profile(){
+        return "pub/profile";
+    }
+
+    @GetMapping("notification")
+    public String introduction(){
+        return "pub/notification";
+    }
 }

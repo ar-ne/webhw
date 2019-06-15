@@ -7,8 +7,8 @@ import org.jooq.Field;
 import org.jooq.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 @Path("sample")
 public class Sample extends APIBase {
@@ -29,4 +29,12 @@ public class Sample extends APIBase {
         }
         return builder.toString();
     }
+
+    @POST
+    @Path("{classname}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Object getSample(@PathParam("classname") String classname) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        return Class.forName("nchu2.webhw.tables.pojos." + classname).newInstance();
+    }
+
 }
