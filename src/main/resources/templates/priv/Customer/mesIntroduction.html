@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<title th:text="#{msg.mesmesIntroduction.title}">产品</title>
+<body th:replace="/framework/main">
+<div th:fragment="mainContent">
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <h3 th:text="#{msg.mesmesIntroduction.title}" class="page-title">清单</h3>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="mb-3 col-12 ">
+            <div class="card card-small ">
+                <div class="card-header "></div>
+                <div class="card-body">
+                    <div class="form-row pl-3">
+                        <div th:replace="/parts::TextInputN(#{msg.mesmesIntroduction.pid},'pid','1')"></div>
+                        <div th:replace="/parts::TextInputN(#{msg.mesmesIntroduction.mid},'mid','123456')"></div>
+                    </div>
+                    <div class="form-row pl-3">
+                        <div th:replace="/parts::TextInputN(#{msg.mesmesIntroduction.risk},'risk','无风险')"></div>
+                        <div th:replace="/parts::titledTextInputAfN(#{msg.mesmesIntroduction.profit},'%','profit','3')"></div>
+                    </div>
+
+                    <div th:replace="/parts::titledTextInputN(#{msg.mesmesIntroduction.rmb},'￥','rmb','10000')"></div>
+                    <br>
+                    <div th:replace="/parts::titledTextareaCN(#{msg.mesmesIntroduction.content},'content','一定赚钱')"></div>
+                    <br>
+                    <div th:replace="/parts::titledTextInput(#{msg.customer.mesmesIntroduction.rmb},'￥','money')"></div>
+                    <br>
+                    <div class="pl-3">
+                        <button type="button" class="mb-2 btn btn-outline-primary mr-2"
+                                th:text="#{msg.mesmesIntroduction.button}">Primary
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
