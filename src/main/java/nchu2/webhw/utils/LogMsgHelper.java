@@ -14,5 +14,14 @@ public class LogMsgHelper {
             log.setTime(new Timestamp(System.currentTimeMillis()));
             return log;
         }
+
+        public static Log loginAttempt(String name, boolean isAuthenticated) {
+            Log log = new Log();
+            log.setLoginname(name);
+            log.setResult("isAuthenticated" + isAuthenticated);
+            log.setOperation("User login");
+            log.setTime(new Timestamp(System.currentTimeMillis()));
+            return log;
+        }
     }
 }

@@ -2,6 +2,7 @@
 <html class="no-js h-100" lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <script>if (!window.Turbolinks) window.location.replace('/?redirect=' + window.location.pathname);</script>
+    <script th:inline="javascript">if ([[${login!=null}]]) Turbolinks.visit("/priv/index", {action: "replace"});</script>
     <meta name="turbolinks-cache-control" content="no-preview">
     <meta charset="UTF-8">
     <title th:text="#{msg.login.title}">123</title>
@@ -49,7 +50,7 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <button type="submit" class="btn btn-outline-primary btn-block form-control"
-                                                th:text="#{msg.login.btn.login}">Primary
+                                                id="button" th:text="#{msg.login.btn.login}">Primary
                                         </button>
                                     </div>
                                     <div class="input-group mb-3">

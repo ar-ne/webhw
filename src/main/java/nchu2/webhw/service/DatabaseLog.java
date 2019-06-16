@@ -15,9 +15,9 @@ public class DatabaseLog {
         this.dao = new LogDao(dsl.configuration());
     }
 
-    public void log(Long user, String operation, String result) {
+    public void log(String loginName, String operation, String result) {
         Log log = new Log();
-        log.setUserId(user);
+        log.setLoginname(loginName);
         log.setOperation(operation);
         log.setResult(result);
         log.setTime(new Timestamp(System.currentTimeMillis()));

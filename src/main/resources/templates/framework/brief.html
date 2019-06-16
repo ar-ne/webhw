@@ -12,33 +12,16 @@
 <body class="h-100">
 <div class="container-fluid">
     <div class="row">
-
-        <main class="main-content col-12" style="display: none;">
+        <main class="main-content col-12 p-0">
             <div class="main-navbar sticky-top bg-white">
-                <!-- Main Navbar -->
-                <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
-                    <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
-                        <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
-                            <div class="d-table m-auto">
-                                <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;"
-                                     th:src="@{/images/logo.jpg}" alt="Shards Dashboard">
-                                <span class="d-none d-md-inline ml-1" th:text="#{msg.main.name}">Shards Dashboard</span>
-                            </div>
-                        </a>
-                        <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
-                            <i class="material-icons">&#xE5C4;</i>
-                        </a>
-                    </nav>
-                </nav>
-            </div>
-            <!-- / .main-navbar -->
-            <div id="mainContent" class="main-content-container container-fluid px-4" th:include="::mainContent">
+                <div id="mainContent" class="main-content-container container-fluid px-4" style="display: none;"
+                     th:include="::mainContent">
                 Main content
             </div>
             <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" th:href="@{/priv/}">Home</a>
                     </li>
                 </ul>
                 <span class="copyright ml-auto my-auto mr-2">Copyright © 2019

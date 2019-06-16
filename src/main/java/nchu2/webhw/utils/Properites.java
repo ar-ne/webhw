@@ -2,11 +2,18 @@ package nchu2.webhw.utils;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 public class Properites {
-    public static class Tamplet {
-        public static final String Customer = "Customer";
-        public static final String Manager = "Manager";
-        public static final String Staff = "Staff";
+    public static final Set<String> PUBLIC_PAGES;
+
+    static {
+        String[] strings = {"notification", "profile"};
+        HashSet<String> hashSet = new HashSet<>(Arrays.asList(strings));
+        PUBLIC_PAGES = Collections.unmodifiableSet(hashSet);
     }
 
     public enum UserType {

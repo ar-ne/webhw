@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/6/15 15:44:48                           */
+/* Created on:     2019/6/16 0:04:04                            */
 /*==============================================================*/
 
 
@@ -97,8 +97,7 @@ create index Index_1 on Loan
 create table Log
 (
    log_id               bigint not null auto_increment  comment 'log_id',
-   user_id              bigint  comment 'user_id',
-   user_type            varchar(100)  comment 'user_type',
+   loginname            varchar(200)  comment 'loginname',
    operation            varchar(1000)  comment 'operation',
    result               varchar(1000)  comment 'result',
    time                 datetime  comment 'time',
@@ -113,8 +112,6 @@ alter table Log comment 'Log';
 create index Index_1 on Log
 (
    log_id,
-   user_id,
-   user_type,
    time
 );
 
@@ -366,6 +363,9 @@ alter table Introduction add constraint FK_INTRODUC_REFERENCE_MANAGER foreign ke
 
 alter table Loan add constraint FK_LOAN_REFERENCE_CUSTOMER foreign key (c_id)
       references Customer (id) on delete restrict on update restrict;
+
+alter table Log add constraint FK_LOG_REFERENCE_LOGIN foreign key (loginname)
+      references Login (loginname);
 
 alter table Notification add constraint FK_NOTIFICA_REFERENCE_CUSTOMER foreign key (c_id)
       references Customer (id) on delete restrict on update restrict;

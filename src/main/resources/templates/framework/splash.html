@@ -13,7 +13,8 @@
             window.Turbolinks.HttpRequest.prototype.requestLoaded = function () {
                 return this.endRequest(function () {
                     var code = this.xhr.status;
-                    if (200 <= code && code < 300 ||
+                    console.log(this.xhr);
+                    if (200 >= code && code < 300 ||
                         code === 403 || code === 404 || code === 500) {
                         this.delegate.requestCompletedWithResponse(
                             this.xhr.responseText,
@@ -25,9 +26,9 @@
                 }.bind(this));
             };
             $(document).on('turbolinks:load', function () {
-                $('main').fadeIn('slow');
+                $('#mainContent').fadeIn('slow');
             });
-            Turbolinks.visit("[[${direction==null?'priv/index':direction}]]", {action: "replace"})
+            Turbolinks.visit("[[${direction==null?'/login':direction}]]", {action: "replace"})
         };
     </script>
     <style>
@@ -525,9 +526,11 @@
     <link data-turbolinks-eval=false th:href="@{'webpack/index.bundle.css'}" rel="stylesheet">
 </head>
 <body>
-<script data-turbolinks-eval=false defer data-turbolinks-suppress-warning type="text/javascript" th:src="@{'webpack/index.bundle.js'}"></script>
+<script data-turbolinks-eval=false defer data-turbolinks-suppress-warning type="text/javascript"
+        th:src="@{'webpack/index.bundle.js'}"></script>
 <script data-turbolinks-eval=false defer type="text/javascript" th:src="@{'scripts/customs.js'}"></script>
-<!--<script data-turbolinks-eval=false defer th:src="@{'webpack/fonts.bundle.js'}"></script>-->
-<script data-turbolinks-eval=false defer type="text/javascript" th:src="@{'scripts/shards-dashboards.1.1.0.js'}"></script>
+<script data-turbolinks-eval=false defer th:src="@{'webpack/fonts.bundle.js'}"></script>
+<script data-turbolinks-eval=false defer type="text/javascript"
+        th:src="@{'scripts/shards-dashboards.1.1.0.js'}"></script>
 </body>
 </html>

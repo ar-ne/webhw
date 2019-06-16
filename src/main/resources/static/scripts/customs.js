@@ -1,25 +1,26 @@
-function formSubmit(form = 'form', callback = null) {
+function formSubmit(form = 'form', button = 'submit', callback = null) {
     form = $('#' + form);
+    button = $('#' + button);
     $.ajax({
         type: form.attr("method"),
         url: form.attr("action"),
         data: form.serialize(),
         dataType: "xhr",
-        async: false,
+        async: true,
         cache: false,
         complete: function (xhr, textStatus) {
             console.log(xhr);
-            if ((xhr.getResponseHeader('Content-Type') || '').substring(0, 9) === 'text/html') {
-                var referrer = window.location.href;
-                var snapshot = Turbolinks.Snapshot.wrap(xhr.response);
-                Turbolinks.controller.cache.put(referrer, snapshot);
-                Turbolinks.visit(referrer, {action: 'restore'})
-            }
+            console.log(xhr.status);
+            if (xhr.status === 403) showFailAlert();
+            else if (xhr.status === 201) Turbolinks.visit(xhr.responseText, {action: "replace"});
+            else if (xhr.status === 200) Turbolinks.visit(xhr.responseText);
         }
     });
-    alert("before return");
-
     return false;
+}
+
+function showFailAlert() {
+    alert("失败/错误")
 }
 
 function generateTables(jURL, table, container = 'table') {

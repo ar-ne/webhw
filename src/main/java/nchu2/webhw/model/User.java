@@ -7,6 +7,8 @@ import java.io.Serializable;
 public abstract class User implements Serializable {
     public abstract User setId(Long id);
 
+    public abstract String getName();
+
     public interface Register {
         /**
          * 注册一个新的用户

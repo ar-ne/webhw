@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.ApplicationPath;
@@ -35,17 +37,26 @@ public class WebhwApplication {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                    .antMatchers("/scripts/*", "/webpack/*", "/fonts/*", "/signup", "/error").permitAll()
-                    .antMatchers("/api/**", "/priv/**").authenticated()
-                    .and().formLogin().loginPage("/login").permitAll()
+                    .antMatchers("/scripts/*", "/webpack/*", "/fonts/*", "/signup", "/error").permitAll().antMatchers("/api/**", "/priv/**").authenticated()
+                    .and().formLogin().loginPage("/login").successHandler(authSuccessHandler()).failureHandler(authFailureHandler()).permitAll()
                     .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
                     .and();
         }
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
+    @Bean
+    public AuthenticationSuccessHandler authSuccessHandler() {
+        return new Auth.LoginHandler();
+    }
+
+    @Bean
+    public AuthenticationFailureHandler authFailureHandler() {
+        return new Auth.LoginHandler();
+    }
 }
