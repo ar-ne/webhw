@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/6/16 0:04:04                            */
+/* Created on:     2019/6/17 18:25:45                           */
 /*==============================================================*/
 
 
@@ -9,7 +9,7 @@
 /*==============================================================*/
 create table Customer
 (
-   id                   bigint not null  comment 'id',
+   loginname            varchar(200) not null  comment 'loginname',
    name                 varchar(200)  comment 'name',
    phoneNum             varchar(200)  comment 'phoneNum',
    age                  int  comment 'age',
@@ -17,7 +17,7 @@ create table Customer
    personid             varchar(200)  comment 'personid',
    adress               varchar(254)  comment 'adress',
    joinTime             datetime  comment 'joinTime',
-   primary key (id)
+   primary key (loginname)
 );
 
 alter table Customer comment 'Customer';
@@ -27,7 +27,6 @@ alter table Customer comment 'Customer';
 /*==============================================================*/
 create index Index_1 on Customer
 (
-   id,
    name,
    phoneNum,
    age,
@@ -43,7 +42,7 @@ create index Index_1 on Customer
 create table Introduction
 (
    i_id                 bigint not null auto_increment  comment 'i_id',
-   m_id                 bigint  comment 'm_id',
+   loginname            varchar(200)  comment 'loginname',
    type                 varchar(200)  comment 'type',
    pubTime              datetime  comment 'pubTime',
    content              varchar(2000)  comment 'content',
@@ -58,7 +57,6 @@ alter table Introduction comment 'Introduction';
 create index Index_1 on Introduction
 (
    i_id,
-   m_id,
    type,
    pubTime
 );
@@ -69,7 +67,7 @@ create index Index_1 on Introduction
 create table Loan
 (
    l_id                 bigint not null auto_increment  comment 'l_id',
-   c_id                 bigint  comment 'c_id',
+   loginname            varchar(200)  comment 'loginname',
    time                 datetime  comment 'time',
    money                int  comment 'money',
    reason               varchar(2000)  comment 'reason',
@@ -85,7 +83,6 @@ alter table Loan comment 'Loan';
 create index Index_1 on Loan
 (
    l_id,
-   c_id,
    time,
    money,
    l_accept
@@ -120,12 +117,10 @@ create index Index_1 on Log
 /*==============================================================*/
 create table Login
 (
-   loginId              bigint not null auto_increment  comment 'loginId',
+   loginname            varchar(200) not null  comment 'loginname',
    type                 int  comment 'type',
    pass                 varchar(200)  comment 'pass',
-   loginname            varchar(200) not null  comment 'loginname',
-   primary key (loginname),
-   key AK_Key_2 (loginId)
+   primary key (loginname)
 );
 
 alter table Login comment 'Login';
@@ -135,7 +130,6 @@ alter table Login comment 'Login';
 /*==============================================================*/
 create index Index_1 on Login
 (
-   loginId,
    loginname
 );
 
@@ -144,7 +138,7 @@ create index Index_1 on Login
 /*==============================================================*/
 create table Manager
 (
-   id                   bigint not null  comment 'id',
+   loginname            varchar(200) not null  comment 'loginname',
    name                 varchar(200)  comment 'name',
    phoneNum             varchar(200)  comment 'phoneNum',
    age                  int  comment 'age',
@@ -153,7 +147,7 @@ create table Manager
    adress               varchar(254)  comment 'adress',
    workYear             int  comment 'workYear',
    joinTime             datetime  comment 'joinTime',
-   primary key (id)
+   primary key (loginname)
 );
 
 alter table Manager comment 'Manager';
@@ -163,7 +157,6 @@ alter table Manager comment 'Manager';
 /*==============================================================*/
 create index Index_1 on Manager
 (
-   id,
    name,
    phoneNum,
    age,
@@ -180,10 +173,10 @@ create index Index_1 on Manager
 create table Notification
 (
    n_id                 bigint not null auto_increment  comment 'n_id',
-   c_id                 bigint  comment 'c_id',
    i_id                 bigint  comment 'i_id',
    t_id                 bigint  comment 't_id',
    l_id                 bigint  comment 'l_id',
+   loginname            varchar(200)  comment 'loginname',
    time                 datetime  comment 'time',
    n_read               int  comment 'n_read',
    primary key (n_id)
@@ -197,7 +190,6 @@ alter table Notification comment 'Notification';
 create index Index_1 on Notification
 (
    n_id,
-   c_id,
    i_id,
    t_id,
    l_id,
@@ -210,8 +202,8 @@ create index Index_1 on Notification
 /*==============================================================*/
 create table Opinion
 (
-   c_id                 bigint  comment 'c_id',
    o_id                 bigint not null auto_increment  comment 'o_id',
+   loginname            varchar(200)  comment 'loginname',
    type                 varchar(200)  comment 'type',
    time                 datetime  comment 'time',
    content              varchar(2000)  comment 'content',
@@ -226,7 +218,6 @@ alter table Opinion comment 'Opinion';
 /*==============================================================*/
 create index Index_1 on Opinion
 (
-   c_id,
    o_id,
    type,
    time,
@@ -239,8 +230,8 @@ create index Index_1 on Opinion
 create table Orders
 (
    p_id                 int  comment 'p_id',
-   c_id                 bigint  comment 'c_id',
    or_id                bigint not null auto_increment  comment 'or_id',
+   loginname            varchar(200)  comment 'loginname',
    buyTime              datetime  comment 'buyTime',
    buyMoney             datetime  comment 'buyMoney',
    buyDuration          int  comment 'buyDuration',
@@ -255,7 +246,6 @@ alter table Orders comment 'Orders';
 create index Index_1 on Orders
 (
    p_id,
-   c_id,
    or_id,
    buyTime,
    buyMoney,
@@ -267,8 +257,8 @@ create index Index_1 on Orders
 /*==============================================================*/
 create table Production
 (
-   m_id                 bigint  comment 'm_id',
    p_id                 int not null auto_increment  comment 'p_id',
+   loginname            varchar(200)  comment 'loginname',
    type                 varchar(200)  comment 'type',
    risk                 int  comment 'risk',
    profit               double  comment 'profit',
@@ -284,7 +274,6 @@ alter table Production comment 'Production';
 /*==============================================================*/
 create index Index_1 on Production
 (
-   m_id,
    p_id,
    type,
    risk,
@@ -297,7 +286,7 @@ create index Index_1 on Production
 /*==============================================================*/
 create table Staff
 (
-   id                   bigint not null  comment 'id',
+   loginname            varchar(200) not null  comment 'loginname',
    name                 varchar(200)  comment 'name',
    phoneNum             varchar(200)  comment 'phoneNum',
    age                  int  comment 'age',
@@ -306,7 +295,7 @@ create table Staff
    adress               varchar(254)  comment 'adress',
    workYear             int  comment 'workYear',
    joinTime             datetime  comment 'joinTime',
-   primary key (id)
+   primary key (loginname)
 );
 
 alter table Staff comment 'Staff';
@@ -316,7 +305,6 @@ alter table Staff comment 'Staff';
 /*==============================================================*/
 create index Index_1 on Staff
 (
-   id,
    name,
    phoneNum,
    age,
@@ -333,8 +321,8 @@ create index Index_1 on Staff
 create table Ticket
 (
    t_id                 bigint not null auto_increment  comment 't_id',
-   c_id                 bigint  comment 'c_id',
-   s_id                 bigint  comment 's_id',
+   loginname            varchar(200)  comment 'loginname',
+   Sta_loginname        varchar(200)  comment 'Sta_loginname',
    tpye                 varchar(200)  comment 'tpye',
    content              varchar(2000)  comment 'content',
    time                 datetime  comment 'time',
@@ -351,24 +339,28 @@ alter table Ticket comment 'Ticket';
 create index Index_1 on Ticket
 (
    t_id,
-   c_id,
-   s_id,
    tpye,
    time,
    ansTime
 );
 
-alter table Introduction add constraint FK_INTRODUC_REFERENCE_MANAGER foreign key (m_id)
-      references Manager (id) on delete restrict on update restrict;
+alter table Customer add constraint FK_CUSTOMER_REFERENCE_LOGIN foreign key (loginname)
+      references Login (loginname);
 
-alter table Loan add constraint FK_LOAN_REFERENCE_CUSTOMER foreign key (c_id)
-      references Customer (id) on delete restrict on update restrict;
+alter table Introduction add constraint FK_INTRODUC_REFERENCE_MANAGER foreign key (loginname)
+      references Manager (loginname) on delete restrict on update restrict;
+
+alter table Loan add constraint FK_LOAN_REFERENCE_CUSTOMER foreign key (loginname)
+      references Customer (loginname) on delete restrict on update restrict;
 
 alter table Log add constraint FK_LOG_REFERENCE_LOGIN foreign key (loginname)
       references Login (loginname);
 
-alter table Notification add constraint FK_NOTIFICA_REFERENCE_CUSTOMER foreign key (c_id)
-      references Customer (id) on delete restrict on update restrict;
+alter table Manager add constraint FK_MANAGER_REFERENCE_LOGIN foreign key (loginname)
+      references Login (loginname);
+
+alter table Notification add constraint FK_NOTIFICA_REFERENCE_CUSTOMER foreign key (loginname)
+      references Customer (loginname) on delete restrict on update restrict;
 
 alter table Notification add constraint FK_NOTIFICA_REFERENCE_INTRODUC foreign key (i_id)
       references Introduction (i_id) on delete restrict on update restrict;
@@ -379,21 +371,24 @@ alter table Notification add constraint FK_NOTIFICA_REFERENCE_TICKET foreign key
 alter table Notification add constraint FK_NOTIFICA_REFERENCE_LOAN foreign key (l_id)
       references Loan (l_id) on delete restrict on update restrict;
 
-alter table Opinion add constraint FK_OPINION_REFERENCE_CUSTOMER foreign key (c_id)
-      references Customer (id) on delete restrict on update restrict;
+alter table Opinion add constraint FK_OPINION_REFERENCE_CUSTOMER foreign key (loginname)
+      references Customer (loginname) on delete restrict on update restrict;
 
 alter table Orders add constraint FK_ORDERS_REFERENCE_PRODUCTI foreign key (p_id)
       references Production (p_id) on delete restrict on update restrict;
 
-alter table Orders add constraint FK_ORDERS_REFERENCE_CUSTOMER foreign key (c_id)
-      references Customer (id) on delete restrict on update restrict;
+alter table Orders add constraint FK_ORDERS_REFERENCE_CUSTOMER foreign key (loginname)
+      references Customer (loginname) on delete restrict on update restrict;
 
-alter table Production add constraint FK_PRODUCTI_REFERENCE_MANAGER foreign key (m_id)
-      references Manager (id) on delete restrict on update restrict;
+alter table Production add constraint FK_PRODUCTI_REFERENCE_MANAGER foreign key (loginname)
+      references Manager (loginname) on delete restrict on update restrict;
 
-alter table Ticket add constraint FK_TICKET_REFERENCE_CUSTOMER foreign key (c_id)
-      references Customer (id) on delete restrict on update restrict;
+alter table Staff add constraint FK_STAFF_REFERENCE_LOGIN foreign key (loginname)
+      references Login (loginname);
 
-alter table Ticket add constraint FK_TICKET_REFERENCE_STAFF foreign key (s_id)
-      references Staff (id) on delete restrict on update restrict;
+alter table Ticket add constraint FK_TICKET_REFERENCE_CUSTOMER foreign key (loginname)
+      references Customer (loginname) on delete restrict on update restrict;
+
+alter table Ticket add constraint FK_TICKET_REFERENCE_STAFF foreign key (Sta_loginname)
+      references Staff (loginname) on delete restrict on update restrict;
 

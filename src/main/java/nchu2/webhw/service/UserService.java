@@ -2,6 +2,7 @@ package nchu2.webhw.service;
 
 import nchu2.webhw.model.User;
 import nchu2.webhw.model.tables.daos.CustomerDao;
+import nchu2.webhw.model.tables.daos.LoginDao;
 import nchu2.webhw.model.tables.daos.ManagerDao;
 import nchu2.webhw.model.tables.daos.StaffDao;
 import nchu2.webhw.model.tables.pojos.Customer;
@@ -21,10 +22,24 @@ public class UserService extends ServiceBase {
         this.loginService = loginService;
     }
 
+    @Cacheable(value = Vars.CacheValues.user)
+    public User getUser(String loginname) {
+        Login login = new LoginDao(dsl.configuration()).fetchOneByLoginname(loginname);
+        switch (login.getType()) {
+            case Customer:
+                return new CustomerDao(dsl.configuration()).fetchOneByLoginname(loginname);
+            case Manager:
+                return new ManagerDao(dsl.configuration()).fetchOneByLoginname(loginname);
+            case Staff:
+                return new StaffDao(dsl.configuration()).fetchOneByLoginname(loginname);
+        }
+        throw new RuntimeException("Error when trying to get user's detail");
+    }
+
     private User createNewUser(String loginName, String plainTextPass, UserType userType, User user) throws LoginService.LoginNameExistsException {
         Login login = loginService.newLoginWithPassword(loginName, plainTextPass, userType);
-        user.setId(login.getLoginid());
-        logger.log(String.format("Welcome new %s with login id: %s", userType.name(), login.getLoginid()));
+        user.setLoginname(login.getLoginname());
+        logger.log(String.format("Welcome new %s with login name: %s", userType.name(), login.getLoginname()));
         return user;
     }
 
@@ -41,48 +56,27 @@ public class UserService extends ServiceBase {
         T register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException;
     }
 
-    public interface GetUserDetails<T extends User> {
-        T getUser(Long id);
-    }
-
     @Service
-    public class CustomerService extends ServiceBase implements Register<Customer>, GetUserDetails<Customer> {
+    public class CustomerService extends ServiceBase implements Register<Customer> {
         @Override
         public Customer register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException {
             return (Customer) createNewUser(loginName, plainTextPass, UserType.Customer, user);
         }
-
-        @Override
-        @Cacheable(value = Vars.CacheValues.user)
-        public Customer getUser(Long id) {
-            return new CustomerDao(dsl.configuration()).fetchOneById(id);
-        }
     }
 
     @Service
-    public class ManagerService extends ServiceBase implements Register<Manager>, GetUserDetails<Manager> {
+    public class ManagerService extends ServiceBase implements Register<Manager> {
         @Override
         public Manager register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException {
             return (Manager) createNewUser(loginName, plainTextPass, UserType.Manager, user);
         }
-
-        @Override
-        @Cacheable(value = Vars.CacheValues.user)
-        public Manager getUser(Long id) {
-            return new ManagerDao(dsl.configuration()).fetchOneById(id);
-        }
     }
 
     @Service
-    public class StaffService extends ServiceBase implements Register<Staff>, GetUserDetails<Staff> {
+    public class StaffService extends ServiceBase implements Register<Staff> {
         @Override
         public Staff register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException {
             return (Staff) createNewUser(loginName, plainTextPass, UserType.Staff, user);
-        }
-
-        @Override
-        public Staff getUser(Long id) {
-            return new StaffDao(dsl.configuration()).fetchOneById(id);
         }
     }
 }

@@ -105,7 +105,8 @@
                                role="button" aria-haspopup="true" aria-expanded="false">
                                 <img class="user-avatar rounded-circle mr-2" th:src="@{/images/avatars/0.jpg}"
                                      alt="User Avatar">
-                                <span class="d-none d-md-inline-block">Sierra Brooks</span>
+                                <!--/*@thymesVar id="user" type="nchu2.webhw.model.User"*/-->
+                                <span class="d-none d-md-inline-block" th:text="${user.getName()}">Sierra Brooks</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-small">
                                 <a class="dropdown-item" href="#" th:href="@{profile}">

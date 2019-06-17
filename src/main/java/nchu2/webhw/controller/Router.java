@@ -2,7 +2,9 @@ package nchu2.webhw.controller;
 
 import nchu2.webhw.ComponentBase;
 import nchu2.webhw.properites.UserType;
+import nchu2.webhw.service.UserService;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,12 @@ import static nchu2.webhw.properites.Vars.PUBLIC_PAGES;
 @Controller
 @RequestMapping("/")
 public class Router extends ComponentBase {
+    private final UserService userService;
+
+    public Router(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/")
     public String splash(Model model, String redirect) {
         model.addAttribute("direction", redirect);
@@ -30,10 +38,11 @@ public class Router extends ComponentBase {
 
         @GetMapping("{page}")
         public String router(@PathVariable("page") String page, Model model, Authentication authentication) {
-            UserType userType = ((UserType.Authority) authentication.getAuthorities().toArray()[0]).getUserType();
+            User user = (User) authentication.getPrincipal();
+            UserType userType = ((UserType.Authority) user.getAuthorities().toArray()[0]).getUserType();
             model.addAttribute("userType", userType.name());
             model.addAttribute("page", page);
-            model.addAttribute("user");
+            model.addAttribute("user", userService.getUser(user.getUsername()));
             if (PUBLIC_PAGES.contains(page))
                 return String.format("pub/%s", page);
             return String.format("priv/%s/%s", userType.name(), page);
