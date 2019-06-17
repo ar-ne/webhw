@@ -1,4 +1,4 @@
-package nchu2.webhw.utils;
+package nchu2.webhw.properites;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,28 +10,10 @@ import org.springframework.core.env.Environment;
 @PropertySource("classpath:/flags.properties")
 public class Flags {
 
-    @Autowired
-    private Environment env;
-
     public static final char TRUE = 'T';
     public static final char FALSE = 'F';
-
-    /**
-     * 获取表中字段对应的FieldFlags
-     *
-     * @param tableName 对应表的名字
-     * @param fieldName 字段名
-     * @return Field Flags
-     */
-    public FieldFlag getFielfFlag(String tableName, String fieldName) {
-        String flagStr = env.getProperty(String.format("field.%s.%s", tableName, fieldName));
-        System.out.println(String.format("field.%s.%s", tableName, fieldName));
-        FieldFlag fieldFlag = new FieldFlag();
-        fieldFlag.setVisibility(c2b(flagStr.charAt(0)));
-        fieldFlag.setEditability(c2b(flagStr.charAt(1)));
-        fieldFlag.setShowType(c2b(flagStr.charAt(2)));
-        return fieldFlag;
-    }
+    @Autowired
+    private Environment env;
 
     /**
      * 将T/F转为bool
@@ -43,10 +25,28 @@ public class Flags {
         return c == TRUE;
     }
 
+    /**
+     * 获取表中字段对应的FieldFlags
+     *
+     * @param tableName 对应表的名字
+     * @param fieldName 字段名
+     * @return Field Flags
+     */
+    public Field getFieldFlag(String tableName, String fieldName) {
+        String flagStr = env.getProperty(String.format("field.%s.%s", tableName, fieldName));
+        System.out.println(String.format("field.%s.%s", tableName, fieldName));
+        Field field = new Field();
+        field.setVisibility(c2b(flagStr.charAt(0)));
+        field.setEditability(c2b(flagStr.charAt(1)));
+        field.setShowType(c2b(flagStr.charAt(2)));
+        return field;
+    }
+
     @Data
-    public static class FieldFlag {
+    public static class Field {
         public boolean visibility;
         public boolean editability;
         public boolean showType;
     }
+
 }

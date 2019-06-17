@@ -1,6 +1,6 @@
-package nchu2.webhw;
+package nchu2.webhw.utils;
 
-import nchu2.webhw.utils.LogMsgHelper;
+import nchu2.webhw.ComponentBase;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -13,15 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Auth {
-    public class LogoutHandler implements LogoutSuccessHandler {
-
-        @Override
-        public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-            response.getWriter().println("/");
-            response.getWriter().close();
-        }
-    }
-
     public static class LoginHandler extends ComponentBase implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
 
         @Override
@@ -36,6 +27,15 @@ public class Auth {
         public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
             response.getWriter().println("");
             response.setStatus(403);
+            response.getWriter().close();
+        }
+    }
+
+    public class LogoutHandler implements LogoutSuccessHandler {
+
+        @Override
+        public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+            response.getWriter().println("/");
             response.getWriter().close();
         }
     }

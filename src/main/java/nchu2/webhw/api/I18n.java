@@ -1,7 +1,7 @@
 package nchu2.webhw.api;
 
 import lombok.Data;
-import nchu2.webhw.utils.Flags;
+import nchu2.webhw.properites.Flags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.PropertySource;
@@ -34,7 +34,7 @@ public class I18n {
         List list = new LinkedList();
         for (BootstrapTableCol col : cols) {
             col.setTitle(messageSource.getMessage(col.field, null, Locale.getDefault()));
-            Flags.FieldFlag colFlag = flags.getFielfFlag(tableName, col.field);
+            Flags.Field colFlag = flags.getFieldFlag(tableName, col.field);
             col.setVisible(colFlag.visibility);
         }
         return cols;

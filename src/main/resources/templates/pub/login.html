@@ -11,7 +11,7 @@
 <body class="h-100">
 <div class="container-fluid">
     <div class="row">
-        <main class="col-lg-4 col-md-6 col-sm-12 offset-lg-4 offset-md-3" style="display: none;">
+        <main id="mainContent" class="col-lg-4 col-md-6 col-sm-12 offset-lg-4 offset-md-3" style="display: none;">
             <div class="page-header row no-gutters py-4">
                 <!--                <div class="col-12 col-sm-4 text-center text-sm-left mb-0"></div>-->
             </div>
@@ -27,8 +27,8 @@
                                     <div class="input-group mb-3">
                                         <div class="input-group input-group-seamless">
                                         <span class="input-group-prepend">
-                                            <span class="input-group-text">                                                <i
-                                                    class="material-icons">person</i>
+                                            <span class="input-group-text">
+                                                <i class="material-icons">person</i>
                                             </span>
                                         </span>
                                             <input type="text" class="form-control" required
@@ -69,6 +69,16 @@
         </main>
     </div>
 </div>
+<footer class="main-footer d-flex p-2 px-3 bg-white border-top fixed-bottom">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/priv/}">Home</a>
+        </li>
+    </ul>
+    <span class="copyright ml-auto my-auto mr-2">Copyright © 2019
+              <a href="#" rel="nofollow">WebHW 162012322</a>
+            </span>
+</footer>
 <script data-turbolinks-eval=true>init()</script>
 </body>
 </html>

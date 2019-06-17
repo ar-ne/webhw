@@ -96,8 +96,8 @@ jooq {
                 inputSchema = 'webhw'
                 forcedTypes {
                     forcedType {
-                        userType = 'nchu2.webhw.utils.Properites.UserType'
-                        converter = 'nchu2.webhw.utils.Properites.UserType.Converter'
+                        userType = 'nchu2.webhw.properites.UserType'
+                        converter = 'nchu2.webhw.properites.UserType.Converter'
                         expression = 'webhw.Login.type'
                         types = '.*'
                     }
