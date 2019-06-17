@@ -14,38 +14,51 @@
                 <div class="card-header ">
                 </div>
                 <div class="card-body">
-                    <img class="rounded-circle m-auto" th:src="@{/images/avatars/0.jpg}" alt="User Avatar" width="110">
-                    <br><br>
-                    <div class="form-row p-3">
-                        <div th:replace="/parts::TextInput(#{msg.profile.username},'username','zzz')"></div>
-                        <div th:replace="/parts::TextInput(#{msg.profile.phoneNum},'phoneNum','123456789')"></div>
-                    </div>
-                    <div class="form-row p-3">
-                        <div th:replace="/parts::TextInput(#{msg.profile.age},'age','20')"></div>
-                        <div class="form-group col-md-5">
-                            <label for="sex">性别</label>
-                            <div class="form-row pl-3 pt-1" id="sex">
-                                <div class="custom-control custom-radio mb-1 pr-5">
-                                    <input type="radio" id="formsRadioDefault" name="sex" class="custom-control-input"
-                                           value="1">
-                                    <label class="custom-control-label" for="formsRadioDefault">男</label>
-                                </div>
-                                <div class="custom-control custom-radio mb-1">
-                                    <input type="radio" id="formsRadioChecked" name="sex" class="custom-control-input"
-                                           value="0">
-                                    <label class="custom-control-label" for="formsRadioChecked">女</label>
+                    <form>
+                        <img class="rounded-circle m-auto" th:src="@{/images/avatars/0.jpg}" alt="User Avatar"
+                             width="110">
+                        <br><br>
+                        <div class="form-row p-3">
+                            <div th:replace="/parts::TextInput(#{msg.profile.username},'username','zzz','')"></div>
+                            <div th:replace="/parts::TextInput(#{msg.profile.phoneNum},'phoneNum','123456789','')"></div>
+                        </div>
+                        <div class="form-row p-3">
+                            <div th:replace="/parts::TextInput(#{msg.profile.age},'age','20','')"></div>
+                            <div class="form-group col-md-5">
+                                <label for="sex">性别</label>
+                                <div class="form-row pl-3 pt-1" id="sex">
+                                    <div class="custom-control custom-radio mb-1 pr-5">
+                                        <input type="radio" id="formsRadioDefault" name="sex"
+                                               class="custom-control-input"
+                                               value="1">
+                                        <label class="custom-control-label" for="formsRadioDefault">男</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-1">
+                                        <input type="radio" id="formsRadioChecked" name="sex"
+                                               class="custom-control-input"
+                                               value="0">
+                                        <label class="custom-control-label" for="formsRadioChecked">女</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <div th:replace="/parts::titledTextareaC(#{msg.profile.adress},'adress','江西省南昌市丰和南大道696号')"></div>
-                    <br>
-                    <div class="form-group col-md-12">
-                        <button type="button" class="mb-2 btn btn-outline-primary mr-2"
-                                th:text="#{msg.profile.button}">提交
-                        </button>
-                    </div>
+                        <br>
+                        <div th:replace="/parts::TextInput(#{msg.profile.personid},'personid','123456432597789','')"></div>
+                        <br>
+                        <div class="form-row p-3" th:if="${!#strings.equals(userType,'Customer')}">
+                            <div th:replace="/parts::TextInput(#{msg.profile.joinTime},'joinTime','2019/1/1','disabled')"></div>
+                            <div th:replace="/parts::titledTextInputAf(#{msg.profile.workYear},'年','workYear','12','disabled')"></div>
+                        </div>
+                        <br>
+                        <div th:replace="/parts::titledTextarea(#{msg.profile.adress},'adress','江西省南昌市丰和南大道696号','')"></div>
+                        <br>
+                        <div class="form-group col-md-12">
+                            <button type="button" class="mb-2 btn btn-outline-primary mr-2"
+                                    th:text="#{msg.profile.button}">提交
+                            </button>
+                        </div>
+                    </form>
+                    >
                 </div>
             </div>
         </div>

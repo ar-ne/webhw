@@ -22,35 +22,37 @@
 </div>
 
 <!--带标题的输入区域-->
-<div class="form-group col-md-12" th:fragment="titledTextarea(title,name)">
+<!--title 标题，name 名字，value 默认值，disabled 可否被修改-->
+<div class="form-group col-md-12" th:fragment="titledTextarea(title,name,value,disabled)">
     <strong class="text-muted d-block mb-2"
             th:text="${title}"></strong>
-    <textarea class="form-control" th:name="${name}" style="min-height: 200px"></textarea>
-</div>
-
-<!--带标题的输入区域(带默认内容)-->
-<div class="form-group col-md-10" th:fragment="titledTextareaC(title,name,value)">
-    <strong class="text-muted d-block mb-2"
-            th:text="${title}"></strong>
-    <textarea class="form-control" th:name="${name}" th:text="${value}" style="min-height: 200px"></textarea>
+    <textarea class="form-control" th:name="${name}" th:text="${value}"
+              th:disabled="${#strings.isEmpty(disabled)?  disableed : ''}"
+              style="min-height: 200px" th:required="${#strings.isEmpty(value) ?  '' : required}"></textarea>
 </div>
 
 <!--带标题的输入框（文字前）-->
-<div class="form-group col-md-5" th:fragment="titledTextInput(title,text,name)">
+<!--title 标题，text 输入框前文字， name 名字，value 默认值，disabled 可否被修改-->
+<div class="form-group col-md-5" th:fragment="titledTextInput(title,text,name,value,disabled)">
     <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" th:text="${text}">￥</span>
         </div>
-        <input type="text" class="form-control" th:name="${name}">
+        <input type="text" class="form-control" th:name="${name}" th:value="${value}"
+               th:disabled="${#strings.isEmpty(disabled)?  disableed : ''}"
+               th:required="${#strings.isEmpty(value) ?  '' : required}">
     </div>
 </div>
 
 <!--带标题的输入框（文字后）-->
-<div class="form-group col-md-5" th:fragment="titledTextInputAf(title,text,name)">
+<!--title 标题，text 输入框后文字， name 名字，value 默认值，disabled 可否被修改-->
+<div class="form-group col-md-5" th:fragment="titledTextInputAf(title,text,name,value,disabled)">
     <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
     <div class="input-group mb-3">
-        <input type="text" class="form-control" th:name="${name}">
+        <input type="text" class="form-control" th:name="${name}" th:value="${value}"
+               th:disabled="${#strings.isEmpty(disabled)?  disableed : ''}"
+               th:required="${#strings.isEmpty(value) ?  '' : required}">
         <div class="input-group-append">
             <span class="input-group-text" th:text="${text}">￥</span>
         </div>
@@ -58,9 +60,12 @@
 </div>
 
 <!--带标题的输入框（无文字）-->
-<div class="form-group col-md-5" th:fragment="TextInput(text,name,value)">
+<!--title 标题， name 名字，value 默认值，disabled 可否被修改-->
+<div class="form-group col-md-5" th:fragment="TextInput(text,name,value,disabled)">
     <label th:text="${text}" th:for="${text}">First Name</label>
-    <input type="text" class="form-control" th:id="${text}" th:name="${name}" th:value="${value}">
+    <input type="text" class="form-control" th:id="${text}" th:name="${name}" th:value="${value}"
+           th:disabled="${#strings.isEmpty(disabled)?  disableed : ''}"
+           th:required="${#strings.isEmpty(value) ?  '' : required}">
 </div>
 
 <!--带标题的输入框（图片链接）-->
@@ -75,40 +80,12 @@
         <input type="text" class="form-control" th:name="${name}">
     </div>
 </div>
-
-<!--带标题的输入框（文字前）无法输入-->
-<div class="form-group col-md-5" th:fragment="titledTextInputN(title,text,name,value)">
-    <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" th:text="${text}">￥</span>
-        </div>
-        <input type="text" class="form-control" th:name="${name}" th:value="${value}" disabled="disabled">
-    </div>
-</div>
-
-<!--带标题的输入框（文字后）无法输入-->
-<div class="form-group col-md-5" th:fragment="titledTextInputAfN(title,text,name,value)">
-    <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" th:name="${name}" th:value="${value}" disabled="disabled">
-        <div class="input-group-append">
-            <span class="input-group-text" th:text="${text}">￥</span>
-        </div>
-    </div>
-</div>
-
-<!--带标题的输入框（无文字）无法输入-->
-<div class="form-group col-md-5" th:fragment="TextInputN(text,name,value)">
+<!--带标题的输入框密码（无文字）-->
+<!--title 标题， name 名字，value 默认值，disabled 可否被修改-->
+<div class="form-group col-md-5" th:fragment="passwordInput(text,name,value,disabled)">
     <label th:text="${text}" th:for="${text}">First Name</label>
-    <input type="text" class="form-control" th:id="${text}" th:name="${name}" th:value="${value}" disabled="disabled">
-</div>
-
-<!--带标题的输入区域(带默认内容) 无法输入-->
-<div class="form-group col-md-10" th:fragment="titledTextareaCN(title,name,value)">
-    <strong class="text-muted d-block mb-2"
-            th:text="${title}"></strong>
-    <textarea class="form-control" th:name="${name}" th:text="${value}" style="min-height: 200px"
-              disabled="disabled"></textarea>
+    <input type="password" class="form-control" th:id="${text}" th:name="${name}" th:value="${value}"
+           th:disabled="${#strings.isEmpty(disabled)?  disableed : ''}"
+           th:required="${#strings.isEmpty(value) ?  '' : required}">
 </div>
 </html>

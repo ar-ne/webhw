@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<title th:text="#{msg.Staff.acceptTicket.title}">受理投诉</title>
+<body th:replace="/framework/main">
+<div th:fragment="mainContent">
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <h3 th:text="#{msg.Staff.acceptTicket.title}" class="page-title">受理</h3>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="mb-3 col-12 ">
+            <div class="card card-small ">
+                <div class="card-header ">
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-row p-3">
+                            <div th:replace="/parts::TextInput(#{msg.Staff.acceptTicket.username},'username','zzz','disabled')"></div>
+                            <div th:replace="/parts::TextInput(#{msg.Staff.acceptTicket.type},'type','服务','disabled')"></div>
+                        </div>
+                        <br>
+                        <div th:replace="/parts::TextInput(#{msg.Staff.acceptTicket.time},'time','2019/1/1','disabled')"></div>
+                        <br>
+                        <div th:replace="/parts::titledTextarea(#{msg.Staff.acceptTicket.content},'content','','')"></div>
+                        <br>
+                        <div class="form-group col-md-12">
+                            <button type="button" class="mb-2 btn btn-outline-primary mr-2"
+                                    th:text="#{msgStaff.acceptTicket.button}">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

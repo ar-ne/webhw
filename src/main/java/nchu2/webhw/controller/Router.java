@@ -71,5 +71,10 @@ public class Router extends ComponentBase {
         public String logout() {
             return "pub/logout";
         }
+
+        @GetMapping("signup")
+        public String signup() {
+            return "pub/signup";
+        }
     }
 }

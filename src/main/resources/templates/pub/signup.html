@@ -5,69 +5,69 @@
     <script th:inline="javascript">if ([[${login!=null}]]) Turbolinks.visit("/priv/index", {action: "replace"});</script>
     <meta name="turbolinks-cache-control" content="no-preview">
     <meta charset="UTF-8">
-    <title th:text="#{msg.login.title}">123</title>
+    <title th:text="#{msg.signup.title}">123</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body class="h-100">
 <div class="container-fluid">
     <div class="row">
-        <main class="col-lg-4 col-md-6 col-sm-12 offset-lg-4 offset-md-3" style="display: none;">
+        <main class="col-lg-4 col-md-6 col-sm-12 offset-lg-4 offset-md-3" style="display: none;" id="mainContent">
             <div class="page-header row no-gutters py-4">
                 <!--                <div class="col-12 col-sm-4 text-center text-sm-left mb-0"></div>-->
             </div>
             <div class="row">
-                <div class="col-12 mb-4">
-                    <div class="card">
-                        <div class="card-header border-bottom">
-                            <h5 class="m-0" th:text="#{msg.login.title}">Login</h5>
+                <div class="mb-3 col-12 ">
+                    <div class="card card-small ">
+                        <div class="card-body">
+                            <form>
+                                <div class="col-12"
+                                     th:include="/parts::TextInput(#{msg.profile.username},'loginname','','')"></div>
+                                <br>
+                                <div class="col-12"
+                                     th:include="/parts::passwordInput(#{msg.signup.password},'password','','')"></div>
+                                <br>
+                                <div class="col-12"
+                                     th:include="/parts::TextInput(#{msg.profile.phoneNum},'phonenum','','')"></div>
+                                <br>
+                                <div class="col-12"
+                                     th:include="/parts::TextInput(#{msg.profile.personid},'personid','','')"></div>
+                                <br>
+                                <div class="form-row p-3">
+                                    <div class="form-group col-md-5">
+                                        <label for="sex">性别</label>
+                                        <div class="form-row pl-3 pt-1" id="sex">
+                                            <div class="custom-control custom-radio mb-1 pr-5">
+                                                <input type="radio" id="formsRadioDefault" name="sex"
+                                                       class="custom-control-input"
+                                                       value="1">
+                                                <label class="custom-control-label" for="formsRadioDefault">男</label>
+                                            </div>
+                                            <div class="custom-control custom-radio mb-1">
+                                                <input type="radio" id="formsRadioChecked" name="sex"
+                                                       class="custom-control-input"
+                                                       value="0">
+                                                <label class="custom-control-label" for="formsRadioChecked">女</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12"
+                                     th:include="/parts::TextInput(#{msg.profile.adress},'adress','','')"></div>
+                                <br>
+
+                                <div class="form-group col-12">
+                                    <button type="button" class="btn-block mb-2 btn btn-outline-primary mr-2"
+                                            th:text="#{msg.signup.button}">提交
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                        <form th:action="@{/login}" method="POST" id="form" onsubmit="return formSubmit()">
-                            <ul class="card-body list-group list-group-flush">
-                                <li class="list-group-item px-3">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group input-group-seamless">
-                                        <span class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="material-icons">person</i>
-                                            </span>
-                                        </span>
-                                            <input type="text" class="form-control" required
-                                                   id="username" name="username"
-                                                   th:placeholder="#{msg.login.uid}">
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group input-group-seamless">
-                                        <span class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="material-icons">lock</i>
-                                            </span>
-                                        </span>
-                                            <input type="password" class="form-control" required
-                                                   id="password" name="password"
-                                                   th:placeholder="#{msg.login.pwd}">
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <button type="submit" class="btn btn-outline-primary btn-block form-control"
-                                                id="button" th:text="#{msg.login.btn.login}">Primary
-                                        </button>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <a th:href="@{/signup}" class="btn-block">
-                                            <button type="button" class="btn btn-outline-warning form-control"
-                                                    th:text="#{msg.login.btn.register}">Secondary
-                                            </button>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </form>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
 </div>
 <script data-turbolinks-eval=true>init()</script>
 </body>
