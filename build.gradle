@@ -85,7 +85,7 @@ jooq {
                 matchers {
                     tables {
                         table {
-                            expression = 'Customer|Manager|Staff'
+                            expression = '[Cc]ustomer|[Mm]anager|[Ss]taff'
                             pojoExtends = 'nchu2.webhw.model.User'
                         }
                     }

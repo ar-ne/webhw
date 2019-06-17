@@ -28,47 +28,6 @@ public class UserService extends ServiceBase {
         return user;
     }
 
-    @Service
-    public class CustomerService extends ServiceBase implements Register<Customer>, FetchUser<Customer> {
-        @Override
-        public Customer register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException {
-            return (Customer) createNewUser(loginName, plainTextPass, UserType.Customer, user);
-        }
-
-        @Override
-        @Cacheable(value = Vars.CacheValues.user)
-        public Customer getUser(Login login) {
-            return new CustomerDao(dsl.configuration()).fetchOneById(login.getLoginid());
-        }
-    }
-
-    @Service
-    public class ManagerService extends ServiceBase implements Register<Manager>, FetchUser<Manager> {
-        @Override
-        public Manager register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException {
-            return (Manager) createNewUser(loginName, plainTextPass, UserType.Manager, user);
-        }
-
-        @Override
-        @Cacheable(value = Vars.CacheValues.user)
-        public Manager getUser(Login login) {
-            return new ManagerDao(dsl.configuration()).fetchOneById(login.getLoginid());
-        }
-    }
-
-    @Service
-    public class StaffService extends ServiceBase implements Register<Staff>, FetchUser<Staff> {
-        @Override
-        public Staff register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException {
-            return (Staff) createNewUser(loginName, plainTextPass, UserType.Staff, user);
-        }
-
-        @Override
-        public Staff getUser(Login login) {
-            return new StaffDao(dsl.configuration()).fetchOneById(login.getLoginid());
-        }
-    }
-
     public interface Register<T extends User> {
         /**
          * 注册一个新的用户
@@ -82,7 +41,48 @@ public class UserService extends ServiceBase {
         T register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException;
     }
 
-    public interface FetchUser<T extends User> {
-        T getUser(Login login);
+    public interface GetUserDetails<T extends User> {
+        T getUser(Long id);
+    }
+
+    @Service
+    public class CustomerService extends ServiceBase implements Register<Customer>, GetUserDetails<Customer> {
+        @Override
+        public Customer register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException {
+            return (Customer) createNewUser(loginName, plainTextPass, UserType.Customer, user);
+        }
+
+        @Override
+        @Cacheable(value = Vars.CacheValues.user)
+        public Customer getUser(Long id) {
+            return new CustomerDao(dsl.configuration()).fetchOneById(id);
+        }
+    }
+
+    @Service
+    public class ManagerService extends ServiceBase implements Register<Manager>, GetUserDetails<Manager> {
+        @Override
+        public Manager register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException {
+            return (Manager) createNewUser(loginName, plainTextPass, UserType.Manager, user);
+        }
+
+        @Override
+        @Cacheable(value = Vars.CacheValues.user)
+        public Manager getUser(Long id) {
+            return new ManagerDao(dsl.configuration()).fetchOneById(id);
+        }
+    }
+
+    @Service
+    public class StaffService extends ServiceBase implements Register<Staff>, GetUserDetails<Staff> {
+        @Override
+        public Staff register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException {
+            return (Staff) createNewUser(loginName, plainTextPass, UserType.Staff, user);
+        }
+
+        @Override
+        public Staff getUser(Long id) {
+            return new StaffDao(dsl.configuration()).fetchOneById(id);
+        }
     }
 }
