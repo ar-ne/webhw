@@ -8,6 +8,8 @@
     <meta charset="UTF-8">
     <title>Shards Dashboard Lite - Free Bootstrap Admin Template – DesignRevision</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <body class="h-100">
 <div class="container-fluid">
@@ -18,8 +20,7 @@
                     <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
                         <div class="d-table m-auto">
                             <img id="main-logo" data-turbolinks-permanent class="d-inline-block align-top mr-1"
-                                 style="max-width: 25px;"
-                                 th:src="@{/images/logo.jpg}">
+                                 style="max-width: 25px;" th:src="@{/images/logo.jpg}">
                             <span class="d-none d-md-inline ml-1" th:text="#{msg.main.name}">Shards Dashboard</span>
                         </div>
                     </a>
@@ -106,7 +107,7 @@
                                 <img class="user-avatar rounded-circle mr-2" th:src="@{/images/avatars/0.jpg}"
                                      alt="User Avatar">
                                 <!--/*@thymesVar id="user" type="nchu2.webhw.model.User"*/-->
-                                <span class="d-none d-md-inline-block" th:text="${user.getName()}">Sierra Brooks</span>
+                                <span class="d-none d-md-inline-block" th:text="${user!=null?user.getName():'admin'}">Sierra Brooks</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-small">
                                 <a class="dropdown-item" href="#" th:href="@{profile}">
@@ -128,6 +129,7 @@
                 </nav>
             </div>
             <!-- / .main-navbar -->
+            <div id="alert"></div>
             <div id="mainContent" class="main-content-container container-fluid px-4" style="display: none;"
                  th:include="::mainContent">
                 Main content

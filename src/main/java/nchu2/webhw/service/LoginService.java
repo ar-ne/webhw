@@ -3,7 +3,9 @@ package nchu2.webhw.service;
 import nchu2.webhw.model.tables.daos.LoginDao;
 import nchu2.webhw.model.tables.pojos.Login;
 import nchu2.webhw.properites.UserType;
+import nchu2.webhw.properites.Vars;
 import nchu2.webhw.utils.LogMsgHelper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,11 @@ public class LoginService extends ServiceBase {
 
     public LoginService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Cacheable(value = Vars.CacheValues.login)
+    public UserType getLoginType(String loginName) {
+        return new LoginDao(dsl.configuration()).fetchOneByLoginname(loginName).getType();
     }
 
 

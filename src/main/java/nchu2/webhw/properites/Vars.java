@@ -16,5 +16,6 @@ public class Vars {
     public static class CacheValues {
         private static final String prefix = "CACHE_";
         public static final String user = prefix + "user";
+        public static final String login = prefix + "login";
     }
 }

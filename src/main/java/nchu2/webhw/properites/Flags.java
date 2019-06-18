@@ -1,6 +1,8 @@
 package nchu2.webhw.properites;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -34,7 +36,12 @@ public class Flags {
      */
     public Field getFieldFlag(String tableName, String fieldName) {
         String flagStr = env.getProperty(String.format("field.%s.%s", tableName, fieldName));
-        System.out.println(String.format("field.%s.%s", tableName, fieldName));
+        if (flagStr == null) {
+//            System.out.println(String.format("field not exist: field.%s.%s", tableName, fieldName));
+            return new Field(true, false, true);
+        }
+//        System.out.println(String.format("field.%s.%s", tableName, fieldName));
+
         Field field = new Field();
         field.setVisibility(c2b(flagStr.charAt(0)));
         field.setEditability(c2b(flagStr.charAt(1)));
@@ -43,6 +50,8 @@ public class Flags {
     }
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Field {
         public boolean visibility;
         public boolean editability;

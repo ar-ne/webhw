@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/6/17 18:25:45                           */
+/* Created on:     2019/6/17 20:44:20                           */
 /*==============================================================*/
 
 
@@ -143,7 +143,7 @@ create table Manager
    phoneNum             varchar(200)  comment 'phoneNum',
    age                  int  comment 'age',
    sex                  int  comment 'sex',
-   pid                  varchar(200)  comment 'pid',
+   personid             varchar(200)  comment 'personid',
    adress               varchar(254)  comment 'adress',
    workYear             int  comment 'workYear',
    joinTime             datetime  comment 'joinTime',
@@ -161,7 +161,7 @@ create index Index_1 on Manager
    phoneNum,
    age,
    sex,
-   pid,
+   personid,
    adress,
    workYear,
    joinTime
@@ -291,7 +291,7 @@ create table Staff
    phoneNum             varchar(200)  comment 'phoneNum',
    age                  int  comment 'age',
    sex                  int  comment 'sex',
-   pid                  varchar(200)  comment 'pid',
+   personid             varchar(200)  comment 'personid',
    adress               varchar(254)  comment 'adress',
    workYear             int  comment 'workYear',
    joinTime             datetime  comment 'joinTime',
@@ -309,7 +309,7 @@ create index Index_1 on Staff
    phoneNum,
    age,
    sex,
-   pid,
+   personid,
    adress,
    workYear,
    joinTime

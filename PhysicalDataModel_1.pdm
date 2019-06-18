@@ -5321,11 +5321,11 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o83">
 <a:ObjectID>B9A77A0F-8A6E-4852-9E8C-89FF2ABCEA50</a:ObjectID>
-<a:Name>pid</a:Name>
-<a:Code>pid</a:Code>
+<a:Name>personid</a:Name>
+<a:Code>personid</a:Code>
 <a:CreationDate>1558876271</a:CreationDate>
 <a:Creator>zk</a:Creator>
-<a:ModificationDate>1558937958</a:ModificationDate>
+<a:ModificationDate>1560775432</a:ModificationDate>
 <a:Modifier>Arne</a:Modifier>
 <a:DataType>varchar(200)</a:DataType>
 <a:Length>200</a:Length>
@@ -5564,11 +5564,11 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o102">
 <a:ObjectID>9C471167-B134-41CD-AF51-F893BE5B32FC</a:ObjectID>
-<a:Name>pid</a:Name>
-<a:Code>pid</a:Code>
+<a:Name>personid</a:Name>
+<a:Code>personid</a:Code>
 <a:CreationDate>1558876395</a:CreationDate>
 <a:Creator>zk</a:Creator>
-<a:ModificationDate>1558937911</a:ModificationDate>
+<a:ModificationDate>1560775417</a:ModificationDate>
 <a:Modifier>Arne</a:Modifier>
 <a:DataType>varchar(200)</a:DataType>
 <a:Length>200</a:Length>

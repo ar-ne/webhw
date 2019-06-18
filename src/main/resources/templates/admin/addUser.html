@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<title th:text="#{msg.index.title}">欢迎</title>
+<body th:replace="/framework/main">
+<div th:fragment="mainContent">
+    <div class="row">
+        <div class="page-header pt-5">
+            <ul>
+                <li class="p-1">
+                    <a th:href="@{index}">
+                        <button class="btn btn-outline-primary">返回首页</button>
+                    </a>
+                </li>
+                <li>
+                    <form id="form" th:action="@{addUser}" method="post" onsubmit="function f() {return false;}">
+                        <div th:include="/parts::titledTextInput('','用户名','username')"></div>
+                        <div th:include="/parts::titledTextInput('','密码','password')"></div>
+                        <input type="hidden" id="type" name="type" value="">
+                    </form>
+                    <script>
+                        function f(type) {
+                            $('#type').attr('value', type);
+                            doSubmit($('#form'));
+                        }
+                    </script>
+                    <ul>
+                        <li class="p-1">
+                            <button class="btn btn-outline-success" onclick="f('Customer')">Customer</button>
+                        </li>
+                        <li class="p-1">
+                            <button class="btn btn-outline-warning" onclick="f('Manager')">Manager</button>
+                        </li>
+                        <li class="p-1">
+                            <button class="btn btn-outline-info" onclick="f('Staff')">Staff</button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -18,25 +18,23 @@ public class Auth {
         @Override
         public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
             logger.log(LogMsgHelper.Auth.loginAttempt(authentication.getName(), authentication.isAuthenticated()));
-            response.getWriter().println("/priv/index");
+            response.getWriter().print("/priv/index");
             response.setStatus(201);
-            response.getWriter().close();
         }
 
         @Override
         public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-            response.getWriter().println("");
+            response.getWriter().print("Wrong login");
             response.setStatus(403);
-            response.getWriter().close();
         }
     }
 
-    public class LogoutHandler implements LogoutSuccessHandler {
+    public static class LogoutHandler implements LogoutSuccessHandler {
 
         @Override
         public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-            response.getWriter().println("/");
-            response.getWriter().close();
+            response.getWriter().print("/priv/");
+            response.setStatus(201);
         }
     }
 

@@ -1,8 +1,10 @@
 <!doctype html>
 <html class="no-js h-100" lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <script>if (!window.Turbolinks) window.location.replace('/?redirect=' + window.location.pathname);</script>
-    <script th:inline="javascript">if ([[${login!=null}]]) Turbolinks.visit("/priv/index", {action: "replace"});</script>
+    <script th:inline="javascript">
+        if (!window.Turbolinks) window.location.replace('/?redirect=' + window.location.pathname);
+        if ([[${login!=null}]]) Turbolinks.visit("/priv/index", {action: "replace"});
+    </script>
     <meta name="turbolinks-cache-control" content="no-preview">
     <meta charset="UTF-8">
     <title th:text="#{msg.login.title}">123</title>
@@ -12,6 +14,7 @@
 <div class="container-fluid">
     <div class="row">
         <main id="mainContent" class="col-lg-4 col-md-6 col-sm-12 offset-lg-4 offset-md-3" style="display: none;">
+            <div id="alert"></div>
             <div class="page-header row no-gutters py-4">
                 <!--                <div class="col-12 col-sm-4 text-center text-sm-left mb-0"></div>-->
             </div>

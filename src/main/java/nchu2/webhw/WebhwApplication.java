@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.ApplicationPath;
@@ -41,6 +42,11 @@ public class WebhwApplication {
         return new Auth.LoginHandler();
     }
 
+    @Bean
+    public LogoutSuccessHandler logoutHandler() {
+        return new Auth.LogoutHandler();
+    }
+
     @Component
     @ApplicationPath("api")
     public class JerseyConfig extends ResourceConfig {
@@ -55,12 +61,11 @@ public class WebhwApplication {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                    .antMatchers("/login", "/logout", "/scripts/*", "/webpack/*", "/fonts/*", "/signup", "/error").permitAll()
+                    .antMatchers("/scripts/*", "/webpack/*", "/fonts/*", "/signup", "/error").permitAll()
                     .antMatchers("/priv/**", "/api/user/**").hasAnyRole("Customer", "Manager", "Staff")
-                    .antMatchers("/admin/**", "/api/admin/**").hasIpAddress("0.0.0.0")
+                    .antMatchers("/admin/**", "/api/admin/**", "/api/i18n/**").hasIpAddress("0:0:0:0:0:0:0:1")
                     .and().formLogin().loginPage("/login").successHandler(authSuccessHandler()).failureHandler(authFailureHandler()).permitAll()
-                    .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
-                    .and();
+                    .and().logout().logoutSuccessHandler(logoutHandler());
         }
     }
 }

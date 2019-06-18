@@ -8,21 +8,9 @@
             <h2 th:text="#{msg.logout}">ERROR</h2>
         </div>
     </div>
-    <script th:inline="javascript">
-        urlx = [[@{/logout}]]
-        ;
-        $.ajax({
-            type: "POST",
-            url: urlx,
-            data: {[[${_csrf.parameterName}]]: [[${_csrf.token}]]},
-            dataType: "xhr",
-            async: true,
-            cache: false,
-            complete: function (xhr, textStatus) {
-                console.log(xhr.status);
-                Turbolinks.visit("login");
-            }
-        });
+    <form id="form" th:action="@{/logout}" method="POST"></form>
+    <script>
+        doSubmit($('#form'));
     </script>
 </div>
 </body>

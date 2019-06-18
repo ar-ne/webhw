@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<title th:text="#{msg.index.title}">欢迎</title>
+<body th:replace="/framework/main">
+<div th:fragment="mainContent">
+    <div class="row">
+        <div class="page-header pt-5">
+            <ul>
+                <li class="p-1">
+                    <a th:href="@{index}">
+                        <button class="btn btn-outline-primary">返回首页</button>
+                    </a>
+                </li>
+                <li>
+                    <div th:include="/parts::table('http://localhost:8080/api/admin/log','Log')"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

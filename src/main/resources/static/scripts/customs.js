@@ -1,6 +1,14 @@
-function formSubmit(form = 'form', button = 'submit', callback = null) {
+function formSubmit(form = 'form', button = null, callbefore = null, callafter = null) {
     form = $('#' + form);
-    button = $('#' + button);
+    if (button !== null) $('#' + button).attr("disabled", "");
+    if (callbefore !== null) callbefore();
+    doSubmit(form);
+    if (callafter !== null) callafter();
+    if (button !== null) $('#' + button).removeAttr("disabled");
+    return false;
+}
+
+function doSubmit(form) {
     $.ajax({
         type: form.attr("method"),
         url: form.attr("action"),
@@ -10,20 +18,74 @@ function formSubmit(form = 'form', button = 'submit', callback = null) {
         cache: false,
         complete: function (xhr, textStatus) {
             console.log(xhr);
-            console.log(xhr.status);
-            if (xhr.status === 403) showFailAlert();
-            else if (xhr.status === 201) Turbolinks.visit(xhr.responseText, {action: "replace"});
-            else if (xhr.status === 200) Turbolinks.visit(xhr.responseText);
+            switch (xhr.status) {
+                case 200:
+                    Turbolinks.visit(xhr.responseText);
+                    break;
+                case 201:
+                    Turbolinks.visit(xhr.responseText, {action: "replace"});
+                    break;
+                case 202:
+                    window.location.href = xhr.responseText;
+                    break;
+                case 203:
+                    eval(xhr.responseText.toString());
+                    break;
+                case 204:
+                    showSuccessAlert();
+                    break;
+                case 205:
+                    showSuccessAlert(xhr.responseText.toString());
+                    break;
+                default:
+                    if (xhr.responseText !== null && xhr.responseText !== "")
+                        showFailAlert(xhr.responseText);
+                    else showFailAlert();
+                    break;
+            }
         }
     });
-    return false;
 }
 
-function showFailAlert() {
-    alert("失败/错误")
+function showSuccessAlert(msg = null, time = -1) {
+    showAlert(msg === null ? "成功/完成" : msg, time);
+
+}
+
+function showFailAlert(msg = null, time = 3000) {
+    showAlert(msg === null ? "错误/失败" : msg, time, "danger", "clear");
+}
+
+let alertCount = 0;
+
+function showAlert(message, time = -1, type = 'success', icon = 'check') {
+    type = "alert-" + type;
+    const current = alertCount++;
+    $("#alert").append("<div class='alert " + type + " alert-dismissible fade mb-0' role='alert'>\n" +
+        "                <button id='alertCount-" + current + "' type=\"button\" class='close' data-dismiss='alert' aria-label='Close'>\n" +
+        "                    <span aria-hidden='true'>×</span>\n" +
+        "                </button>\n" +
+        "                <i class='material-icons'>" + icon + "</i>\n" + message +
+        "</div>");
+    setTimeout(function () {
+        $("#alert > div").addClass("show")
+    }, 10);
+    if (time !== -1)
+        setTimeout(function () {
+            dismiss(current);
+        }, time)
+}
+
+function dismiss(id) {
+    $("#alertCount-" + id).click();
+}
+
+function dismissAll() {
+    $("#alert > div > button").click();
 }
 
 function generateTables(jURL, table, container = 'table') {
+    console.log("gentable: " + table);
     $.get(jURL, function (data, status) {
         if (status !== "success") return;
         jsonTable = data;
@@ -41,11 +103,13 @@ function generateTables(jURL, table, container = 'table') {
             type: "POST",
             url: "/api/i18n/tableCol/" + table,
             dataType: 'json',
+            headers: {'X-CSRF-TOKEN': $("meta[name='_csrf']").attr("content")},
+            async: false,
             contentType: "application/json",
             data: JSON.stringify(col),
             success: function (data) {
                 data.splice(0, 0, {checkbox: true});
-                $(container).bootstrapTable({
+                $('#' + container).bootstrapTable({
                     locale: 'zh-CN',
                     pagination: true,
                     search: true,
@@ -53,8 +117,21 @@ function generateTables(jURL, table, container = 'table') {
                     maintainSelected: true,
                     clickToSelect: true,
                     columns: data,
-                    data: jsonTable
-                })
+                    data: jsonTable,
+                    theadClasses: 'bg-light',
+                    classes: 'table mb-0',
+                    checkboxHeader: false,
+
+                });
+
+                //modify table checkbox
+                // let cbList = $("#" + container + " > tbody > tr >td.bs-checkbox");
+                // for (let i = 0; i < cbList.length; i++) {
+                //     cbList[i].innerHTML = "";
+                //     cbList[i].innerHTML = ("<div class='custom-control custom-checkbox'>" +
+                //         "<input type='checkbox' class='custom-control-input' name='btSelectItem' data-index='" + i + "'>" +
+                //         "<label class=\"custom-control-label\"></label></div>")
+                // }
             }
         });
     });
@@ -101,4 +178,8 @@ function initPopper() {
     }), $(".toggle-sidebar").click(function (t) {
         $(".main-sidebar").toggleClass("open")
     })
+}
+
+function sleep(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
 }

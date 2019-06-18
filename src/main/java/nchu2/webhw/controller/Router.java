@@ -1,15 +1,21 @@
 package nchu2.webhw.controller;
 
 import nchu2.webhw.ComponentBase;
+import nchu2.webhw.model.tables.pojos.Customer;
+import nchu2.webhw.model.tables.pojos.Manager;
+import nchu2.webhw.model.tables.pojos.Staff;
 import nchu2.webhw.properites.UserType;
 import nchu2.webhw.service.UserService;
+import nchu2.webhw.service.user.CustomerService;
+import nchu2.webhw.service.user.ManagerService;
+import nchu2.webhw.service.user.StaffService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 import static nchu2.webhw.properites.Vars.PUBLIC_PAGES;
 
@@ -17,12 +23,18 @@ import static nchu2.webhw.properites.Vars.PUBLIC_PAGES;
 @RequestMapping("/")
 public class Router extends ComponentBase {
     private final UserService userService;
+    private final CustomerService customerService;
+    private final ManagerService managerService;
+    private final StaffService staffService;
 
-    public Router(UserService userService) {
+    public Router(UserService userService, CustomerService customerService, ManagerService managerService, StaffService staffService) {
         this.userService = userService;
+        this.customerService = customerService;
+        this.managerService = managerService;
+        this.staffService = staffService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String splash(Model model, String redirect) {
         model.addAttribute("direction", redirect);
         return "framework/splash";
@@ -31,7 +43,7 @@ public class Router extends ComponentBase {
     @Controller
     @RequestMapping("priv")
     public class UserSpace extends ComponentBase {
-        @GetMapping("/")
+        @GetMapping("")
         public String router() {
             return "redirect:/priv/index";
         }
@@ -52,9 +64,30 @@ public class Router extends ComponentBase {
     @Controller
     @RequestMapping("admin")
     public class AdminSpace {
-        @GetMapping("/")
+        @GetMapping("")
         public String index() {
             return "redirect:/admin/index";
+        }
+
+        @GetMapping("{page}")
+        public String router(@PathVariable("page") String page, Model model) {
+            model.addAttribute("page", page);
+            return String.format("admin/%s", page);
+        }
+
+        @PostMapping("addUser")
+        @ResponseBody
+        public String addUser(HttpServletResponse response, String username, String password, String type) {
+            response.setStatus(205);
+            switch (UserType.valueOf(type)) {
+                case Staff:
+                    return staffService.register(username, password, new Staff().setName(username)).toString();
+                case Manager:
+                    return managerService.register(username, password, new Manager().setName(username)).toString();
+                case Customer:
+                    return customerService.register(username, password, new Customer().setName(username)).toString();
+            }
+            return "";
         }
     }
 

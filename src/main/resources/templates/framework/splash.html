@@ -28,7 +28,7 @@
             $(document).on('turbolinks:load', function () {
                 $('#mainContent').fadeIn('slow');
             });
-            Turbolinks.visit("[[${direction==null?'/login':direction}]]", {action: "replace"})
+            Turbolinks.visit("[[${direction==null?'/priv/':direction}]]", {action: "replace"})
         };
     </script>
     <style>
