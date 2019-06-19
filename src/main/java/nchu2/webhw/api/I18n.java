@@ -1,9 +1,10 @@
 package nchu2.webhw.api;
 
 import lombok.Data;
-import nchu2.webhw.properites.Flags;
+import nchu2.webhw.properties.Flags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,13 +32,17 @@ public class I18n {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public BootstrapTableCol[] bootstrapTableCol(@PathParam("tableName") String tableName, BootstrapTableCol[] cols) {
-        List list = new LinkedList();
+        List<BootstrapTableCol> list = new LinkedList<>();
         for (BootstrapTableCol col : cols) {
-            col.setTitle(messageSource.getMessage(col.field, null, Locale.getDefault()));
-            Flags.Field colFlag = flags.getFieldFlag(tableName, col.field);
-            col.setVisible(colFlag.visibility);
+            try {
+                col.setTitle(messageSource.getMessage(tableName + "." + col.field, null, Locale.getDefault()));
+                Flags.Field colFlag = flags.getFieldFlag(tableName, col.field);
+                col.setVisible(colFlag.visibility);
+                list.add(col);
+            } catch (NoSuchMessageException ignored) {
+            }
         }
-        return cols;
+        return list.toArray(new BootstrapTableCol[0]);
     }
 
     @Data
@@ -46,5 +51,6 @@ public class I18n {
         String title;
         boolean sortable;
         boolean visible;
+        boolean checkbox;
     }
 }

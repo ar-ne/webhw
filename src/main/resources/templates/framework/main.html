@@ -2,7 +2,7 @@
 <html class="no-js h-100" lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <script>
-        if (!window.Turbolinks) window.location.replace('/?redirect=' + window.location.pathname);
+        if (!window.Turbolinks) window.location.replace('/?redirect=' + (window.location + "").substring(window.location.origin.length));
     </script>
     <meta name="turbolinks-cache-control" content="no-cache">
     <meta charset="UTF-8">
@@ -29,7 +29,8 @@
                     </a>
                 </nav>
             </div>
-            <form action="#" class="main-sidebar__search w-100 border-right d-sm-flex d-md-none d-lg-none">
+            <form class="main-sidebar__search w-100 border-right d-sm-flex d-md-none d-lg-none"
+                  onsubmit="return ()=> {return false}">
                 <div class="input-group input-group-seamless ml-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
@@ -45,12 +46,12 @@
                 </ul>
             </div>
         </aside>
-
         <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
             <div class="main-navbar sticky-top bg-white">
                 <!-- Main Navbar -->
                 <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
-                    <form action="#" class="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
+                    <form class="main-navbar__search w-100 d-none d-md-flex d-lg-flex"
+                          onsubmit="return ()=> {return false}">
                         <div class="input-group input-group-seamless ml-3">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -138,6 +139,9 @@
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/priv/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/}">Admin</a>
                     </li>
                 </ul>
                 <span class="copyright ml-auto my-auto mr-2">Copyright © 2019

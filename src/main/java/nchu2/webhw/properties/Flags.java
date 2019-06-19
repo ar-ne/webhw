@@ -1,4 +1,4 @@
-package nchu2.webhw.properites;
+package nchu2.webhw.properties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

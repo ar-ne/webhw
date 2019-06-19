@@ -21,6 +21,13 @@
     </script>
 </div>
 
+<div th:fragment="tableNoCheckbox(jURL,table)">
+    <table id="table"></table>
+    <script th:inline="javascript">
+        generateTables([[${jURL}]], [[${table}]], false);
+    </script>
+</div>
+
 <!--带标题的输入区域-->
 <!--title 标题，name 名字，value 默认值，disabled 可否被修改-->
 <div class="form-group col-md-12" th:fragment="titledTextarea(title,name,value,disabled)">

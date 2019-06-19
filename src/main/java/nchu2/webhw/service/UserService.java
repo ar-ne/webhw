@@ -8,10 +8,12 @@ import nchu2.webhw.model.tables.pojos.Customer;
 import nchu2.webhw.model.tables.pojos.Login;
 import nchu2.webhw.model.tables.pojos.Manager;
 import nchu2.webhw.model.tables.pojos.Staff;
-import nchu2.webhw.properites.UserType;
-import nchu2.webhw.properites.Vars;
+import nchu2.webhw.properties.Vars;
+import nchu2.webhw.properties.mapping.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +21,7 @@ public class UserService extends ServiceBase {
     @Autowired
     protected LoginService loginService;
 
-    @Cacheable(value = Vars.CacheValues.user)
+    @Cacheable(value = Vars.CacheValues.user, key = "getArgs()[0]")
     public User getUser(String loginname) {
         switch (loginService.getLoginType(loginname)) {
             case Customer:
@@ -32,11 +34,32 @@ public class UserService extends ServiceBase {
         throw new RuntimeException("Error when trying to get user's detail");
     }
 
+    public User getUser(Authentication authentication) {
+        String login = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
+        return getUser(login);
+    }
+
     protected User createNewUser(String loginName, String plainTextPass, UserType userType, User user) throws LoginService.LoginNameExistsException {
         Login login = loginService.newLoginWithPassword(loginName, plainTextPass, userType);
         user.setLoginname(login.getLoginname());
         logger.log(String.format("Welcome new %s with login name: %s", userType.name(), login.getLoginname()));
         return user;
+    }
+
+    @CachePut(value = Vars.CacheValues.user, key = "getArgs()[0]")
+    public User putUser(String loginName, User dbObj) {
+        switch (loginService.getLoginType(loginName)) {
+            case Staff:
+                new StaffDao(dsl.configuration()).update((Staff) dbObj);
+                break;
+            case Manager:
+                new ManagerDao(dsl.configuration()).update(((Manager) dbObj));
+                break;
+            case Customer:
+                new CustomerDao(dsl.configuration()).update(((Customer) dbObj));
+        }
+        logger.log("Profile update: " + loginName);
+        return dbObj;
     }
 
     public interface Register<T extends User> {

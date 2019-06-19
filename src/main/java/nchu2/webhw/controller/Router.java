@@ -1,37 +1,28 @@
 package nchu2.webhw.controller;
 
 import nchu2.webhw.ComponentBase;
-import nchu2.webhw.model.tables.pojos.Customer;
-import nchu2.webhw.model.tables.pojos.Manager;
-import nchu2.webhw.model.tables.pojos.Staff;
-import nchu2.webhw.properites.UserType;
+import nchu2.webhw.properties.mapping.UserType;
+import nchu2.webhw.service.CommonCRUD;
 import nchu2.webhw.service.UserService;
-import nchu2.webhw.service.user.CustomerService;
-import nchu2.webhw.service.user.ManagerService;
-import nchu2.webhw.service.user.StaffService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletResponse;
-
-import static nchu2.webhw.properites.Vars.PUBLIC_PAGES;
+import static nchu2.webhw.properties.Vars.PUBLIC_PAGES;
 
 @Controller
 @RequestMapping("/")
 public class Router extends ComponentBase {
     private final UserService userService;
-    private final CustomerService customerService;
-    private final ManagerService managerService;
-    private final StaffService staffService;
+    private final CommonCRUD commonCRUD;
 
-    public Router(UserService userService, CustomerService customerService, ManagerService managerService, StaffService staffService) {
+    public Router(UserService userService, CommonCRUD commonCRUD) {
         this.userService = userService;
-        this.customerService = customerService;
-        this.managerService = managerService;
-        this.staffService = staffService;
+        this.commonCRUD = commonCRUD;
     }
 
     @GetMapping("")
@@ -49,15 +40,24 @@ public class Router extends ComponentBase {
         }
 
         @GetMapping("{page}")
-        public String router(@PathVariable("page") String page, Model model, Authentication authentication) {
+        public String router(@PathVariable("page") String page, Model model, Authentication authentication, String arg) {
             User user = (User) authentication.getPrincipal();
             UserType userType = ((UserType.Authority) user.getAuthorities().toArray()[0]).getUserType();
             model.addAttribute("userType", userType.name());
             model.addAttribute("page", page);
             model.addAttribute("user", userService.getUser(user.getUsername()));
-            if (PUBLIC_PAGES.contains(page))
+            if (PUBLIC_PAGES.contains(page)) {
+                attachData(model, page, arg);
                 return String.format("pub/%s", page);
+            }
             return String.format("priv/%s/%s", userType.name(), page);
+        }
+
+        public void attachData(Model model, String PAGE, String args) {
+            switch (PAGE) {
+                case "production":
+                    model.addAttribute("data", commonCRUD.getProduction(Integer.valueOf(args)));
+            }
         }
     }
 
@@ -73,21 +73,6 @@ public class Router extends ComponentBase {
         public String router(@PathVariable("page") String page, Model model) {
             model.addAttribute("page", page);
             return String.format("admin/%s", page);
-        }
-
-        @PostMapping("addUser")
-        @ResponseBody
-        public String addUser(HttpServletResponse response, String username, String password, String type) {
-            response.setStatus(205);
-            switch (UserType.valueOf(type)) {
-                case Staff:
-                    return staffService.register(username, password, new Staff().setName(username)).toString();
-                case Manager:
-                    return managerService.register(username, password, new Manager().setName(username)).toString();
-                case Customer:
-                    return customerService.register(username, password, new Customer().setName(username)).toString();
-            }
-            return "";
         }
     }
 

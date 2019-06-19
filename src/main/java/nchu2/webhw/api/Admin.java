@@ -1,7 +1,10 @@
 package nchu2.webhw.api;
 
+import nchu2.webhw.model.Webhw;
 import nchu2.webhw.model.tables.daos.*;
-import nchu2.webhw.properites.UserType;
+import nchu2.webhw.properties.mapping.UserType;
+import org.jooq.Field;
+import org.jooq.Table;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.GET;
@@ -36,5 +39,17 @@ public class Admin extends APIBase {
                 return new StaffDao(dsl.configuration()).findAll();
         }
         return new LoginDao(dsl.configuration()).findAll();
+    }
+
+    @GET
+    @Path("fields")
+    public String list() {
+        StringBuilder builder = new StringBuilder();
+        for (Table<?> table : Webhw.WEBHW.getTables()) {
+            for (Field<?> field : table.fields()) {
+                builder.append(table.getName()).append(".").append(field.getName().toLowerCase()).append("\n");
+            }
+        }
+        return builder.toString();
     }
 }

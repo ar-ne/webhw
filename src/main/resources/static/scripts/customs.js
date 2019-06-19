@@ -1,4 +1,4 @@
-function formSubmit(form = 'form', button = null, callbefore = null, callafter = null) {
+function formSubmit(button = null, form = 'form', callbefore = null, callafter = null) {
     form = $('#' + form);
     if (button !== null) $('#' + button).attr("disabled", "");
     if (callbefore !== null) callbefore();
@@ -25,29 +25,27 @@ function doSubmit(form) {
                 case 201:
                     Turbolinks.visit(xhr.responseText, {action: "replace"});
                     break;
-                case 202:
-                    window.location.href = xhr.responseText;
-                    break;
                 case 203:
                     eval(xhr.responseText.toString());
                     break;
-                case 204:
-                    showSuccessAlert();
-                    break;
-                case 205:
+                case 202:
                     showSuccessAlert(xhr.responseText.toString());
                     break;
+                case 205:
+                    showSuccessAlert();
+                    break;
+                case 406:
+                    showFailAlert(xhr.responseText.toString());
+                    break;
                 default:
-                    if (xhr.responseText !== null && xhr.responseText !== "")
-                        showFailAlert(xhr.responseText);
-                    else showFailAlert();
+                    showFailAlert();
                     break;
             }
         }
     });
 }
 
-function showSuccessAlert(msg = null, time = -1) {
+function showSuccessAlert(msg = null, time = 3000) {
     showAlert(msg === null ? "成功/完成" : msg, time);
 
 }
@@ -67,6 +65,7 @@ function showAlert(message, time = -1, type = 'success', icon = 'check') {
         "                </button>\n" +
         "                <i class='material-icons'>" + icon + "</i>\n" + message +
         "</div>");
+    ScrollTop(0, 100);
     setTimeout(function () {
         $("#alert > div").addClass("show")
     }, 10);
@@ -84,7 +83,7 @@ function dismissAll() {
     $("#alert > div > button").click();
 }
 
-function generateTables(jURL, table, container = 'table') {
+function generateTables(jURL, table, chb = true, container = 'table') {
     console.log("gentable: " + table);
     $.get(jURL, function (data, status) {
         if (status !== "success") return;
@@ -94,8 +93,7 @@ function generateTables(jURL, table, container = 'table') {
             if (col.indexOf(key) === -1) {
                 col.push({
                     field: key.toString(),
-                    title: null,
-                    sortable: true
+                    sortable: true,
                 });
             }
         }
@@ -108,7 +106,7 @@ function generateTables(jURL, table, container = 'table') {
             contentType: "application/json",
             data: JSON.stringify(col),
             success: function (data) {
-                data.splice(0, 0, {checkbox: true});
+                if (chb) data.splice(0, 0, {checkbox: true});
                 $('#' + container).bootstrapTable({
                     locale: 'zh-CN',
                     pagination: true,
@@ -116,11 +114,16 @@ function generateTables(jURL, table, container = 'table') {
                     silentSort: false,
                     maintainSelected: true,
                     clickToSelect: true,
+                    checkboxHeader: false,
                     columns: data,
-                    data: jsonTable,
+                    // data: jsonTable,
+                    url: jURL,
+                    showRefresh: true,
+                    showPaginationSwitch: true,
+                    showToggle: true,
+                    smartDisplay: true,
                     theadClasses: 'bg-light',
                     classes: 'table mb-0',
-                    checkboxHeader: false,
 
                 });
 
@@ -134,30 +137,6 @@ function generateTables(jURL, table, container = 'table') {
                 // }
             }
         });
-    });
-}
-
-function zzz_test(tablename) {
-    console.log(tablename);
-    $.ajax({
-        type: "post",
-        async: false,
-        url: "/api/sample/" + tablename,
-        dataType: "json",
-
-        success: function (data) {
-            console.log(data);
-
-            for (key in data) {
-                console.log(key);
-                if ($("[name='key']").val() != null) {
-                    data[key] = $("[name=key]").val();
-                }
-                console.log(data[key]);
-            }
-            console.log(data);
-
-        }
     });
 }
 
@@ -183,3 +162,22 @@ function initPopper() {
 function sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
 }
+
+const ScrollTop = (number = 0, time) => {
+    if (!time) {
+        document.body.scrollTop = document.documentElement.scrollTop = number;
+        return number;
+    }
+    const spacingTime = 20; // 设置循环的间隔时间  值越小消耗性能越高
+    let spacingInex = time / spacingTime; // 计算循环的次数
+    let nowTop = document.body.scrollTop + document.documentElement.scrollTop; // 获取当前滚动条位置
+    let everTop = (number - nowTop) / spacingInex; // 计算每次滑动的距离
+    let scrollTimer = setInterval(() => {
+        if (spacingInex > 0) {
+            spacingInex--;
+            ScrollTop(nowTop += everTop);
+        } else {
+            clearInterval(scrollTimer); // 清除计时器
+        }
+    }, spacingTime);
+};

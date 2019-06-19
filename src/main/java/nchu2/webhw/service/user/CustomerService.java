@@ -3,7 +3,7 @@ package nchu2.webhw.service.user;
 import nchu2.webhw.model.User;
 import nchu2.webhw.model.tables.daos.CustomerDao;
 import nchu2.webhw.model.tables.pojos.Customer;
-import nchu2.webhw.properites.UserType;
+import nchu2.webhw.properties.mapping.UserType;
 import nchu2.webhw.service.LoginService;
 import nchu2.webhw.service.UserService;
 import org.springframework.stereotype.Service;

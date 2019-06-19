@@ -10,11 +10,14 @@
                     <a th:href="@{index}">
                         <button class="btn btn-outline-primary">返回首页</button>
                     </a>
+                    <a th:href="@{userList}">
+                        <button class="btn btn-outline-primary">用户列表</button>
+                    </a>
                 </li>
                 <li>
                     <form id="form" th:action="@{addUser}" method="post" onsubmit="function f() {return false;}">
-                        <div th:include="/parts::titledTextInput('','用户名','username')"></div>
-                        <div th:include="/parts::titledTextInput('','密码','password')"></div>
+                        <div th:include="/parts::titledTextInput('','用户名','username','','')"></div>
+                        <div th:include="/parts::titledTextInput('','密码','password','','')"></div>
                         <input type="hidden" id="type" name="type" value="">
                     </form>
                     <script>

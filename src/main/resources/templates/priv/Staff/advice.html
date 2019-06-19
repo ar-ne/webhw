@@ -13,27 +13,31 @@
             <div class="card card-small ">
                 <div class="card-header "></div>
                 <div class="card-body">
-                    <table class="table mb-0">
-                        <thead class="bg-light">
-                        <tr>
-                            <th scope="col" class="border-1">选择</th>
-                            <th scope="col" class="border-1">时间</th>
-                            <th scope="col" class="border-1">意见类型</th>
-                            <th scope="col" class="border-1">意见内容</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <td>2019-5-25</td>
-                            <td>界面方面</td>
-                            <td>太好看了</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div th:include="/parts::table('/api/user/advice','Opinion')"></div>
+                    <!--                    <table class="table mb-0">-->
+                    <!--                        <thead class="bg-light">-->
+                    <!--                        <tr>-->
+                    <!--                            <th scope="col" class="border-1">选择</th>-->
+                    <!--                            <th scope="col" class="border-1">时间</th>-->
+                    <!--                            <th scope="col" class="border-1">意见类型</th>-->
+                    <!--                            <th scope="col" class="border-1">意见内容</th>-->
+                    <!--                        </tr>-->
+                    <!--                        </thead>-->
+                    <!--                        <tbody>-->
+                    <!--                        <tr>-->
+                    <!--                            <td></td>-->
+                    <!--                            <td>2019-5-25</td>-->
+                    <!--                            <td>界面方面</td>-->
+                    <!--                            <td>太好看了</td>-->
+                    <!--                        </tr>-->
+                    <!--                        </tbody>-->
+                    <!--                    </table>-->
                     <div class="form-group col-md-12">
                         <button type="button" class="mb-2 btn btn-outline-primary mr-2"
-                                th:text="#{msg.staff.sidebar.advice.button}">忽略意见
+                                th:text="#{msg.staff.sidebar.advice.button.x}">X
+                        </button>
+                        <button type="button" class="mb-2 btn btn-outline-primary mr-2"
+                                th:text="#{msg.staff.sidebar.advice.button.v}">V
                         </button>
                     </div>
                 </div>

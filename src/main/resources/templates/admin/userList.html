@@ -3,11 +3,6 @@
 <title th:text="#{msg.index.title}">欢迎</title>
 <body th:replace="/framework/main">
 <div th:fragment="mainContent">
-    <div class="page-header row no-gutters py-4">
-        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-            <h3 class="page-title">已购清单</h3>
-        </div>
-    </div>
     <div class="row">
         <div class="row mb-3 col-12 ">
             <div class="col-12">
@@ -17,6 +12,9 @@
                             <li class="p-1">
                                 <a th:href="@{index}">
                                     <button class="btn btn-outline-primary">返回首页</button>
+                                </a>
+                                <a th:href="@{addUser}">
+                                    <button class="btn btn-outline-primary">添加用户</button>
                                 </a>
                             </li>
                             <li>
@@ -38,10 +36,10 @@
                             </li>
                         </ul>
                         <script>
-                            generateTables('http://localhost:8080/api/admin/users/Customer', 'Customer', 't1');
-                            generateTables('http://localhost:8080/api/admin/users/Manager', 'Manager', 't2');
-                            generateTables('http://localhost:8080/api/admin/users/Staff', 'Staff', 't3');
-                            generateTables('http://localhost:8080/api/admin/users/Login', 'Login', 't4');
+                            generateTables('http://localhost:8080/api/admin/users/Customer', 'Customer', false, 't1');
+                            generateTables('http://localhost:8080/api/admin/users/Manager', 'Manager', false, 't2');
+                            generateTables('http://localhost:8080/api/admin/users/Staff', 'Staff', false, 't3');
+                            generateTables('http://localhost:8080/api/admin/users/Login', 'Login', false, 't4');
                         </script>
                     </div>
                 </div>

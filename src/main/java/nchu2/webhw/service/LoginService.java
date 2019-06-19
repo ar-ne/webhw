@@ -2,8 +2,8 @@ package nchu2.webhw.service;
 
 import nchu2.webhw.model.tables.daos.LoginDao;
 import nchu2.webhw.model.tables.pojos.Login;
-import nchu2.webhw.properites.UserType;
-import nchu2.webhw.properites.Vars;
+import nchu2.webhw.properties.Vars;
+import nchu2.webhw.properties.mapping.UserType;
 import nchu2.webhw.utils.LogMsgHelper;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +22,6 @@ public class LoginService extends ServiceBase {
         return new LoginDao(dsl.configuration()).fetchOneByLoginname(loginName).getType();
     }
 
-
     /**
      * 创建新的客户登录信息
      *
@@ -32,7 +31,8 @@ public class LoginService extends ServiceBase {
      * @return 新添加的登录信息
      * @throws LoginNameExistsException 登录名已被占用
      */
-    public Login newLoginWithPassword(String loginName, String password, UserType userType) throws LoginNameExistsException {
+    public Login newLoginWithPassword(String loginName, String password, UserType userType) throws
+            LoginNameExistsException {
         Login login = new Login();
         login.setPass(password);
         login.setLoginname(loginName);

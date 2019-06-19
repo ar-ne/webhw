@@ -1,4 +1,4 @@
-package nchu2.webhw.properites;
+package nchu2.webhw.properties.mapping;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -23,7 +23,7 @@ public enum UserType {
                 case 2:
                     return Staff;
             }
-            return null;
+            throw new RuntimeException("DBO not a valid 'UserType'");
         }
 
         @Override
@@ -36,7 +36,7 @@ public enum UserType {
                 case Staff:
                     return 2;
             }
-            return null;
+            throw new RuntimeException("UO not a valid 'UserType'");
         }
 
         @Override

@@ -14,26 +14,27 @@
                 <div class="card card-small ">
                     <div class="card-header "></div>
                     <div class="card-body">
-                        <table class="table mb-0">
-                            <thead class="bg-light">
-                            <tr>
-                                <th scope="col" class="border-1">客户编号</th>
-                                <th scope="col" class="border-1">贷款时间</th>
-                                <th scope="col" class="border-1">贷款金额</th>
-                                <th scope="col" class="border-1">贷款理由</th>
-                                <th scope="col" class="border-1">是否受理</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2019-5-28</td>
-                                <td>20000</td>
-                                <td>穷！！！</td>
-                                <td>否</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div th:include="/parts::tableNoCheckbox('/api/user/loan','Loan')"></div>
+                        <!--                        <table class="table mb-0">-->
+                        <!--                            <thead class="bg-light">-->
+                        <!--                            <tr>-->
+                        <!--                                <th scope="col" class="border-1">客户编号</th>-->
+                        <!--                                <th scope="col" class="border-1">贷款时间</th>-->
+                        <!--                                <th scope="col" class="border-1">贷款金额</th>-->
+                        <!--                                <th scope="col" class="border-1">贷款理由</th>-->
+                        <!--                                <th scope="col" class="border-1">是否受理</th>-->
+                        <!--                            </tr>-->
+                        <!--                            </thead>-->
+                        <!--                            <tbody>-->
+                        <!--                            <tr>-->
+                        <!--                                <td>1</td>-->
+                        <!--                                <td>2019-5-28</td>-->
+                        <!--                                <td>20000</td>-->
+                        <!--                                <td>穷！！！</td>-->
+                        <!--                                <td>否</td>-->
+                        <!--                            </tr>-->
+                        <!--                            </tbody>-->
+                        <!--                        </table>-->
                     </div>
                 </div>
             </div>

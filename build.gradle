@@ -96,9 +96,27 @@ jooq {
                 inputSchema = 'webhw'
                 forcedTypes {
                     forcedType {
-                        userType = 'nchu2.webhw.properites.UserType'
-                        converter = 'nchu2.webhw.properites.UserType.Converter'
+                        userType = 'nchu2.webhw.properties.mapping.UserType'
+                        converter = 'nchu2.webhw.properties.mapping.UserType.Converter'
                         expression = 'webhw.Login.type'
+                        types = '.*'
+                    }
+                    forcedType {
+                        userType = 'nchu2.webhw.properties.mapping.Risk'
+                        converter = 'nchu2.webhw.properties.mapping.Risk.Converter'
+                        expression = 'webhw.Production.risk'
+                        types = '.*'
+                    }
+                    forcedType {
+                        userType = 'nchu2.webhw.properties.mapping.Sex'
+                        converter = 'nchu2.webhw.properties.mapping.Sex.Converter'
+                        expression = 'webhw.*.sex'
+                        types = '.*'
+                    }
+                    forcedType {
+                        userType = 'java.lang.Boolean'
+                        converter = 'nchu2.webhw.properties.mapping.BoolConvert'
+                        expression = 'webhw.Opinion.o_accept'
                         types = '.*'
                     }
                 }

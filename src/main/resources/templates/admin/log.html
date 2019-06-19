@@ -10,9 +10,12 @@
                     <a th:href="@{index}">
                         <button class="btn btn-outline-primary">返回首页</button>
                     </a>
+                    <a th:href="@{log}">
+                        <button class="btn btn-outline-primary">刷新页面</button>
+                    </a>
                 </li>
                 <li>
-                    <div th:include="/parts::table('http://localhost:8080/api/admin/log','Log')"></div>
+                    <div th:include="/parts::tableNoCheckbox('http://localhost:8080/api/admin/log','Log')"></div>
                 </li>
             </ul>
         </div>

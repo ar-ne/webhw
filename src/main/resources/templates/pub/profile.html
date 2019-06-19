@@ -12,15 +12,16 @@
         <div class="mb-3 col-12 ">
             <div class="card card-small ">
                 <div class="card-header ">
+                    <img class="rounded-circle m-auto" th:src="@{/images/avatars/0.jpg}" alt="User Avatar"
+                         width="110">
                 </div>
                 <div class="card-body">
-                    <form>
-                        <img class="rounded-circle m-auto" th:src="@{/images/avatars/0.jpg}" alt="User Avatar"
-                             width="110">
-                        <br><br>
+                    <!--/*@thymesVar id="user" type="nchu2.webhw.model.User"*/-->
+                    <!--/*@thymesVar id="userType" type="java.lang.String"*/-->
+                    <form id="form" th:action="@{profile}" method="post" onsubmit="return formSubmit()">
                         <div class="form-row p-3">
-                            <div th:replace="/parts::TextInput(#{msg.profile.username},'username','zzz','')"></div>
-                            <div th:replace="/parts::TextInput(#{msg.profile.phoneNum},'phoneNum','123456789','')"></div>
+                            <div th:replace="/parts::TextInput(#{msg.profile.username},'name',${user.getName()},'')"></div>
+                            <div th:replace="/parts::TextInput(#{msg.profile.phoneNum},'phonenum',${user.getPhonenum()},'')"></div>
                         </div>
                         <div class="form-row p-3">
                             <div th:replace="/parts::TextInput(#{msg.profile.age},'age','20','')"></div>
@@ -29,31 +30,31 @@
                                 <div class="form-row pl-3 pt-1" id="sex">
                                     <div class="custom-control custom-radio mb-1 pr-5">
                                         <input type="radio" id="formsRadioDefault" name="sex"
-                                               class="custom-control-input"
-                                               value="1">
+                                               class="custom-control-input" value="Male"
+                                               th:checked="${user.getSex().name()=='Male'}">
                                         <label class="custom-control-label" for="formsRadioDefault">男</label>
                                     </div>
                                     <div class="custom-control custom-radio mb-1">
                                         <input type="radio" id="formsRadioChecked" name="sex"
-                                               class="custom-control-input"
-                                               value="0">
+                                               class="custom-control-input" value="Female"
+                                               th:checked="${user.getSex().name()=='Female'}">
                                         <label class="custom-control-label" for="formsRadioChecked">女</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <br>
-                        <div th:replace="/parts::TextInput(#{msg.profile.personid},'personid','123456432597789','')"></div>
+                        <div th:replace="/parts::TextInput(#{msg.profile.personid},'personid',${user.getPersonid()},'')"></div>
                         <br>
                         <div class="form-row p-3" th:if="${!#strings.equals(userType,'Customer')}">
-                            <div th:replace="/parts::TextInput(#{msg.profile.joinTime},'joinTime','2019/1/1','disabled')"></div>
-                            <div th:replace="/parts::titledTextInputAf(#{msg.profile.workYear},'年','workYear','12','disabled')"></div>
+                            <div th:replace="/parts::TextInput(#{msg.profile.joinTime},'joinTime',${#dates.format(user.getJointime(),'yyyy-MM-dd')},'disabled')"></div>
+                            <div th:replace="/parts::titledTextInputAf(#{msg.profile.workYear},'年','workYear',${user.getWorkyear()},'disabled')"></div>
                         </div>
                         <br>
-                        <div th:replace="/parts::titledTextarea(#{msg.profile.adress},'adress','江西省南昌市丰和南大道696号','')"></div>
+                        <div th:replace="/parts::titledTextarea(#{msg.profile.adress},'adress',${user.getAdress()},'')"></div>
                         <br>
                         <div class="form-group col-md-12">
-                            <button type="button" class="mb-2 btn btn-outline-primary mr-2"
+                            <button type="submit" id="button" class="mb-2 btn btn-outline-primary mr-2"
                                     th:text="#{msg.profile.button}">提交
                             </button>
                         </div>
