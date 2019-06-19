@@ -21,20 +21,41 @@
                     </div>
                     <form th:if="${data!=null}" th:action="@{order}" method="post" onsubmit="return formSubmit()">
                         <div class="form-row pl-3">
-                            <div th:replace="/parts::TextInput(#{msg.mesmesIntroduction.pid},'pid',${data.getPId()},'disabled')"></div>
-                            <div th:replace="/parts::TextInput(#{msg.mesmesIntroduction.mid},'mid',${data.getLoginname()},'disabled')"></div>
+                            <div th:replace="/parts::TextInput(#{msg.mesmesIntroduction.pid},'pId',${data.getPId()},'disabled')"></div>
+                            <div th:replace="/parts::TextInput(#{msg.mesmesIntroduction.mid},'loginname',${data.getLoginname()},'disabled')"></div>
                         </div>
                         <div class="form-row pl-3">
                             <div th:replace="/parts::TextInput(#{msg.mesmesIntroduction.risk},'risk',${data.getRisk()},'disabled')"></div>
                             <div th:replace="/parts::titledTextInputAf(#{msg.mesmesIntroduction.profit},'%','profit',${data.getProfit()},'disable')"></div>
                         </div>
 
-                        <div th:replace="/parts::titledTextInput(#{msg.mesmesIntroduction.rmb},'￥','rmb',${data.getPmin()},'disabled')"></div>
+                        <div th:replace="/parts::titledTextInput(#{msg.mesmesIntroduction.rmb},'￥','pmin',${data.getPmin()},'disabled')"></div>
                         <br>
-                        <div th:replace="/parts::titledTextarea(#{msg.mesmesIntroduction.content},'content',${data.getIntro()},'disabled')"></div>
+                        <div th:replace="/parts::titledTextarea(#{msg.mesmesIntroduction.content},'intro',${data.getIntro()},'disabled')"></div>
                         <br>
                         <div class="form-row" th:if="${#strings.equals(userType,'Customer')}">
-                            <div th:replace="/parts::titledTextInput(#{msg.customer.mesmesIntroduction.rmb},'￥','money','','')"></div>
+                            <div th:replace="/parts::titledTextInput(#{msg.customer.mesmesIntroduction.rmb},'￥','buymoney','','')"></div>
+                            <div class="form-group">
+                                <strong class="text-muted d-block mb-2"
+                                        th:text="#{msg.customer.production.time}">购买时长</strong>
+                                <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+                                    <label class="btn btn-white">
+                                        <input type="radio" name="buyduration" id="option1" autocomplete="off"
+                                               value="1">
+                                        1年
+                                    </label>
+                                    <label class="btn btn-white">
+                                        <input type="radio" name="buyduration" id="option2" autocomplete="off"
+                                               value="3">
+                                        3年
+                                    </label>
+                                    <label class="btn btn-white">
+                                        <input type="radio" name="buyduration" id="option3" autocomplete="off"
+                                               value="5">
+                                        5年
+                                    </label>
+                                </div>
+                            </div>
                             <div class="pl-3 pt-4">
                                 <button type="submit" class="mt-2 btn btn-outline-primary mr-2"
                                         id="button" th:text="#{msg.mesmesIntroduction.button}">Primary

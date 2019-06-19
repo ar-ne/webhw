@@ -29,7 +29,7 @@ public class Vars {
         for (Table<?> table : Webhw.WEBHW.getTables()) {
             String pojo = String.format("%s.pojos.%s", table.getClass().getPackage().getName(), table.getName());
             String dao = String.format("%s.daos.%sDao", table.getClass().getPackage().getName(), table.getName());
-//            System.out.println(pojo + " <=> " + dao);
+            System.out.println(pojo + " <=> " + dao);
             try {
                 map.put(Class.forName(pojo), Class.forName(dao).getConstructor(org.jooq.Configuration.class));
                 map1.put(Class.forName(pojo), table);
