@@ -3,11 +3,10 @@ package nchu2.webhw.service;
 import nchu2.webhw.model.tables.daos.ProductionDao;
 import nchu2.webhw.model.tables.pojos.Log;
 import nchu2.webhw.model.tables.pojos.Production;
-import nchu2.webhw.properties.Vars;
 import nchu2.webhw.utils.LogMsgHelper;
 import org.jooq.impl.DAOImpl;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -18,6 +17,7 @@ import static nchu2.webhw.properties.Vars.POJO_DAO_TABLE;
 public class CommonCRUD extends ServiceBase {
 
     @SuppressWarnings("unchecked")
+    @Transactional
     public Object newRecord(Object o, String loginName) {
         try {
             Class c = o.getClass();

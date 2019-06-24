@@ -1,18 +1,20 @@
 plugins {
-    id 'java'
+    id "com.moowork.node" version "1.3.1"
 }
-
-apply plugin: 'java'
 
 group 'nchu.162012322'
 version '0.0.1-SNAPSHOT'
 
-task cleanPack(type: Delete) {
+task clean(type: Delete) {
     delete "$rootProject.projectDir/src/main/resources/static/webpack"
     delete "$rootProject.projectDir/src/main/resources/static/fonts"
 }
 
-task buildPack(type: Exec) {
+task build(type: Exec) {
+    dependsOn(npmInstall)
+    doFirst {
+        println "Building webpack..."
+    }
     inputs.file("package-lock.json").withPathSensitivity(PathSensitivity.RELATIVE)
     inputs.file("package.json").withPathSensitivity(PathSensitivity.RELATIVE)
     inputs.file("webpack.config.js").withPathSensitivity(PathSensitivity.RELATIVE)
@@ -28,20 +30,8 @@ task buildPack(type: Exec) {
     }
 }
 
-task cnpmClean(type: Delete) {
+task npmClean{
+    group="node"
     delete "node_modules"
+    finalizedBy clean
 }
-
-task cnpmInstall(type: Exec){
-    dependsOn cnpmClean
-    inputs.file("package-lock.json").withPathSensitivity(PathSensitivity.RELATIVE)
-    inputs.file("package.json").withPathSensitivity(PathSensitivity.RELATIVE)
-    outputs.dir("node_modules")
-    outputs.cacheIf { true }
-    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
-        commandLine "${System.properties['user.home']}/AppData/Roaming/npm/cnpm.cmd","install"
-    }
-}
-
-rootProject.tasks.getByName('build').dependsOn buildPack
-rootProject.tasks.getByName('clean').dependsOn cleanPack

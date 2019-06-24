@@ -8,6 +8,7 @@ import nchu2.webhw.utils.LogMsgHelper;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LoginService extends ServiceBase {
@@ -45,6 +46,7 @@ public class LoginService extends ServiceBase {
      * @return 被添加的登录信息
      * @throws LoginNameExistsException 登录名已被占用
      */
+    @Transactional
     public Login newLogin(Login login) throws LoginNameExistsException {
         LoginDao dao = new LoginDao(dsl.configuration());
         if (dao.existsById(login.getLoginname()))
@@ -56,7 +58,7 @@ public class LoginService extends ServiceBase {
     }
 
 
-    public class LoginNameExistsException extends RuntimeException {
+    public static class LoginNameExistsException extends RuntimeException {
         public LoginNameExistsException(String message) {
             super(message);
         }

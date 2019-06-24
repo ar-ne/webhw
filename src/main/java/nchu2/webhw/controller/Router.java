@@ -63,7 +63,7 @@ public class Router extends ComponentBase {
 
     @Controller
     @RequestMapping("admin")
-    public class AdminSpace {
+    public static class AdminSpace {
         @GetMapping("")
         public String index() {
             return "redirect:/admin/index";
@@ -77,7 +77,7 @@ public class Router extends ComponentBase {
     }
 
     @Controller
-    public class AuthSpace extends ComponentBase {
+    public static class AuthSpace extends ComponentBase {
         @GetMapping("login")
         public String index(Authentication authentication, Model model) {
             if (authentication != null && authentication.isAuthenticated())

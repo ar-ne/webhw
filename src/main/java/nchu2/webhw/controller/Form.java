@@ -7,6 +7,7 @@ import nchu2.webhw.properties.Status;
 import nchu2.webhw.properties.mapping.Sex;
 import nchu2.webhw.properties.mapping.UserType;
 import nchu2.webhw.service.CommonCRUD;
+import nchu2.webhw.service.FakeAccountBalanceService;
 import nchu2.webhw.service.LoginService;
 import nchu2.webhw.service.UserService;
 import nchu2.webhw.service.user.CustomerService;
@@ -41,28 +42,72 @@ public class Form extends ComponentBase {
     private final UserService userService;
     private final CommonCRUD commonCRUD;
     private final LoginService loginService;
+    private final FakeAccountBalanceService accountBalanceService;
 
-    public Form(CustomerService customerService, ManagerService managerService, StaffService staffService, UserService userService, CommonCRUD commonCRUD, LoginService loginService) {
+    public Form(CustomerService customerService, ManagerService managerService, StaffService staffService, UserService userService, CommonCRUD commonCRUD, LoginService loginService, FakeAccountBalanceService accountBalanceService) {
         this.customerService = customerService;
         this.managerService = managerService;
         this.staffService = staffService;
         this.userService = userService;
         this.commonCRUD = commonCRUD;
         this.loginService = loginService;
+        this.accountBalanceService = accountBalanceService;
     }
 
     @Controller
     @RequestMapping("priv")
     public class UserSpace extends ComponentBase {
+        @PostMapping("loan")
+        @ResponseBody
+        public String loan(Loan loan, HttpServletResponse resp, Authentication auth) {
+            loan.setLoginname(getLoginName(auth));
+            loan.setTime(getTimestamp());
+            loan = (Loan) commonCRUD.newRecord(loan, getLoginName(auth));
+            resp.setStatus(Status.showSuccessMsg);
+            return "申请提交成功，流水号: " + loan.getLId();
+        }
+
+        @PostMapping("advice")
+        @ResponseBody
+        public String advice(Opinion opinion, HttpServletResponse resp, Authentication auth) {
+            opinion.setLoginname(getLoginName(auth));
+            opinion.setTime(getTimestamp());
+            opinion = (Opinion) commonCRUD.newRecord(opinion, getLoginName(auth));
+            resp.setStatus(Status.showSuccessMsg);
+            return "提交成功，流水号: " + opinion.getOId();
+        }
+
+        @PostMapping("ticket")
+        @ResponseBody
+        public String ticket(Ticket ticket, HttpServletResponse resp, Authentication auth) {
+            ticket.setLoginname(getLoginName(auth));
+            ticket.setTime(getTimestamp());
+            ticket = (Ticket) commonCRUD.newRecord(ticket, getLoginName(auth));
+            resp.setStatus(Status.showSuccessMsg);
+            return "提交成功，流水号: " + ticket.getTId();
+        }
+
         @PostMapping("order")
         @ResponseBody
-        public String order(Production production, double money, HttpServletResponse response, Authentication authentication) {
+        public String order(Production production, double money, int dur, HttpServletResponse response, Authentication authentication) {
+            if (money < production.getPmin()) {
+                response.setStatus(Status.showFailMsg);
+                return "金额不满最低投入";
+            }
             Orders order = new Orders();
             order.setPId(production.getPId());
             order.setLoginname(getLoginName(authentication));
-            order.setBuyduration(1);
+            order.setBuyduration(dur);
             order.setBuytime(getTimestamp());
-            return null;
+            order.setBuymoney(money);
+            double bal = accountBalanceService.pay(money);
+            if (bal < 0) {
+                response.setStatus(Status.showFailMsg);
+                return "购买失败，账户余额不足: " + accountBalanceService.getBal();
+            }
+            order = (Orders) commonCRUD.newRecord(order, getLoginName(authentication));
+            response.setStatus(Status.showSuccessMsg);
+            return String.format("购买成功！订单编号: %s", order.getOrId());
         }
 
         @PostMapping("addProduction")
@@ -75,7 +120,7 @@ public class Form extends ComponentBase {
             }
             production.setLoginname(getLoginName(authentication));
             production = (Production) commonCRUD.newRecord(production, getLoginName(authentication));
-            return "添加成功, id: " + production.getPId();
+            return "添加成功, 产品编号: " + production.getPId();
         }
 
         @PostMapping("addIntroduction")
@@ -85,7 +130,7 @@ public class Form extends ComponentBase {
             introduction.setLoginname(getLoginName(authentication));
             introduction.setPubtime(getTimestamp());
             introduction = (Introduction) commonCRUD.newRecord(introduction, getLoginName(authentication));
-            return "添加成功, id: " + introduction.getIId();
+            return "添加成功, 介绍编号: " + introduction.getIId();
         }
 
         @PostMapping("profile")

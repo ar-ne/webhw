@@ -28,3 +28,11 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+
+# Project exclude paths
+/devops/out/
+/devops/out/production/classes/
+/devops/out/test/classes/
+# Project exclude paths
+/devops/build/
+/PhysicalDataModel_1.pdb

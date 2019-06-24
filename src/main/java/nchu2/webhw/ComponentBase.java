@@ -6,6 +6,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import javax.ws.rs.core.SecurityContext;
+
 @Component
 public abstract class ComponentBase {
     @Autowired
@@ -13,5 +15,9 @@ public abstract class ComponentBase {
 
     public static String getLoginName(Authentication authentication) {
         return ((User) authentication.getPrincipal()).getUsername();
+    }
+
+    public static String getLoginName(SecurityContext context) {
+        return context.getUserPrincipal().getName();
     }
 }

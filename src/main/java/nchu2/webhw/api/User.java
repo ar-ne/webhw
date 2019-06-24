@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -33,8 +35,8 @@ public class User extends APIBase {
     @GET
     @Path("orders")
     @Produces(APPLICATION_JSON)
-    public List orders() {
-        return new OrdersDao(dsl.configuration()).findAll();
+    public List orders(@Context SecurityContext context) {
+        return new OrdersDao(dsl.configuration()).fetchByLoginname(getLoginName(context));
     }
 
     @GET

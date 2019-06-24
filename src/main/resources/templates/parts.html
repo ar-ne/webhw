@@ -34,7 +34,7 @@
     <strong class="text-muted d-block mb-2"
             th:text="${title}"></strong>
     <textarea class="form-control" th:name="${name}" th:text="${value}"
-              th:disabled="${#strings.isEmpty(disabled)?  disableed : ''}"
+              th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
               style="min-height: 200px" th:required="${#strings.isEmpty(value) ?  '' : required}"></textarea>
 </div>
 
@@ -47,7 +47,7 @@
             <span class="input-group-text" th:text="${text}">￥</span>
         </div>
         <input type="text" class="form-control" th:name="${name}" th:value="${value}"
-               th:disabled="${#strings.isEmpty(disabled)?  disableed : ''}"
+               th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
                th:required="${#strings.isEmpty(value) ?  '' : required}">
     </div>
 </div>
@@ -58,7 +58,7 @@
     <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
     <div class="input-group mb-3">
         <input type="text" class="form-control" th:name="${name}" th:value="${value}"
-               th:disabled="${#strings.isEmpty(disabled)?  disableed : ''}"
+               th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
                th:required="${#strings.isEmpty(value) ?  '' : required}">
         <div class="input-group-append">
             <span class="input-group-text" th:text="${text}">￥</span>
@@ -71,7 +71,7 @@
 <div class="form-group col-md-5" th:fragment="TextInput(text,name,value,disabled)">
     <label th:text="${text}" th:for="${text}">First Name</label>
     <input type="text" class="form-control" th:id="${text}" th:name="${name}" th:value="${value}"
-           th:disabled="${#strings.isEmpty(disabled)?  disableed : ''}"
+           th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
            th:required="${#strings.isEmpty(value) ?  '' : required}">
 </div>
 
@@ -92,7 +92,7 @@
 <div class="form-group col-md-5" th:fragment="passwordInput(text,name,value,disabled)">
     <label th:text="${text}" th:for="${text}">First Name</label>
     <input type="password" class="form-control" th:id="${text}" th:name="${name}" th:value="${value}"
-           th:disabled="${#strings.isEmpty(disabled)?  disableed : ''}"
+           th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
            th:required="${#strings.isEmpty(value) ?  '' : required}">
 </div>
 </html>

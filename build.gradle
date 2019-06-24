@@ -1,11 +1,26 @@
+buildscript {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/spring/' }
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
+    }
+}
+
 plugins {
     id 'org.asciidoctor.convert' version '1.5.3'
-    id 'org.springframework.boot' version '2.1.4.RELEASE'
+    id 'org.springframework.boot' version '2.1.6.RELEASE'
     id 'java'
     id 'nu.studer.jooq' version '3.0.3'
+    id 'com.github.johnrengelman.shadow' version '5.0.0'
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+
 
 group = 'nchu.162012322'
 version = '0.0.1-SNAPSHOT'
@@ -28,19 +43,20 @@ ext {
 }
 
 dependencies {
-    implementation project(':wpack')
-    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'de.codecentric:spring-boot-admin-starter-client'
+//    implementation 'org.springframework.boot:spring-boot-loader'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-jersey'
+    implementation 'org.springframework.session:spring-session-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-jersey'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1'
-    implementation 'org.springframework.session:spring-session-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core'
     compile "org.springframework.boot:spring-boot-starter-security"
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
@@ -50,6 +66,12 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     jooqRuntime 'mysql:mysql-connector-java'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "de.codecentric:spring-boot-admin-dependencies:2.1.5"
+    }
 }
 
 test {
@@ -137,7 +159,23 @@ jooq {
     }
 }
 
-task cleanOut(type: Delete) {
-    delete("out")
+clean {
+    doLast {
+        delete("out")
+    }
 }
-rootProject.tasks.getByName('clean').dependsOn cleanOut
+
+shadowJar {
+    minimize()
+}
+
+//bootJar {
+//    launchScript()
+//}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.springframework.boot.loader.JarLauncher'
+        attributes 'Start-Class': 'nchu2.webhw.WebhwApplication'
+    }
+}

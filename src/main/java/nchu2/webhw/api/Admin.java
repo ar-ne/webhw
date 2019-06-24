@@ -14,8 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@RestController
 @Path("admin")
+@RestController
 public class Admin extends APIBase {
     @GET
     @Path("log")

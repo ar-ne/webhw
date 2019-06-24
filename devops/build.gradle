@@ -1,0 +1,34 @@
+plugins {
+    id "io.spring.dependency-management"
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'nchu.162012322'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springBootAdminVersion', "2.1.5")
+}
+
+dependencies {
+    implementation 'de.codecentric:spring-boot-admin-starter-server'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
+    }
+}
+
+test {
+    enabled = false
+}

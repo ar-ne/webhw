@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <title th:text="#{msg.customer.sidebar.advice.title}">建议</title>
-<body th:replace="/framework/main">
+<body th:replace="~{/framework/main}">
 <div th:fragment="mainContent">
     <div class="page-header row no-gutters py-4">
         <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
@@ -14,7 +14,7 @@
                 <div class="card-header ">
                 </div>
                 <div class="card-body">
-                    <form id="form" th:action="@{/advice}" method="post" onsubmit="return formSubmit()">
+                    <form id="form" method="post" onsubmit="return formSubmit()" th:action="@{advice}">
                         <div class="form-group col-md-12">
                             <strong class="text-muted d-block mb-2"
                                     th:text="#{msg.customer.sidebar.ticket.type}">投诉类型</strong>
@@ -26,7 +26,7 @@
                         </div>
                         <div th:replace="/parts::titledTextarea(#{msg.customer.sidebar.advice.content},'content','','')"></div>
                         <div class="form-group col-md-12">
-                            <button type="submit" id="submit" class="mb-2 btn btn-outline-primary mr-2"
+                            <button class="mb-2 btn btn-outline-primary mr-2" id="button" type="submit"
                                     th:text="#{msg.customer.sidebar.advice.button}">提交意见
                             </button>
                         </div>

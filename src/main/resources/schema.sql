@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/6/17 20:44:20                           */
+/* Created on:     2019/6/19 15:35:23                           */
 /*==============================================================*/
 
 
@@ -233,7 +233,7 @@ create table Orders
    or_id                bigint not null auto_increment  comment 'or_id',
    loginname            varchar(200)  comment 'loginname',
    buyTime              datetime  comment 'buyTime',
-   buyMoney             datetime  comment 'buyMoney',
+   buyMoney             double  comment 'buyMoney',
    buyDuration          int  comment 'buyDuration',
    primary key (or_id)
 );

@@ -15,6 +15,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService extends ServiceBase {
@@ -46,6 +47,7 @@ public class UserService extends ServiceBase {
         return user;
     }
 
+    @Transactional
     @CachePut(value = Vars.CacheValues.user, key = "getArgs()[0]")
     public User putUser(String loginName, User dbObj) {
         switch (loginService.getLoginType(loginName)) {
@@ -72,6 +74,7 @@ public class UserService extends ServiceBase {
          * @return 新注册用户的信息
          * @throws LoginService.LoginNameExistsException 登录名已被占用
          */
+        @Transactional
         T register(String loginName, String plainTextPass, User user) throws LoginService.LoginNameExistsException;
     }
 
