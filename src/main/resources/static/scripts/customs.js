@@ -1,3 +1,11 @@
+/**
+ * form 表单提交
+ * @param button 提交按钮（默认为空）
+ * @param form 提交表单用id控制
+ * @param callbefore
+ * @param callafter
+ * @returns {boolean}
+ */
 function formSubmit(button = null, form = 'form', callbefore = null, callafter = null) {
     form = $('#' + form);
     if (button !== null) $('#' + button).attr("disabled", "");
@@ -160,10 +168,14 @@ function initPopper() {
 }
 
 function sleep(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
+    return new Promise((resolve) = > setTimeout(resolve, time)
+)
+    ;
 }
 
-const ScrollTop = (number = 0, time) => {
+const ScrollTop = (number = 0, time) =
+>
+{
     if (!time) {
         document.body.scrollTop = document.documentElement.scrollTop = number;
         return number;
@@ -172,12 +184,20 @@ const ScrollTop = (number = 0, time) => {
     let spacingInex = time / spacingTime; // 计算循环的次数
     let nowTop = document.body.scrollTop + document.documentElement.scrollTop; // 获取当前滚动条位置
     let everTop = (number - nowTop) / spacingInex; // 计算每次滑动的距离
-    let scrollTimer = setInterval(() => {
-        if (spacingInex > 0) {
-            spacingInex--;
-            ScrollTop(nowTop += everTop);
-        } else {
-            clearInterval(scrollTimer); // 清除计时器
-        }
-    }, spacingTime);
-};
+    let scrollTimer = setInterval(() = > {
+        if(spacingInex > 0
+)
+    {
+        spacingInex--;
+        ScrollTop(nowTop += everTop);
+    }
+else
+    {
+        clearInterval(scrollTimer); // 清除计时器
+    }
+},
+    spacingTime
+)
+    ;
+}
+;

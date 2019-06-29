@@ -2,6 +2,9 @@ package nchu2.webhw.service;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * 生成一个假的账户余额
+ */
 @Service
 public class FakeAccountBalanceService {
     private double bal = genBal();
@@ -12,7 +15,7 @@ public class FakeAccountBalanceService {
 
     public double pay(double money) {
         if (money > bal) return -1;
-        else return bal - money;
+        else return bal -= money;
     }
 
     public double getBal() {

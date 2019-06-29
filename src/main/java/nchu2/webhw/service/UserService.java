@@ -17,11 +17,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 所有用户的Service
+ */
 @Service
 public class UserService extends ServiceBase {
     @Autowired
     protected LoginService loginService;
 
+    /**
+     * 从数据库中获取一个用户
+     *
+     * @param loginname 登录名
+     * @return 用户
+     */
     @Cacheable(value = Vars.CacheValues.user, key = "getArgs()[0]")
     public User getUser(String loginname) {
         switch (loginService.getLoginType(loginname)) {
@@ -35,11 +44,25 @@ public class UserService extends ServiceBase {
         throw new RuntimeException("Error when trying to get user's detail");
     }
 
+    /**
+     * 根据身份信息获取用户
+     * @param authentication 身份信息
+     * @return 用户
+     */
     public User getUser(Authentication authentication) {
         String login = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
         return getUser(login);
     }
 
+    /**
+     * 创建一个新的用户
+     * @param loginName 登录名
+     * @param plainTextPass 明文密码
+     * @param userType 用户类型
+     * @param user 用户
+     * @return 返回用户
+     * @throws LoginService.LoginNameExistsException
+     */
     protected User createNewUser(String loginName, String plainTextPass, UserType userType, User user) throws LoginService.LoginNameExistsException {
         Login login = loginService.newLoginWithPassword(loginName, plainTextPass, userType);
         user.setLoginname(login.getLoginname());
@@ -47,6 +70,12 @@ public class UserService extends ServiceBase {
         return user;
     }
 
+    /**
+     * 向数据库里插入信息
+     * @param loginName 登录名
+     * @param dbObj 用户
+     * @return 插入数据库的用户
+     */
     @Transactional
     @CachePut(value = Vars.CacheValues.user, key = "getArgs()[0]")
     public User putUser(String loginName, User dbObj) {

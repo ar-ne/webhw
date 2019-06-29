@@ -58,6 +58,8 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core'
     compile "org.springframework.boot:spring-boot-starter-security"
+    compile "com.alibaba:druid:1.1.8"
+    compile "com.alibaba:druid-spring-boot-starter:1.1.8"
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -65,6 +67,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
     jooqRuntime 'mysql:mysql-connector-java'
 }
 

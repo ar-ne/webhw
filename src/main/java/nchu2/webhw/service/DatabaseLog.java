@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 
+/**
+ * 数据库日志
+ */
 @Service
 public class DatabaseLog {
     private final LogDao dao;

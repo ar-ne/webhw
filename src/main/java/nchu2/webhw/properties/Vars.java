@@ -12,13 +12,19 @@ import static java.util.Collections.unmodifiableMap;
 import static java.util.Collections.unmodifiableSet;
 import static nchu2.webhw.properties.mapping.UserType.*;
 
+/**
+ * 常量
+ */
 public class Vars {
-    public static final Set<String> PUBLIC_PAGES;
-    public static final Map<Class, Constructor> POJO_DAO_MAPPER;
-    public static final Map<Class, Table<?>> POJO_DAO_TABLE;
-    public static final Map<UserType, Class<? extends User>> TYPE_POJO_MAP;
+    public static final Set<String> PUBLIC_PAGES;  //公共页面集
+    public static final Map<Class, Constructor> POJO_DAO_MAPPER; //用于将pojo转为dao的构造方法
+    public static final Map<Class, Table<?>> POJO_DAO_TABLE; //pojo转table
+    public static final Map<UserType, Class<? extends User>> TYPE_POJO_MAP; //用户类型和对应pojo的转换
 
 
+    /**
+     * 填充数据
+     */
     static {
         String[] strings = new String[]{"notification", "profile", "production"};
         PUBLIC_PAGES = unmodifiableSet(new HashSet<>(Arrays.asList(strings)));

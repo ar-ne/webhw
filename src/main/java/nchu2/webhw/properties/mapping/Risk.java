@@ -1,5 +1,8 @@
 package nchu2.webhw.properties.mapping;
 
+/**
+ * 风险的枚举类型和转换器
+ */
 public enum Risk {
     None, Low, High;
 

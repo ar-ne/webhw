@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * 控制台
+ */
 public class ConsoleThread extends Thread {
     private static Map<String, Runnable> commands;
 

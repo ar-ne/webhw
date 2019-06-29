@@ -15,7 +15,7 @@ public class Flags {
     public static final char TRUE = 'T';
     public static final char FALSE = 'F';
     @Autowired
-    private Environment env;
+    private Environment env; //用来获取properties里的内容
 
     /**
      * 将T/F转为bool

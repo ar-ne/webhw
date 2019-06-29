@@ -6,6 +6,9 @@ import org.jooq.Table;
 
 import java.sql.Timestamp;
 
+/**
+ * 用于生成日志信息
+ */
 public class LogMsgHelper {
     public static Timestamp getTimestamp() {
         return new Timestamp(System.currentTimeMillis());

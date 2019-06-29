@@ -1,5 +1,8 @@
 package nchu2.webhw.properties.mapping;
 
+/**
+ * 性别的枚举类型和转换器
+ */
 public enum Sex {
     Female, Male;
 

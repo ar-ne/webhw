@@ -10,9 +10,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
+/**
+ * 登录认证 SpringSecurity
+ */
 @Service
 public class AuthService extends ServiceBase implements UserDetailsService {
 
+    /**
+     * 从数据库加载一个用户
+     *
+     * @param loginName 登录名
+     * @return 用户信息
+     * @throws UsernameNotFoundException 如果登录名不存在
+     */
     @Override
     public UserDetails loadUserByUsername(String loginName) throws UsernameNotFoundException {
         Login login = new LoginDao(dsl.configuration()).fetchOneByLoginname(loginName);

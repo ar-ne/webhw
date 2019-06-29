@@ -17,6 +17,10 @@ import java.util.List;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 
+/**
+ * 三种用户的接口
+ * 根据表名获取表中信息
+ */
 @Path("user")
 @RestController
 public class User extends APIBase {
@@ -53,6 +57,13 @@ public class User extends APIBase {
         return new OpinionDao(dsl.configuration()).fetchByOAccept();
     }
 
+    /**
+     * 提交建议审核结果
+     *
+     * @param action   操作类型 x忽略，v提交上级
+     * @param opinions 所有被选定的意见
+     * @return
+     */
     @POST
     @Path("advice/{action}")//action=x/v
     @Produces(TEXT_PLAIN)

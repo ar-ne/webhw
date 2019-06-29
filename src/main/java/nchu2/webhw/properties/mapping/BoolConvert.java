@@ -2,6 +2,9 @@ package nchu2.webhw.properties.mapping;
 
 import org.jooq.Converter;
 
+/**
+ * 数据库中的Int转Boolean
+ */
 public class BoolConvert implements Converter<Integer, Boolean> {
     @Override
     public Boolean from(Integer databaseObject) {

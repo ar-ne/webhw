@@ -8,6 +8,9 @@ import nchu2.webhw.service.LoginService;
 import nchu2.webhw.service.UserService;
 import org.springframework.stereotype.Service;
 
+/**
+ * 顾客的Service
+ */
 @Service
 public class CustomerService extends UserService implements UserService.Register<Customer> {
 

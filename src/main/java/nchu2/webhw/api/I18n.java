@@ -14,11 +14,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * 翻译字符串
+ */
 @Path("i18n")
 @RestController
 @PropertySource("classpath:flags.properties")
 public class I18n {
-    private final MessageSource messageSource;
+    private final MessageSource messageSource; //在代码里获取Messages
     private final Flags flags;
 
     @Autowired
@@ -27,10 +30,17 @@ public class I18n {
         this.flags = flags;
     }
 
+    /**
+     * 表格列名翻译和可见性
+     *
+     * @param tableName 表格名
+     * @param cols      列
+     * @return 填充的信息列
+     */
     @POST
     @Path("tableCol/{tableName}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON) //返回类型
+    @Consumes(MediaType.APPLICATION_JSON) //输入类型
     public BootstrapTableCol[] bootstrapTableCol(@PathParam("tableName") String tableName, BootstrapTableCol[] cols) {
         List<BootstrapTableCol> list = new LinkedList<>();
         for (BootstrapTableCol col : cols) {
@@ -45,6 +55,9 @@ public class I18n {
         return list.toArray(new BootstrapTableCol[0]);
     }
 
+    /**
+     * 列属性
+     */
     @Data
     static class BootstrapTableCol {
         String field;
