@@ -12,4 +12,6 @@ import org.springframework.stereotype.Service;
 abstract class ServiceBase extends ComponentBase {
     @Autowired
     protected DSLContext dsl;
+    @Autowired
+    protected NotificationService notification;
 }

@@ -5,7 +5,7 @@
 <div th:fragment="mainContent">
     <div class="page-header row no-gutters py-4">
         <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-            <h3 th:text="#{msg.customer.map.header.title}" class="page-title">地址</h3>
+            <h3 class="page-title" th:text="#{msg.customer.map.header.title}">地址</h3>
         </div>
     </div>
     <div class="row ">
@@ -13,22 +13,23 @@
             <div class="card card-small ">
                 <div class="card-header "></div>
                 <div class="card-body">
-                    <table class="table mb-0">
-                        <thead class="bg-light">
-                        <tr>
-                            <th scope="col" class="border-1">所在省</th>
-                            <th scope="col" class="border-1">所在市</th>
-                            <th scope="col" class="border-1">具体地址</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>江西省</td>
-                            <td>南昌市</td>
-                            <td>丰和南大道696号</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div th:replace="~{/parts::tableNoCheckbox('/api/user/map','Map')}"></div>
+                    <!--                    <table class="table mb-0">-->
+                    <!--                        <thead class="bg-light">-->
+                    <!--                        <tr>-->
+                    <!--                            <th scope="col" class="border-1">所在省</th>-->
+                    <!--                            <th scope="col" class="border-1">所在市</th>-->
+                    <!--                            <th scope="col" class="border-1">具体地址</th>-->
+                    <!--                        </tr>-->
+                    <!--                        </thead>-->
+                    <!--                        <tbody>-->
+                    <!--                        <tr>-->
+                    <!--                            <td>江西省</td>-->
+                    <!--                            <td>南昌市</td>-->
+                    <!--                            <td>丰和南大道696号</td>-->
+                    <!--                        </tr>-->
+                    <!--                        </tbody>-->
+                    <!--                    </table>-->
                 </div>
             </div>
         </div>

@@ -14,15 +14,16 @@ import java.sql.SQLException;
 @SpringBootTest
 public class WebhwApplicationTests {
 
-	@Autowired
-	DataSource dataSource;
-	@Test
-	public void contextLoads() throws SQLException {
-		System.out.println(dataSource.getClass());
+    @Autowired
+    DataSource dataSource;
 
-		Connection connection = dataSource.getConnection();
-		System.out.println(connection);
-		connection.close();
-	}
+    @Test
+    public void contextLoads() throws SQLException {
+        System.out.println(dataSource.getClass());
+
+        Connection connection = dataSource.getConnection();
+        System.out.println(connection);
+        connection.close();
+    }
 
 }

@@ -2,9 +2,12 @@ package nchu2.webhw.utils;
 
 import nchu2.webhw.model.tables.pojos.Log;
 import nchu2.webhw.model.tables.pojos.Login;
+import nchu2.webhw.properties.CRUDOperation;
 import org.jooq.Table;
 
 import java.sql.Timestamp;
+
+import static java.lang.Math.min;
 
 /**
  * 用于生成日志信息
@@ -33,17 +36,13 @@ public class LogMsgHelper {
     }
 
     public static class CRUD {
-        public static Log newOperation(Table table, String loginName, Operation op, Object o) {
+        public static Log newOperation(Table table, String loginName, CRUDOperation op, Object o) {
             Log log = new Log();
             log.setOperation(op.name() + " on table " + table.getName());
             log.setLoginname(loginName);
-            log.setResult(o.toString().substring(o.toString().length() >= 200 ? 200 : o.toString().length()));
+            log.setResult(o.toString().substring(0, min(o.toString().length(), 200)));
             log.setTime(getTimestamp());
             return log;
-        }
-
-        public enum Operation {
-            insert, edit, delete
         }
     }
 }

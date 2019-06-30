@@ -5,20 +5,20 @@
 <div th:fragment="mainContent">
     <div class="page-header row no-gutters py-4">
         <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-            <h3 th:text="#{msg.profile.title}" class="page-title">添加</h3>
+            <h3 class="page-title" th:text="#{msg.profile.title}">添加</h3>
         </div>
     </div>
     <div class="row ">
         <div class="mb-3 col-12 ">
             <div class="card card-small ">
                 <div class="card-header ">
-                    <img class="rounded-circle m-auto" th:src="@{/images/avatars/0.jpg}" alt="User Avatar"
+                    <img alt="User Avatar" class="rounded-circle m-auto" th:src="@{/images/avatars/0.jpg}"
                          width="110">
                 </div>
                 <div class="card-body">
                     <!--/*@thymesVar id="user" type="nchu2.webhw.model.User"*/-->
                     <!--/*@thymesVar id="userType" type="java.lang.String"*/-->
-                    <form id="form" th:action="@{profile}" method="post" onsubmit="return formSubmit()">
+                    <form id="form" method="post" onsubmit="return formSubmit()" th:action="@{profile}">
                         <div class="form-row p-3">
                             <div th:replace="/parts::TextInput(#{msg.profile.username},'name',${user.getName()},'')"></div>
                             <div th:replace="/parts::TextInput(#{msg.profile.phoneNum},'phonenum',${user.getPhonenum()},'')"></div>
@@ -29,15 +29,15 @@
                                 <label for="sex">性别</label>
                                 <div class="form-row pl-3 pt-1" id="sex">
                                     <div class="custom-control custom-radio mb-1 pr-5">
-                                        <input type="radio" id="formsRadioDefault" name="sex"
-                                               class="custom-control-input" value="Male"
-                                               th:checked="${user.getSex().name()=='Male'}">
+                                        <input class="custom-control-input" id="formsRadioDefault" name="sex"
+                                               th:checked="${user.getSex().name()=='Male'}" type="radio"
+                                               value="Male">
                                         <label class="custom-control-label" for="formsRadioDefault">男</label>
                                     </div>
                                     <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" id="formsRadioChecked" name="sex"
-                                               class="custom-control-input" value="Female"
-                                               th:checked="${user.getSex().name()=='Female'}">
+                                        <input class="custom-control-input" id="formsRadioChecked" name="sex"
+                                               th:checked="${user.getSex().name()=='Female'}" type="radio"
+                                               value="Female">
                                         <label class="custom-control-label" for="formsRadioChecked">女</label>
                                     </div>
                                 </div>
@@ -54,8 +54,9 @@
                         <div th:replace="/parts::titledTextarea(#{msg.profile.adress},'adress',${user.getAdress()},'')"></div>
                         <br>
                         <div class="form-group col-md-12">
-                            <button type="submit" id="button" class="mb-2 btn btn-outline-primary mr-2"
-                                    th:text="#{msg.profile.button}">提交
+                            <button class="mb-2 btn btn-outline-primary mr-2" id="button"
+                                    th:text="#{msg.profile.button}"
+                                    type="submit">提交
                             </button>
                         </div>
                     </form>

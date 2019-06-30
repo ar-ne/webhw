@@ -20,7 +20,7 @@
                 <div class="mb-3 col-12 ">
                     <div class="card card-small ">
                         <div class="card-body">
-                            <form>
+                            <form id="form" method="post" onsubmit="return formSubmit()" th:action="signup">
                                 <div class="col-12"
                                      th:include="/parts::TextInput(#{msg.profile.username},'loginname','','')"></div>
                                 <br>
@@ -40,13 +40,13 @@
                                             <div class="custom-control custom-radio mb-1 pr-5">
                                                 <input type="radio" id="formsRadioDefault" name="sex"
                                                        class="custom-control-input"
-                                                       value="1">
+                                                       value="Male">
                                                 <label class="custom-control-label" for="formsRadioDefault">男</label>
                                             </div>
                                             <div class="custom-control custom-radio mb-1">
                                                 <input type="radio" id="formsRadioChecked" name="sex"
                                                        class="custom-control-input"
-                                                       value="0">
+                                                       value="Female">
                                                 <label class="custom-control-label" for="formsRadioChecked">女</label>
                                             </div>
                                         </div>
@@ -57,7 +57,8 @@
                                 <br>
 
                                 <div class="form-group col-12">
-                                    <button type="button" class="btn-block mb-2 btn btn-outline-primary mr-2"
+                                    <button class="btn-block mb-2 btn btn-outline-primary mr-2" id="button"
+                                            type="submit"
                                             th:text="#{msg.signup.button}">提交
                                     </button>
                                 </div>

@@ -53,7 +53,7 @@ public class LoginService extends ServiceBase {
             throw new LoginNameExistsException("login name exists:" + login.getLoginname());
         login.setPass(passwordEncoder.encode(login.getPass()));
         dao.insert(login);
-        logger.log(LogMsgHelper.Auth.newLogin(login));
+        dbLogger.log(LogMsgHelper.Auth.newLogin(login));
         return login;
     }
 

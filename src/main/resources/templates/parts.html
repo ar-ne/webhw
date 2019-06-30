@@ -6,7 +6,7 @@
 </div>
 <ul>
     <li class="nav-item" th:fragment="nav-item(icon,text,tref,active)">
-        <a class="spf-link nav-link " th:classappend="${tref==page?'active':''}" href="#" th:href="${tref}">
+        <a class="spf-link nav-link " href="#" th:classappend="${tref==page?'active':''}" th:href="${tref}">
             <i class="material-icons" th:text="${icon}">icon</i>
             <span th:text="${text}">Text</span>
         </a>
@@ -33,9 +33,9 @@
 <div class="form-group col-md-12" th:fragment="titledTextarea(title,name,value,disabled)">
     <strong class="text-muted d-block mb-2"
             th:text="${title}"></strong>
-    <textarea class="form-control" th:name="${name}" th:text="${value}"
+    <textarea class="form-control" style="min-height: 200px" th:name="${name}"
               th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
-              style="min-height: 200px" th:required="${#strings.isEmpty(value) ?  '' : required}"></textarea>
+              th:required="${#strings.isEmpty(value) ?  '' : required}" th:text="${value}"></textarea>
 </div>
 
 <!--带标题的输入框（文字前）-->
@@ -46,9 +46,10 @@
         <div class="input-group-prepend">
             <span class="input-group-text" th:text="${text}">￥</span>
         </div>
-        <input type="text" class="form-control" th:name="${name}" th:value="${value}"
-               th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
-               th:required="${#strings.isEmpty(value) ?  '' : required}">
+        <input class="form-control" th:name="${name}" th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
+               th:required="${#strings.isEmpty(value) ?  '' : required}"
+               th:value="${value}"
+               type="text">
     </div>
 </div>
 
@@ -57,9 +58,10 @@
 <div class="form-group col-md-5" th:fragment="titledTextInputAf(title,text,name,value,disabled)">
     <strong class="text-muted d-block mb-2" th:text="${title}"></strong>
     <div class="input-group mb-3">
-        <input type="text" class="form-control" th:name="${name}" th:value="${value}"
-               th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
-               th:required="${#strings.isEmpty(value) ?  '' : required}">
+        <input class="form-control" th:name="${name}" th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
+               th:required="${#strings.isEmpty(value) ?  '' : required}"
+               th:value="${value}"
+               type="text">
         <div class="input-group-append">
             <span class="input-group-text" th:text="${text}">￥</span>
         </div>
@@ -69,10 +71,12 @@
 <!--带标题的输入框（无文字）-->
 <!--title 标题， name 名字，value 默认值，disabled 可否被修改-->
 <div class="form-group col-md-5" th:fragment="TextInput(text,name,value,disabled)">
-    <label th:text="${text}" th:for="${text}">First Name</label>
-    <input type="text" class="form-control" th:id="${text}" th:name="${name}" th:value="${value}"
+    <label th:for="${text}" th:text="${text}">First Name</label>
+    <input class="form-control" th:id="${text}" th:name="${name}"
            th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
-           th:required="${#strings.isEmpty(value) ?  '' : required}">
+           th:required="${#strings.isEmpty(value) ?  '' : required}"
+           th:value="${value}"
+           type="text">
 </div>
 
 <!--带标题的输入框（图片链接）-->
@@ -84,15 +88,17 @@
                 <i class="material-icons" th:text="${icon}">icon</i>
             </span>
         </div>
-        <input type="text" class="form-control" th:name="${name}">
+        <input class="form-control" th:name="${name}" type="text">
     </div>
 </div>
 <!--带标题的输入框密码（无文字）-->
 <!--title 标题， name 名字，value 默认值，disabled 可否被修改-->
 <div class="form-group col-md-5" th:fragment="passwordInput(text,name,value,disabled)">
-    <label th:text="${text}" th:for="${text}">First Name</label>
-    <input type="password" class="form-control" th:id="${text}" th:name="${name}" th:value="${value}"
+    <label th:for="${text}" th:text="${text}">First Name</label>
+    <input class="form-control" th:id="${text}" th:name="${name}"
            th:readonly="${#strings.isEmpty(disabled)?  disableed : ''}"
-           th:required="${#strings.isEmpty(value) ?  '' : required}">
+           th:required="${#strings.isEmpty(value) ?  '' : required}"
+           th:value="${value}"
+           type="password">
 </div>
 </html>

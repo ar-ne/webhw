@@ -44,7 +44,7 @@ ext {
 
 dependencies {
     implementation 'de.codecentric:spring-boot-admin-starter-client'
-//    implementation 'org.springframework.boot:spring-boot-loader'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
@@ -55,11 +55,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'uk.com.robust-it:cloning:1.9.12'
+    compile 'com.alibaba:druid-spring-boot-starter:1.1.17'
     compile group: 'org.apache.logging.log4j', name: 'log4j-api'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core'
     compile "org.springframework.boot:spring-boot-starter-security"
-    compile "com.alibaba:druid:1.1.8"
-    compile "com.alibaba:druid-spring-boot-starter:1.1.8"
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -67,7 +67,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-
     jooqRuntime 'mysql:mysql-connector-java'
 }
 
@@ -139,9 +138,15 @@ jooq {
                         types = '.*'
                     }
                     forcedType {
+                        userType = 'nchu2.webhw.properties.mapping.MessageType'
+                        converter = 'nchu2.webhw.properties.mapping.MessageType.Converter'
+                        expression = 'webhw.Notification.type'
+                        types = '.*'
+                    }
+                    forcedType {
                         userType = 'java.lang.Boolean'
                         converter = 'nchu2.webhw.properties.mapping.BoolConvert'
-                        expression = 'webhw.Opinion.o_accept'
+                        expression = 'webhw.Opinion.o_accept|webhw.Receive.n_read'
                         types = '.*'
                     }
                 }
@@ -162,19 +167,17 @@ jooq {
     }
 }
 
+task cleanOut(type: Delete) {
+    delete("out")
+}
+
 clean {
-    doLast {
-        delete("out")
-    }
+    finalizedBy cleanOut
 }
 
 shadowJar {
     minimize()
 }
-
-//bootJar {
-//    launchScript()
-//}
 
 jar {
     manifest {

@@ -5,7 +5,7 @@
 <div th:fragment="mainContent">
     <div class="page-header row no-gutters py-4">
         <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-            <h3 th:text="#{msg.Staff.acceptTicket.title}" class="page-title">受理</h3>
+            <h3 class="page-title" th:text="#{msg.Staff.acceptTicket.title}">受理</h3>
         </div>
     </div>
     <div class="row ">
@@ -25,8 +25,8 @@
                         <div th:replace="/parts::titledTextarea(#{msg.Staff.acceptTicket.content},'content','','')"></div>
                         <br>
                         <div class="form-group col-md-12">
-                            <button type="button" class="mb-2 btn btn-outline-primary mr-2"
-                                    th:text="#{msgStaff.acceptTicket.button}">
+                            <button class="mb-2 btn btn-outline-primary mr-2" th:text="#{msgStaff.acceptTicket.button}"
+                                    type="button">
                             </button>
                         </div>
                     </form>

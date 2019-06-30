@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<title th:text="#{msg.staff.ticket.title}">投诉受理</title>
+<body th:replace="~{/framework/main}">
+<div th:fragment="mainContent">
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <h3 th:text="#{msg.staff.ticket.header.title}" class="page-title">受理</h3>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="mb-3 col-12 ">
+            <div class="card card-small ">
+                <div class="card-header ">
+                    <button class="btn btn-outline-info" onclick="goBack()">←返回</button>
+                </div>
+                <div class="card-body">
+                    <form id="form" th:action="@{answerTicket}" method="post" onsubmit="return formSubmit()">
+                        <!--/*@thymesVar id="data" type="nchu2.webhw.model.tables.pojos.Ticket"*/-->
+                        <input type="hidden" th:value="${data.getTId()}" name="tId">
+                        <div class="form-row p-3">
+                            <div th:replace="/parts::TextInput(#{msg.Staff.acceptTicket.username},'loginname',${data.getLoginname()},'disabled')"></div>
+                            <div th:replace="/parts::TextInput(#{msg.Staff.acceptTicket.type},'tpye',${data.getTpye()},'disabled')"></div>
+                        </div>
+                        <br>
+                        <div th:replace="/parts::TextInput(#{msg.Staff.acceptTicket.time},'time',${data.getTime()},'disabled')"></div>
+                        <br>
+                        <div th:replace="/parts::titledTextarea(#{msg.Staff.acceptTicket.content},'content',${data.getContent()},'disabled')"></div>
+                        <br>
+                        <div th:replace="/parts::titledTextarea(#{msg.Staff.acceptTicket.content},'reply',${userType=='Staff'?'':data.getReply()},${userType=='Staff'?'':'disabled'})"></div>
+                        <br>
+                        <div th:if="${userType=='Staff'}" class="form-group col-md-12">
+                            <button type="submit" id="button" class="mb-2 btn btn-outline-primary mr-2"
+                                    th:text="#{msgStaff.acceptTicket.button}">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

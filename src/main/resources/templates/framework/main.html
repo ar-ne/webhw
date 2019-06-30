@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <script src="../../static/webpack/fonts.bundle.js"></script>
 </head>
 <body class="h-100">
 <div class="container-fluid">
@@ -29,17 +30,6 @@
                     </a>
                 </nav>
             </div>
-            <form class="main-sidebar__search w-100 border-right d-sm-flex d-md-none d-lg-none"
-                  onsubmit="return ()=> {return false}">
-                <div class="input-group input-group-seamless ml-3">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <i class="material-icons">search</i>
-                        </div>
-                    </div>
-                    <input class="navbar-search form-control" type="text" placeholder="Search for something..."
-                           th:placeholder="#{msg.main.search.placeholder}" aria-label="Search"></div>
-            </form>
             <div class="nav-wrapper">
                 <!--/*@thymesVar id="userType" type="java.lang.String"*/-->
                 <ul class="nav flex-column" th:include="/framework/sidebar::${userType}">
@@ -50,72 +40,41 @@
             <div class="main-navbar sticky-top bg-white">
                 <!-- Main Navbar -->
                 <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
-                    <form class="main-navbar__search w-100 d-none d-md-flex d-lg-flex"
-                          onsubmit="return ()=> {return false}">
-                        <div class="input-group input-group-seamless ml-3">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="material-icons">search</i>
-                                </div>
-                            </div>
-                            <input class="navbar-search form-control" type="text" placeholder="Search for something..."
-                                   th:placeholder="#{msg.main.search.placeholder}" aria-label="Search"></div>
-                    </form>
+                    <div class="main-navbar__search w-75 d-none d-md-flex d-lg-flex">
+                    </div>
                     <ul class="navbar-nav border-left flex-row ">
                         <li class="nav-item border-right dropdown notifications">
                             <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="nav-link-icon__wrapper">
                                     <i class="material-icons">&#xE7F4;</i>
-                                    <span class="badge badge-pill badge-danger" id="messageAmount"></span>
+                                    <span class="badge badge-pill badge-danger" data-turbolinks-permanent=""
+                                          id="aCount"></span>
                                 </div>
                             </a>
-                            <div id="messageList" class="dropdown-menu dropdown-menu-small"
+                            <div class="dropdown-menu dropdown-menu-small"
                                  aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#">
-                                    <div class="notification__icon-wrapper">
-                                        <div class="notification__icon">
-                                            <i class="material-icons">&#xE6E1;</i>
-                                        </div>
-                                    </div>
-                                    <div class="notification__content">
-                                        <span class="notification__category">Analytics</span>
-                                        <p>Your website’s active users count increased by in the last week. Great
-                                            job!</p>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <div class="notification__icon-wrapper">
-                                        <div class="notification__icon">
-                                            <i class="material-icons">&#xE8D1;</i>
-                                        </div>
-                                    </div>
-                                    <div class="notification__content">
-                                        <span class="notification__category">Sales</span>
-                                        <p>Last week your store’s sales count decreased by. It could have been
-                                            worse!</p>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item notification__all text-center" th:href="@{notification}"> View
-                                    all
-                                    Notifications </a>
+                                <div data-turbolinks-permanent="" id="aNotification" style="overflow-y:scroll;max-height: 75vh;">
+                                    <a class="dropdown-item notification__all text-center" th:href="@{notification}">
+                                        查看全部提醒 </a>
+                                </div>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="permanentElement01" data-turbolinks-permanent
                                class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#"
                                role="button" aria-haspopup="true" aria-expanded="false">
-                                <img class="user-avatar rounded-circle mr-2" th:src="@{/images/avatars/0.jpg}"
-                                     alt="User Avatar">
+                                <!--                                <img class="user-avatar rounded-circle mr-2" th:src="@{/images/avatars/0.jpg}"-->
+                                <!--                                     alt="User Avatar">-->
                                 <!--/*@thymesVar id="user" type="nchu2.webhw.model.User"*/-->
                                 <span class="d-none d-md-inline-block" th:text="${user!=null?user.getName():'admin'}">Sierra Brooks</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-small">
                                 <a class="dropdown-item" href="#" th:href="@{profile}">
-                                    <i class="material-icons">&#xE7FD;</i> Profile</a>
+                                    <i class="material-icons">&#xE7FD;</i> 设置</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item text-danger" th:href="@{/logout}">
-                                    <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                                    <i class="material-icons text-danger">&#xE879;</i> 登出 </a>
                             </div>
                         </li>
                     </ul>
@@ -151,6 +110,9 @@
         </main>
     </div>
 </div>
-<script data-turbolinks-eval=true>init()</script>
+<script data-turbolinks-eval=true>
+    if ([[${userType != null}]]) setUT("[[${userType}]]");
+    init()
+</script>
 </body>
 </html>

@@ -5,65 +5,16 @@
 </head>
 <body th:replace="~{/framework/main}">
 <div th:fragment="mainContent">
-    <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-        <i class="fa fa-check mx-2"></i>
-        <strong>Success!</strong> Your profile has been updated!
-    </div>
     <div class="page-header row no-gutters py-4">
         <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-            <h3 th:text="#{msg.notification.title}" class="page-title">清单</h3>
+            <button class='btn btn-white' onclick="markAsRead()">
+                <i class='far fa-bookmark mr-1'></i> 全部标记为已读
+            </button>
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
-            <div class="card card-small card-post mb-4 button">
-                <a th:href="@{notification}">
-                    <div class="card-body">
-                        <h5 class="card-title">Had denoting properly jointure which well books beyond</h5>
-                        <p class="card-text text-muted"> In said to of poor full be post face snug. Introduced
-                            imprudence
-                            see say unpleasing devonshire acceptance son. Exeter longer...</p>
-                    </div>
-                </a>
-                <div class="card-footer border-top d-flex">
-                    <div class="card-post__author d-flex">
-                        <div class="d-flex flex-column justify-content-center ml-3">
-                            <small class="text-muted">2019-1-1</small>
-                        </div>
-                    </div>
-                    <div class="my-auto ml-auto">
-                        <button class="btn btn-sm btn-white">
-                            <i class="far fa-bookmark mr-1"></i> 已读
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card card-small card-post mb-4">
-                <a th:href="@{notification}">
-                    <div class="card-body">
-                        <h5 class="card-title">Had denoting properly jointure which well books beyond</h5>
-                        <p class="card-text text-muted"> In said to of poor full be post face snug. Introduced
-                            imprudence
-                            see say unpleasing devonshire acceptance son. Exeter longer...</p>
-                    </div>
-                </a>
-                <div class="card-footer border-top d-flex">
-                    <div class="card-post__author d-flex">
-                        <div class="d-flex flex-column justify-content-center ml-3">
-                            <small class="text-muted">2019-1-1</small>
-                        </div>
-                    </div>
-                    <div class="my-auto ml-auto">
-                        <button class="btn btn-sm btn-white">
-                            <i class="far fa-bookmark mr-1"></i> 已读
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div class="col-12" id="bNotification">
+            <h1> 暂无未读消息 </h1>
         </div>
     </div>
 </div>

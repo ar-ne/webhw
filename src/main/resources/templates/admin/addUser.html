@@ -15,10 +15,10 @@
                     </a>
                 </li>
                 <li>
-                    <form id="form" th:action="@{addUser}" method="post" onsubmit="function f() {return false;}">
+                    <form id="form" method="post" onsubmit="function f() {return false;}" th:action="@{addUser}">
                         <div th:include="/parts::titledTextInput('','用户名','username','','')"></div>
                         <div th:include="/parts::titledTextInput('','密码','password','','')"></div>
-                        <input type="hidden" id="type" name="type" value="">
+                        <input id="type" name="type" type="hidden" value="">
                     </form>
                     <script>
                         function f(type) {

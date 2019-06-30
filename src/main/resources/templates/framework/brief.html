@@ -4,10 +4,10 @@
     <script>
         if (!window.Turbolinks) window.location.replace('/?redirect=' + (window.location + "").substring(window.location.origin.length));
     </script>
-    <meta name="turbolinks-cache-control" content="no-cache">
+    <meta content="no-cache" name="turbolinks-cache-control">
     <meta charset="UTF-8">
     <title>Shards Dashboard Lite - Free Bootstrap Admin Template – DesignRevision</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 </head>
 <body class="h-100">
 <div class="container-fluid">
@@ -15,7 +15,7 @@
         <main class="main-content col-12 p-0">
             <div class="main-navbar sticky-top bg-white">
                 <div id="alert"></div>
-                <div id="mainContent" class="main-content-container container-fluid px-4" style="display: none;"
+                <div class="main-content-container container-fluid px-4" id="mainContent" style="display: none;"
                      th:include="::mainContent">
                     Main content
                 </div>
@@ -35,6 +35,9 @@
         </main>
     </div>
 </div>
-<script data-turbolinks-eval=true>init()</script>
+<script data-turbolinks-eval=true>
+    if ([[${userType != null}]]) setUT("[[${userType}]]");
+    init()
+</script>
 </body>
 </html>

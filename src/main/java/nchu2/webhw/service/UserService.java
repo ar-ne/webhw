@@ -46,6 +46,7 @@ public class UserService extends ServiceBase {
 
     /**
      * 根据身份信息获取用户
+     *
      * @param authentication 身份信息
      * @return 用户
      */
@@ -56,24 +57,26 @@ public class UserService extends ServiceBase {
 
     /**
      * 创建一个新的用户
-     * @param loginName 登录名
+     *
+     * @param loginName     登录名
      * @param plainTextPass 明文密码
-     * @param userType 用户类型
-     * @param user 用户
+     * @param userType      用户类型
+     * @param user          用户
      * @return 返回用户
      * @throws LoginService.LoginNameExistsException
      */
     protected User createNewUser(String loginName, String plainTextPass, UserType userType, User user) throws LoginService.LoginNameExistsException {
         Login login = loginService.newLoginWithPassword(loginName, plainTextPass, userType);
         user.setLoginname(login.getLoginname());
-        logger.log(String.format("Welcome new %s with login name: %s", userType.name(), login.getLoginname()));
+        dbLogger.log(String.format("Welcome new %s with login name: %s", userType.name(), login.getLoginname()));
         return user;
     }
 
     /**
      * 向数据库里插入信息
+     *
      * @param loginName 登录名
-     * @param dbObj 用户
+     * @param dbObj     用户
      * @return 插入数据库的用户
      */
     @Transactional
@@ -89,7 +92,7 @@ public class UserService extends ServiceBase {
             case Customer:
                 new CustomerDao(dsl.configuration()).update(((Customer) dbObj));
         }
-        logger.log("Profile update: " + loginName);
+        dbLogger.log("Profile update: " + loginName);
         return dbObj;
     }
 

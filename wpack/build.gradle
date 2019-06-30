@@ -6,11 +6,13 @@ group 'nchu.162012322'
 version '0.0.1-SNAPSHOT'
 
 task clean(type: Delete) {
+    group="webpack"
     delete "$rootProject.projectDir/src/main/resources/static/webpack"
     delete "$rootProject.projectDir/src/main/resources/static/fonts"
 }
 
 task build(type: Exec) {
+    group="webpack"
     dependsOn(npmInstall)
     doFirst {
         println "Building webpack..."

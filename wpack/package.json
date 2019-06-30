@@ -26,7 +26,10 @@
     "bootstrap-table": "^1.14.2",
     "chart.js": "^2.8.0",
     "jquery": "^3.4.1",
+    "net": "^1.0.2",
     "popper.js": "^1.15.0",
+    "sockjs-client": "^1.3.0",
+    "stompjs": "^2.3.3",
     "turbolinks": "^5.2.0"
   }
 }

@@ -5,7 +5,7 @@
 <div th:fragment="mainContent">
     <div class="page-header row no-gutters py-4">
         <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-            <h3 th:text="#{msg.staff.advice.header.title}" class="page-title">筛选</h3>
+            <h3 class="page-title" th:text="#{msg.staff.advice.header.title}">筛选</h3>
         </div>
     </div>
     <div class="row ">
@@ -33,11 +33,19 @@
                     <!--                        </tbody>-->
                     <!--                    </table>-->
                     <div class="form-group col-md-12">
-                        <button type="button" class="mb-2 btn btn-outline-primary mr-2"
-                                th:text="#{msg.staff.sidebar.advice.button.x}">X
+                        <button class="mb-2 btn btn-outline-primary mr-2" onclick="apiSubmit('/api/user/advice/x','post',$('#table').bootstrapTable('getSelections'),function(data) {
+                                  showSuccessAlert(data.responseText);
+                                  $('#table').bootstrapTable('refresh');
+                                })"
+                                th:text="#{msg.staff.sidebar.advice.button.x}"
+                                type="button">X
                         </button>
-                        <button type="button" class="mb-2 btn btn-outline-primary mr-2"
-                                th:text="#{msg.staff.sidebar.advice.button.v}">V
+                        <button class="mb-2 btn btn-outline-primary mr-2" onclick="apiSubmit('/api/user/advice/v','post',$('#table').bootstrapTable('getSelections'),function(data) {
+                                  showSuccessAlert(data.responseText);
+                                  $('#table').bootstrapTable('refresh');
+                                })"
+                                th:text="#{msg.staff.sidebar.advice.button.v}"
+                                type="button">V
                         </button>
                     </div>
                 </div>

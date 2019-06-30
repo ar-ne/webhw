@@ -7,25 +7,82 @@
         <div class="col-12">
             <div class="card card-small">
                 <div class="card-header border-bottom">
-                    <h6 class="m-0" th:text="#{msg.manger.chartOrd.chart.title}">Users</h6>
+                    <div class="float-left">
+                        <h6 class="m-0" th:text="#{msg.manger.chartOrd.chart.title}">Users</h6>
+                    </div>
+                    <div class="float-right">
+                        <i class="fas fa-circle-notch fa-spin" style="color: #79e3c0;"></i>
+                        Live Updating
+                    </div>
                 </div>
                 <div class="card-body pt-0">
-                    <div class="chartjs-size-monitor"
-                         style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                        <div class="chartjs-size-monitor-expand"
-                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-                        </div>
-                        <div class="chartjs-size-monitor-shrink"
-                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-                        </div>
-                    </div>
-                    <!--<div class="row border-bottom py-2 bg-light">
-                     </div>-->
-                    <canvas height="362"
-                            style="max-width: 100% !important; display: block; height: 290px; width: 670px;"
-                            class="blog-overview-users chartjs-render-monitor" width="837"></canvas>
+                    <canvas id="myChart"></canvas>
+                    <script>
+                        var dynamicColors = function () {
+                            var r = Math.floor(Math.random() * 255);
+
+                            var g = Math.floor(Math.random() * 255);
+                            var b = Math.floor(Math.random() * 255);
+                            return 'rgba(' + r + ',' + g + ',' + b + ',0.8)';
+                        };
+                        $.ajax({
+                            type: 'get',
+                            url: '/api/user/chart/order',
+                            contentType: "application/json",
+                            async: true,
+                            cache: false,
+                            success: function (respDat) {					//参数
+                                var config = {
+                                    type: 'bar',
+                                    data: {
+                                        labels: respDat.productID,									//X轴数据
+                                        datasets: [{
+                                            label: '客户贷款业务统计',
+                                            data: respDat.orderCount,							//Y轴数据
+                                            backgroundColor: [],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                };
+
+                                for (let i = 0; i < respDat.productID.length; i++) {
+                                    config.data.datasets[0].backgroundColor.push(dynamicColors());
+                                }
+
+                                var ctx = document.getElementById('myChart').getContext('2d');
+                                window.myChart = new Chart(ctx, config);
+                            }
+                        });
+
+                        window.updateChart = function () {
+                            $.ajax({
+                                url: '/api/user/chart/order',
+                                contentType: "application/json",
+                                cache: false,
+                                success: function (resp) {
+                                    window.myChart.data.datasets[0].data = resp.orderCount;
+                                    let len = resp.productID.length - window.myChart.data.datasets[0].backgroundColor.length;
+                                    console.log(len);
+                                    for (let i = 0; i < len; i++) {
+                                        console.log("new add");
+                                        window.myChart.data.datasets[0].backgroundColor.push(dynamicColors());
+                                    }
+                                    window.myChart.update();
+                                }
+                            });
+                        }
+
+                    </script>
+
                 </div>
             </div>
         </div>

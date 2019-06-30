@@ -5,15 +5,15 @@
         if (!window.Turbolinks) window.location.replace('/?redirect=' + window.location.pathname);
         if ([[${login!=null}]]) Turbolinks.visit("/priv/index", {action: "replace"});
     </script>
-    <meta name="turbolinks-cache-control" content="no-preview">
+    <meta content="no-preview" name="turbolinks-cache-control">
     <meta charset="UTF-8">
     <title th:text="#{msg.login.title}">123</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 </head>
 <body class="h-100">
 <div class="container-fluid">
     <div class="row">
-        <main id="mainContent" class="col-lg-4 col-md-6 col-sm-12 offset-lg-4 offset-md-3" style="display: none;">
+        <main class="col-lg-4 col-md-6 col-sm-12 offset-lg-4 offset-md-3" id="mainContent" style="display: none;">
             <div id="alert"></div>
             <div class="page-header row no-gutters py-4">
                 <!--                <div class="col-12 col-sm-4 text-center text-sm-left mb-0"></div>-->
@@ -24,7 +24,8 @@
                         <div class="card-header border-bottom">
                             <h5 class="m-0" th:text="#{msg.login.title}">Login</h5>
                         </div>
-                        <form th:action="@{/login}" method="POST" id="form" onsubmit="return formSubmit()">
+                        <form id="form" method="POST" onsubmit="return formSubmit(null,'form',null,disconnect())"
+                              th:action="@{/login}">
                             <ul class="card-body list-group list-group-flush">
                                 <li class="list-group-item px-3">
                                     <div class="input-group mb-3">
@@ -34,9 +35,9 @@
                                                 <i class="material-icons">person</i>
                                             </span>
                                         </span>
-                                            <input type="text" class="form-control" required
-                                                   id="username" name="username"
-                                                   th:placeholder="#{msg.login.uid}">
+                                            <input class="form-control" id="username" name="username"
+                                                   required th:placeholder="#{msg.login.uid}"
+                                                   type="text">
                                         </div>
                                     </div>
                                     <div class="input-group mb-3">
@@ -46,9 +47,9 @@
                                                 <i class="material-icons">lock</i>
                                             </span>
                                         </span>
-                                            <input type="password" class="form-control" required
-                                                   id="password" name="password"
-                                                   th:placeholder="#{msg.login.pwd}">
+                                            <input class="form-control" id="password" name="password"
+                                                   required th:placeholder="#{msg.login.pwd}"
+                                                   type="password">
                                         </div>
                                     </div>
                                     <div class="input-group mb-3">
@@ -58,9 +59,10 @@
                                         </button>
                                     </div>
                                     <div class="input-group mb-3">
-                                        <a th:href="@{/signup}" class="btn-block">
-                                            <button type="button" class="btn btn-outline-warning form-control"
-                                                    th:text="#{msg.login.btn.register}">Secondary
+                                        <a class="btn-block" th:href="@{/signup}">
+                                            <button class="btn btn-outline-warning form-control"
+                                                    th:text="#{msg.login.btn.register}"
+                                                    type="button">Secondary
                                             </button>
                                         </a>
                                     </div>

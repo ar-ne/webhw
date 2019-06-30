@@ -57,6 +57,16 @@ public class Form extends ComponentBase {
         this.accountBalanceService = accountBalanceService;
     }
 
+
+    @PostMapping("signup")
+    @ResponseBody
+    public String signup(Customer customer, String password, HttpServletResponse response) {
+        response.setStatus(Status.showSuccessMsg);
+        customer.setJointime(getTimestamp()).setName(customer.getLoginname());
+        customerService.register(customer.getLoginname(), password, customer);
+        return "注册成功";
+    }
+
     /**
      * 用户表单
      */
@@ -83,9 +93,10 @@ public class Form extends ComponentBase {
 
         /**
          * 意见上交
+         *
          * @param opinion 意见信息
-         * @param resp 响应
-         * @param auth 身份
+         * @param resp    响应
+         * @param auth    身份
          * @return
          */
         @PostMapping("advice")
@@ -98,11 +109,22 @@ public class Form extends ComponentBase {
             return "提交成功，流水号: " + opinion.getOId();
         }
 
+        @PostMapping("answerTicket")
+        @ResponseBody
+        public String answerTicket(Ticket ticket, HttpServletResponse resp, Authentication auth) {
+            ticket.setAnstime(getTimestamp())
+                    .setStaLoginname(getLoginName(auth));
+            ticket = (Ticket) commonCRUD.updateRecord(ticket, getLoginName(auth));
+            resp.setStatus(Status.showSuccessMsg);
+            return ticket.getTId() + " 提交成功";
+        }
+
         /**
          * 投诉
+         *
          * @param ticket 投诉内容
-         * @param resp 响应
-         * @param auth 身份
+         * @param resp   响应
+         * @param auth   身份
          * @return 操作结果
          */
         @PostMapping("ticket")
@@ -117,10 +139,11 @@ public class Form extends ComponentBase {
 
         /**
          * 购买理财产品
-         * @param production 理财产品
-         * @param money 购买金额
-         * @param dur 购买时长
-         * @param response 响应
+         *
+         * @param production     理财产品
+         * @param money          购买金额
+         * @param dur            购买时长
+         * @param response       响应
          * @param authentication 身份
          * @return 操作结果
          */
@@ -149,8 +172,9 @@ public class Form extends ComponentBase {
 
         /**
          * 添加理财产品
-         * @param production 产品信息
-         * @param response 响应
+         *
+         * @param production     产品信息
+         * @param response       响应
          * @param authentication 身份
          * @return 操作结果
          */
@@ -169,8 +193,9 @@ public class Form extends ComponentBase {
 
         /**
          * 添加业务介绍
-         * @param introduction 介绍信息
-         * @param response 响应
+         *
+         * @param introduction   介绍信息
+         * @param response       响应
          * @param authentication 身份
          * @return 操作结果
          */
@@ -186,9 +211,10 @@ public class Form extends ComponentBase {
 
         /**
          * 修改个人信息
-         * @param response 响应
+         *
+         * @param response       响应
          * @param authentication 身份
-         * @param request 请求
+         * @param request        请求
          * @return 操作结果
          */
         @PostMapping("profile")
@@ -235,10 +261,11 @@ public class Form extends ComponentBase {
     public class AdminSpace extends ComponentBase {
         /**
          * 添加用户
+         *
          * @param response 响应
          * @param username 用户名
          * @param password 密码
-         * @param type 类型
+         * @param type     类型
          * @return 添加结果
          */
         @PostMapping("addUser")

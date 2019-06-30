@@ -10,5 +10,4 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class APIBase extends ComponentBase {
     @Autowired
     DSLContext dsl;  //数据库连接信息
-
 }

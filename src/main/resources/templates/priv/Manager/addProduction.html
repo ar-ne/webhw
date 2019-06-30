@@ -5,7 +5,7 @@
 <div th:fragment="mainContent">
     <div class="page-header row no-gutters py-4">
         <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-            <h3 th:text="#{msg.manager.addPro.header.title}" class="page-title">添加</h3>
+            <h3 class="page-title" th:text="#{msg.manager.addPro.header.title}">添加</h3>
         </div>
     </div>
     <div class="row ">
@@ -14,11 +14,11 @@
                 <div class="card-header ">
                 </div>
                 <div class="card-body">
-                    <form id="form" th:action="@{addProduction}" method="post" onsubmit="return formSubmit()">
+                    <form id="form" method="post" onsubmit="return formSubmit()" th:action="@{addProduction}">
                         <div class="form-group col-md-7">
                             <strong class="text-muted d-block mb-2"
                                     th:text="#{msg.manager.sidebar.production.type}">类型</strong>
-                            <select id="inputState" class="form-control" name="type">
+                            <select class="form-control" id="inputState" name="type">
                                 <option selected="" value="债券型">债券型</option>
                                 <option value="信托型">信托型</option>
                                 <option value="挂钩型">挂钩型</option>
@@ -31,15 +31,15 @@
                                     th:text="#{msg.manager.sidebar.production.risk}">等级</strong>
                             <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
                                 <label class="btn btn-white">
-                                    <input type="radio" name="risk" id="option1" autocomplete="off" value="None">
+                                    <input autocomplete="off" id="option1" name="risk" type="radio" value="None">
                                     无风险
                                 </label>
                                 <label class="btn btn-white">
-                                    <input type="radio" name="risk" id="option2" autocomplete="off" value="Low">
+                                    <input autocomplete="off" id="option2" name="risk" type="radio" value="Low">
                                     低风险
                                 </label>
                                 <label class="btn btn-white">
-                                    <input type="radio" name="risk" id="option3" autocomplete="off" value="High">
+                                    <input autocomplete="off" id="option3" name="risk" type="radio" value="High">
                                     高风险
                                 </label>
                             </div>
@@ -51,8 +51,9 @@
                         <div th:replace="/parts::titledTextarea(#{msg.manager.sidebar.addPro.intro},'intro','','')"></div>
                         <br>
                         <div class="form-group col-md-12">
-                            <button class="mb-2 btn btn-outline-primary mr-2" id="button" type="submit"
-                                    th:text="#{msg.manager.sidebar.addPro.button}">发布
+                            <button class="mb-2 btn btn-outline-primary mr-2" id="button"
+                                    th:text="#{msg.manager.sidebar.addPro.button}"
+                                    type="submit">发布
                             </button>
                         </div>
                     </form>

@@ -17,6 +17,7 @@ public class Tools {
 
     /**
      * 生成随机字符串长度随意
+     *
      * @param length
      * @return
      */
@@ -32,6 +33,7 @@ public class Tools {
 
     /**
      * 二选一
+     *
      * @param o1
      * @param o2
      * @return
@@ -39,5 +41,13 @@ public class Tools {
     public static Object pick(Object o1, Object o2) {
         if (random() > 0.5) return o1;
         else return o2;
+    }
+
+    public static Double getAccountBalance(String loginName) {
+        return random() > 0.5 ? (random() * 100) / (random()) : random() * 1000;
+    }
+
+    public static double nano2second(long nanoSec) {
+        return nanoSec / (1e+9);
     }
 }

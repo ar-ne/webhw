@@ -8,8 +8,12 @@
             <h2 th:text="#{msg.logout}">ERROR</h2>
         </div>
     </div>
-    <form id="form" th:action="@{/logout}" method="POST"></form>
+    <form id="form" method="POST" th:action="@{/logout}"></form>
     <script>
+        if (stompClient !== null) {
+            stompClient.disconnect();
+        }
+        console.log("Disconnected");
         doSubmit($('#form'));
     </script>
 </div>

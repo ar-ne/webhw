@@ -29,4 +29,6 @@ public class AuthService extends ServiceBase implements UserDetailsService {
         if (login == null) throw new UsernameNotFoundException("login name:" + loginName);
         return new User(login.getLoginname(), login.getPass(), Collections.singletonList(login.getType().getAuthority()));
     }
+
+
 }

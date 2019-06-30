@@ -33,6 +33,8 @@ HELP.md
 /devops/out/
 /devops/out/production/classes/
 /devops/out/test/classes/
-# Project exclude paths
 /devops/build/
 /PhysicalDataModel_1.pdb
+/src/main/resources/static/fonts/
+/src/main/resources/static/webpack/
+jrebel*
